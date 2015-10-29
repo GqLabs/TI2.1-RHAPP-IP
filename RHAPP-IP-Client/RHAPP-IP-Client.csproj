@@ -67,6 +67,7 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\DataHandler.cs" />
     <Compile Include="Misc\TCPController.cs" />
     <Compile Include="PatientForm.cs">
       <SubType>Form</SubType>
@@ -74,6 +75,7 @@
     <Compile Include="PatientForm.Designer.cs">
       <DependentUpon>PatientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PatientModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Misc\StandardForm.cs">

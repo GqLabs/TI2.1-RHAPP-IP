@@ -13,24 +13,24 @@ namespace RHAPP_IP_Server
     {
         public static void Main(string[] args)
         {
-            new Program();
-            //"useless" method call, this forces the Datastorage to be initialized. 
-            Datastorage.Instance.ToString();
-            var userInput = Console.ReadLine();
-            while (userInput != "exit")
-            {
-                switch (userInput)
-                {
-                    case "save":
-                        Datastorage.Instance.SaveToFile();
-                        break;
-                    case "exit":
-                        return;
-                }
-                userInput = Console.ReadLine();
-            }
-            Datastorage.Instance.SaveToFile();
-            Environment.Exit(0);
+            //new Program();
+            ////"useless" method call, this forces the Datastorage to be initialized. 
+            //Datastorage.Instance.ToString();
+            //var userInput = Console.ReadLine();
+            //while (userInput != "exit")
+            //{
+            //    switch (userInput)
+            //    {
+            //        case "save":
+            //            Datastorage.Instance.SaveToFile();
+            //            break;
+            //        case "exit":
+            //            return;
+            //    }
+            //    userInput = Console.ReadLine();
+            //}
+            //Datastorage.Instance.SaveToFile();
+            //Environment.Exit(0);
         }
 
         public Program()
