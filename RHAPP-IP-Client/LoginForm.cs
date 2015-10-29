@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace RHAPP_IP_Client
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : StandardForm
     {
         public LoginForm()
         {

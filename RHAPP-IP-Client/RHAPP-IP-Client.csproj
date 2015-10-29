@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppGlobal.cs" />
     <Compile Include="DoctorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StandardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="DoctorForm.resx">
       <DependentUpon>DoctorForm.cs</DependentUpon>
     </EmbeddedResource>
