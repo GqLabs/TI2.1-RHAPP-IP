@@ -23,11 +23,12 @@ namespace RHAPP_IP_Client
             string username = textBox1.Text;
             string password = textBox2.Text;
 
-            if ((username != "" )&&( password != ""))
+            if ((username != "") && (password != ""))
             {
-            var packet = new LoginPacket(username, password);
+                var packet = new LoginPacket(username, password);
             }
-
+            else
+                MessageBox.Show("Vul een Gebruikersnaam en Wachtwoord in");
 
         }
     }
