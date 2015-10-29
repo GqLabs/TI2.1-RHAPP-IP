@@ -21,11 +21,13 @@ namespace RHAPP_IP_Server
         private Datastorage()
         {
             //Debug code below:
-            //_users.Add(new User("Henk", "testuser01", Crypto.CreateSHA256("1234")));
-            //_users.Add(new User("Bart", "bart", Crypto.CreateSHA256("hoi")));
-            //_users.Add(new User("Jordy", "jordy", Crypto.CreateSHA256("hoi")));
-            
+            _users.Add(new User("henk", "testuser01","bla1"));
+            _users.Add(new User("bart", "bart", "bla1"));
+            _users.Add(new User("jordy", "jordy", "bla1"));
+
             OpenFromFile();
+            SaveToFile();
+            System.Console.WriteLine("done");
         } 
 
         public User GetUser(string username)
