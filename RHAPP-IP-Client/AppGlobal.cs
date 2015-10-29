@@ -25,7 +25,7 @@ namespace RHAPP_IP_Client
 
         }
 
-        public void Receive(JObject json)
+        public void Receive()
         {
 
         }

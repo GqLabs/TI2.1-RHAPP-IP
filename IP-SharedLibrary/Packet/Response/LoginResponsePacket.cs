@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
+using IP_SharedLibrary.Packet.Response;
 
 namespace ChatShared.Packet.Response
 {
@@ -7,20 +8,21 @@ namespace ChatShared.Packet.Response
     {
         public const string DefCmd = "RESP-LOGIN";
 
-        public string AuthToken { get; private set; }
+        public bool isDoctor { get; private set; }
+        public string username { get; set; }
 
         #region Constructors
-        public LoginResponsePacket(Statuscode.Status status, String authtoken)
-            : base(status, DefCmd)
-        {
-            Initialize(authtoken);
-        }
+        //public LoginResponsePacket(Statuscode.Status status, String authtoken)
+        //    : base(status, DefCmd)
+        //{
+        //    Initialize();
+        //}
 
-        public LoginResponsePacket(String status, String description, String authtoken) 
-            : base(status, description, DefCmd)
-        {
-            Initialize(authtoken);
-        }
+        //public LoginResponsePacket(String status, String description, String authtoken) 
+        //    : base(status, description, DefCmd)
+        //{
+        //    Initialize();
+        //}
 
         public LoginResponsePacket(JObject json) : base(json)
         {
@@ -29,17 +31,21 @@ namespace ChatShared.Packet.Response
 
             if (Status != "200") return;
 
-            JToken authToken;
-            if (!(json.TryGetValue("AUTHTOKEN", StringComparison.CurrentCultureIgnoreCase, out authToken)))
-                throw new ArgumentException("AUTHTOKEN is not found in json \n" + json);
-            Initialize(authToken.ToString());
+            JToken username;
+            if (!(json.TryGetValue("USERNAME", StringComparison.CurrentCultureIgnoreCase, out username)))
+                throw new ArgumentException("USERNAME is not found in json \n" + json);
+            JToken isDoctor;
+            if (!(json.TryGetValue("ISDOCTOR", StringComparison.CurrentCultureIgnoreCase, out isDoctor)))
+                throw new ArgumentException("ISDOCTOR is not found in json \n" + json);
+            Initialize(username.ToString(),Boolean.Parse(isDoctor.ToString()));
         }
         #endregion
 
         #region Initializers
-        private void Initialize(String authtoken)
+        private void Initialize(string username, bool isDoctor)
         {
-            AuthToken = authtoken;
+            this.username = username;
+            this.isDoctor = isDoctor;
         }
         #endregion
 
@@ -47,7 +53,8 @@ namespace ChatShared.Packet.Response
         public override JObject ToJsonObject()
         {
             var returnJson = base.ToJsonObject();
-            returnJson.Add("AUTHTOKEN", AuthToken);
+            returnJson.Add("USERNAME", username);
+            returnJson.Add("ISDOCTOR", isDoctor);
 
             return returnJson;
 
