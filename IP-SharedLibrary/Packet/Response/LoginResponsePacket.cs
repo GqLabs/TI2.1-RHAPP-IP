@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using IP_SharedLibrary.Packet.Response;
 
-namespace ChatShared.Packet.Response
+namespace IP_SharedLibrary.Packet.Response
 {
     public class LoginResponsePacket : ResponsePacket
     {
@@ -12,11 +12,11 @@ namespace ChatShared.Packet.Response
         public string username { get; set; }
 
         #region Constructors
-        //public LoginResponsePacket(Statuscode.Status status, String authtoken)
-        //    : base(status, DefCmd)
-        //{
-        //    Initialize();
-        //}
+        public LoginResponsePacket(Statuscode.Status status, string username, bool isDoctor)
+            : base(status, DefCmd)
+        {
+            Initialize(username, isDoctor);
+        }
 
         //public LoginResponsePacket(String status, String description, String authtoken) 
         //    : base(status, description, DefCmd)
@@ -37,7 +37,7 @@ namespace ChatShared.Packet.Response
             JToken isDoctor;
             if (!(json.TryGetValue("ISDOCTOR", StringComparison.CurrentCultureIgnoreCase, out isDoctor)))
                 throw new ArgumentException("ISDOCTOR is not found in json \n" + json);
-            Initialize(username.ToString(),Boolean.Parse(isDoctor.ToString()));
+            Initialize(username.ToString(), Boolean.Parse(isDoctor.ToString()));
         }
         #endregion
 

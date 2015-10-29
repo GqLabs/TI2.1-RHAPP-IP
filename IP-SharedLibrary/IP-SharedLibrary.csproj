@@ -48,6 +48,7 @@
     <Compile Include="Entity\User.cs" />
     <Compile Include="Packet\Packet.cs" />
     <Compile Include="Packet\Push\PushPacket.cs" />
+    <Compile Include="Packet\Request\DisconnectPacket.cs" />
     <Compile Include="Packet\Request\LoginPacket.cs" />
     <Compile Include="Packet\Request\RequestPacket.cs" />
     <Compile Include="Packet\Response\LoginResponsePacket.cs" />
