@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RHAPP_IP_Server
@@ -39,7 +42,7 @@ namespace RHAPP_IP_Server
         public void RunServer()
         {
             Console.WriteLine("ChatServer Status: Initializing");
-            var serverListener = new TcpListener(IPAddress.Any, ChatShared.Properties.Settings.Default.PortNumber);
+            var serverListener = new TcpListener(IPAddress.Any, IP_SharedLibrary.Properties.Settings.Default.PortNumber);
 
             //Code for getting server IP
             var serverip = Dns.GetHostEntry(Dns.GetHostName())
@@ -59,7 +62,8 @@ namespace RHAPP_IP_Server
             {
                 var tcpclient = serverListener.AcceptTcpClient();
                 Console.WriteLine("ChatServer: Accepted new client");
-                new ClientHandler(tcpclient);
+                //new ClientHandler(tcpclient);
+                throw new NotImplementedException();
             }
             // ReSharper disable once FunctionNeverReturns
         }

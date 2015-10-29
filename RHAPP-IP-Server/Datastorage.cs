@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Chatserver.FileController
+namespace RHAPP_IP_Server
 {
     internal class Datastorage
     {
@@ -38,13 +38,13 @@ namespace Chatserver.FileController
             return _users;
         } 
 
-        public IEnumerable<BikeTest> GetBikeTests(string username)
+        public IEnumerable<BikeTest> GetBikeTestsOfUser(string username)
         {
             var x =
-                from message in _bikeTests
-                where message.Recipient == username || message.Sender == username
-                orderby message.Timestamp ascending
-                select message;
+                from bikeTest in _bikeTests
+                where bikeTest.Username == username
+                orderby bikeTest.TimeStampStarted ascending
+                select bikeTest;
 
             return x;
         }
