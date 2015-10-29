@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace RHAPP_IP_Client
 {
-    public partial class PatientForm : Form
+    public partial class PatientForm : StandardForm
     {
         public PatientForm()
         {
