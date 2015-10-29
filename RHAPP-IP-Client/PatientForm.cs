@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RHAPP_IP_Client
 {
-    public partial class Form1 : Form
+    public partial class PatientForm : Form
     {
-        public Form1()
+        public PatientForm()
         {
             InitializeComponent();
         }
