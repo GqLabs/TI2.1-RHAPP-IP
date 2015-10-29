@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHAPP-IP-Client", "RHAPP-IP-Client\RHAPP-IP-Client.csproj", "{85406049-243F-4DFD-9436-07CDD1C2274B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IP-SharedLibrary", "IP-SharedLibrary\IP-SharedLibrary.csproj", "{DF525C72-9053-4433-B94E-B431965D8895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RHAPP-IP-Server", "RHAPP-IP-Server\RHAPP-IP-Server.csproj", "{93BA124B-7A32-42DE-9719-FB36CF35DC97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85406049-243F-4DFD-9436-07CDD1C2274B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85406049-243F-4DFD-9436-07CDD1C2274B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85406049-243F-4DFD-9436-07CDD1C2274B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85406049-243F-4DFD-9436-07CDD1C2274B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF525C72-9053-4433-B94E-B431965D8895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF525C72-9053-4433-B94E-B431965D8895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF525C72-9053-4433-B94E-B431965D8895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF525C72-9053-4433-B94E-B431965D8895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93BA124B-7A32-42DE-9719-FB36CF35DC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93BA124B-7A32-42DE-9719-FB36CF35DC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93BA124B-7A32-42DE-9719-FB36CF35DC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93BA124B-7A32-42DE-9719-FB36CF35DC97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
