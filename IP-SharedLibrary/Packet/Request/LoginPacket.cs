@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 
-namespace ChatShared.Packet.Request
+namespace IP_SharedLibrary.Packet.Request
 {
     public class LoginPacket : RequestPacket
     {
@@ -13,7 +13,7 @@ namespace ChatShared.Packet.Request
         public String Username { get; private set; }
         public String Passhash { get; private set; }
 
-        public LoginPacket(JObject json) 
+        public LoginPacket(JObject json)
             : base(json)
         {
             if (json == null)
