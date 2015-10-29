@@ -31,7 +31,7 @@ namespace RHAPP_IP_Client
             Controller.SendAsync(data);
         }
 
-        public void Receive(JObject json)
+        public void Receive()
         {
 
         }
