@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ServerIP" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

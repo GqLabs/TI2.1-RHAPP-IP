@@ -62,8 +62,7 @@ namespace RHAPP_IP_Server
             {
                 var tcpclient = serverListener.AcceptTcpClient();
                 Console.WriteLine("ChatServer: Accepted new client");
-                //new ClientHandler(tcpclient);
-                throw new NotImplementedException();
+                new ClientHandler(tcpclient);
             }
             // ReSharper disable once FunctionNeverReturns
         }

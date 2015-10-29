@@ -25,7 +25,7 @@ namespace IP_SharedLibrary.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1288")]
         public int PortNumber {
             get {
                 return ((int)(this["PortNumber"]));

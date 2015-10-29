@@ -70,19 +70,19 @@ namespace IP_SharedLibrary.Packet
             Packet p = null;
             switch ((string) json.GetValue("CMD", StringComparison.CurrentCultureIgnoreCase))
             {
-                
+
                 //case ChatPacket.DefCmd:
                 //    p = new ChatPacket(json);
                 //    break;
-                //case DisconnectPacket.DefCmd:
-                //    p = new DisconnectPacket(json);
-                //    break;
-                //case LoginPacket.DefCmd:
-                //    p = new LoginPacket(json);
-                //    break;
-                //case LoginResponsePacket.DefCmd:
-                //    p = new LoginResponsePacket(json);
-                //    break;
+                case DisconnectPacket.DefCmd:
+                    p = new DisconnectPacket(json);
+                    break;
+                case LoginPacket.DefCmd:
+                    p = new LoginPacket(json);
+                    break;
+                case LoginResponsePacket.DefCmd:
+                    p = new LoginResponsePacket(json);
+                    break;
                 //case MessagePushPacket.DefCmd:
                 //    p = new MessagePushPacket(json);
                 //    break;
@@ -96,7 +96,7 @@ namespace IP_SharedLibrary.Packet
                 //    p = new UserChangedPacket(json);
                 //    break;
                 //case PullResponsePacket.DefCmd:
-                //    switch ((PullResponseEnum) Enum.Parse(typeof (PullResponseEnum),
+                //    switch ((PullResponseEnum)Enum.Parse(typeof(PullResponseEnum),
                 //        (string)
                 //            json.GetValue("DataType", StringComparison.CurrentCultureIgnoreCase))
                 //        )

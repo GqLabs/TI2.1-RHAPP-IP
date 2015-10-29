@@ -16,7 +16,7 @@ namespace IP_SharedLibrary.Entity
             Nickname = nickname;
             Username = username;
             Password = password;
-            IsDoctor = IsDoctor;
+            IsDoctor = isDoctor;
         }
 
         public User(string nickname, string username, string password)
