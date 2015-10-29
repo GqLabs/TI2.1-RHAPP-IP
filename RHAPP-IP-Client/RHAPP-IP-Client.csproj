@@ -64,6 +64,7 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\TCPController.cs" />
     <Compile Include="PatientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,7 +73,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StandardForm.cs">
+    <Compile Include="Misc\StandardForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="DoctorForm.resx">

@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using IP_SharedLibrary.Packet;
+using Newtonsoft.Json.Linq;
+using RHAPP_IP_Client.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,19 +17,24 @@ namespace RHAPP_IP_Client
             get { return _instance ?? (_instance = new AppGlobal()); }
         }
 
+        private readonly TCPController Controller;
+
+        public object _client { get; private set; }
+
         private AppGlobal()
         {
 
         }
 
-        public void Send(JObject json)
+        public void Send(String data)
         {
-
+            Controller.SendAsync(data);
         }
 
         public void Receive(JObject json)
         {
 
         }
+
     }
 }
