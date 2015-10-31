@@ -13,24 +13,24 @@ namespace RHAPP_IP_Server
     {
         public static void Main(string[] args)
         {
-            //new Program();
-            ////"useless" method call, this forces the Datastorage to be initialized. 
-            //Datastorage.Instance.ToString();
-            //var userInput = Console.ReadLine();
-            //while (userInput != "exit")
-            //{
-            //    switch (userInput)
-            //    {
-            //        case "save":
-            //            Datastorage.Instance.SaveToFile();
-            //            break;
-            //        case "exit":
-            //            return;
-            //    }
-            //    userInput = Console.ReadLine();
-            //}
-            //Datastorage.Instance.SaveToFile();
-            //Environment.Exit(0);
+            new Program();
+            //"useless" method call, this forces the Datastorage to be initialized. 
+            Datastorage.Instance.ToString();
+            var userInput = Console.ReadLine();
+            while (userInput != "exit")
+            {
+                switch (userInput)
+                {
+                    case "save":
+                        Datastorage.Instance.SaveToFile();
+                        break;
+                    case "exit":
+                        return;
+                }
+                userInput = Console.ReadLine();
+            }
+            Datastorage.Instance.SaveToFile();
+            Environment.Exit(0);
         }
 
         public Program()
@@ -41,7 +41,7 @@ namespace RHAPP_IP_Server
 
         public void RunServer()
         {
-            Console.WriteLine("ChatServer Status: Initializing");
+            Console.WriteLine("Server Status: Initializing");
             var serverListener = new TcpListener(IPAddress.Any, IP_SharedLibrary.Properties.Settings.Default.PortNumber);
 
             //Code for getting server IP
@@ -49,11 +49,11 @@ namespace RHAPP_IP_Server
                 .AddressList.First(address => address.AddressFamily == AddressFamily.InterNetwork)
                 .ToString();
             //Display server IP:
-            Console.WriteLine("ChatServer IP: {0}", serverip);
+            Console.WriteLine("Server IP: {0}", serverip);
 
             //Start the server listener
             serverListener.Start();
-            Console.WriteLine("ChatServer Status: Listening");
+            Console.WriteLine("Server Status: Listening");
 
             //Console.WriteLine("Example json: Errorpacket");
             //Console.WriteLine(new LoginResponsePacket(Statuscode.Status.Ok, "Client", "Ahsdha7w27%^hsdja^&"));
@@ -61,7 +61,7 @@ namespace RHAPP_IP_Server
             while (true)
             {
                 var tcpclient = serverListener.AcceptTcpClient();
-                Console.WriteLine("ChatServer: Accepted new client");
+                Console.WriteLine("Server: Accepted new client");
                 new ClientHandler(tcpclient);
             }
             // ReSharper disable once FunctionNeverReturns

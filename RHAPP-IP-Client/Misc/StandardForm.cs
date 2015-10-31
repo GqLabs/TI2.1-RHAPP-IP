@@ -11,6 +11,5 @@ namespace RHAPP_IP_Client
     {
         protected AppGlobal _appGlobal { get; private set; } = AppGlobal.Instance;
         
-
     }
 }

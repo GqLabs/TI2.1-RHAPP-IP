@@ -45,12 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BikeTest.cs" />
+    <Compile Include="Entity\Measurement.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Packet\Packet.cs" />
     <Compile Include="Packet\Push\PushPacket.cs" />
+    <Compile Include="Packet\Push\SerialDataPushPacket.cs" />
     <Compile Include="Packet\Request\DisconnectPacket.cs" />
     <Compile Include="Packet\Request\LoginPacket.cs" />
     <Compile Include="Packet\Request\RequestPacket.cs" />
+    <Compile Include="Packet\Request\SerialDataPacket.cs" />
     <Compile Include="Packet\Response\LoginResponsePacket.cs" />
     <Compile Include="Packet\Response\ResponsePacket.cs" />
     <Compile Include="Packet\Statuscode.cs" />

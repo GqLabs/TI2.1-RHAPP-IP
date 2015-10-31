@@ -18,7 +18,7 @@ namespace RHAPP_IP_Client
         public LoginForm()
         {
             InitializeComponent();
-            _appGlobal.LoginResultEvent += HandleLogin;
+            _appGlobal.LoginResultEvent += HandleLoginEvent;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,9 +32,9 @@ namespace RHAPP_IP_Client
                 _appGlobal.Receive();
             }
             else
-                MessageBox.Show("Vul een Gebruikersnaam en Wachtwoord in","Inlog fout", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Vul een Gebruikersnaam en Wachtwoord in", "Inlog fout", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        public void HandleLogin(Packet packet)
+        public void HandleLoginEvent(Packet packet)
         {
             LoginResponsePacket responsePacket = packet as LoginResponsePacket;
 
@@ -43,17 +43,20 @@ namespace RHAPP_IP_Client
                 case "200":
                     if (this.InvokeRequired)
                     {
-                        this.Invoke((new Action(() => HandleLogin(packet))));
+                        this.Invoke((new Action(() => HandleLoginEvent(packet))));
                         return;
                     }
-                    Visible = false;
                     if (responsePacket.isDoctor)
                     {
-                        new DoctorForm();
+                        DoctorForm doctorForm = new DoctorForm();
+                        this.Hide();
+                        doctorForm.Show();
                     }
                     else
                     {
-                        new PatientForm();
+                        PatientForm patientForm = new PatientForm();
+                        this.Hide();
+                        patientForm.Show();
                     }
                     break;
                 case "430":
@@ -62,6 +65,14 @@ namespace RHAPP_IP_Client
                 default:
                     MessageBox.Show("Unhandled error occured", "Error", MessageBoxButtons.OK);
                     break;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                button1_Click(sender, e);
             }
         }
     }

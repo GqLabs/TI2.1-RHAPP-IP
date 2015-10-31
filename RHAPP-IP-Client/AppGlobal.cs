@@ -1,4 +1,5 @@
-﻿using IP_SharedLibrary.Packet;
+﻿using IP_SharedLibrary.Entity;
+using IP_SharedLibrary.Packet;
 using IP_SharedLibrary.Packet.Request;
 using IP_SharedLibrary.Packet.Response;
 using IP_SharedLibrary.Utilities;
@@ -14,26 +15,26 @@ namespace RHAPP_IP_Client
 {
     public class AppGlobal
     {
+        #region Fields + Constructors
         private static AppGlobal _instance;
-        public static AppGlobal Instance
-        {
-            get { return _instance ?? (_instance = new AppGlobal()); }
-        }
+        public static AppGlobal Instance { get { return _instance ?? (_instance = new AppGlobal()); } }
 
         public delegate void ResultDelegate(Packet packet);
         public event ResultDelegate LoginResultEvent;
         public event ResultDelegate ResultEvent;
 
         private readonly TCPController Controller;
-
-        public object _client { get; private set; }
+        public string Username { get; private set; }
 
         private AppGlobal()
         {
             Controller = new TCPController();
             Controller.OnPacketReceived += PacketReceived;
-
+            this.LoginResultEvent += CheckLoggedIn;
+            DataHandler.IncomingDataEvent += SerialDataReceived;
         }
+
+        #endregion
 
         private void OnResultEvent(Packet packet)
         {
@@ -52,8 +53,19 @@ namespace RHAPP_IP_Client
             Controller.RunClient();
             var passhash = Crypto.CreateSHA256(password);
             var packet = new LoginPacket(username, passhash);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Controller.SendAsync(packet);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             Controller.ReceiveTransmissionAsync();
+        }
+
+        private void CheckLoggedIn(Packet packet)
+        {
+            //Post logged-in method calls
+            if (((LoginResponsePacket)packet).Status == Statuscode.Status.Ok.ToString())
+            {
+                Username = ((LoginResponsePacket)packet).username;
+            }
         }
 
         public void Send(Packet packet)
@@ -63,13 +75,15 @@ namespace RHAPP_IP_Client
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         }
 
+        // Get TCPController to receive a packet.
         public void Receive()
         {
             Controller.ReceiveTransmissionAsync();
         }
 
-        void PacketReceived(Packet p)
+        private void PacketReceived(Packet p)
         {
+            Console.WriteLine(p.ToJsonObject().ToString());
             //if (p is MessagePushPacket)
             //{
             //    var packet = p as MessagePushPacket;
@@ -95,7 +109,6 @@ namespace RHAPP_IP_Client
             if (p is LoginResponsePacket)
             {
                 var packet = p as LoginResponsePacket;
-                Console.WriteLine("We are logged in!");
                 OnLoginResultEvent(packet);
             }
             //else if (p is RegisterResponsePacket)
@@ -123,6 +136,16 @@ namespace RHAPP_IP_Client
                 var packet = p as ResponsePacket;
                 OnResultEvent(packet);
             }
+        }
+
+        private void SerialDataReceived(Measurement m)
+        {
+            Controller.RunClient();
+            var packet = new SerialDataPacket(m, Username);
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Controller.SendAsync(packet);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            Controller.ReceiveTransmissionAsync();
         }
 
     }

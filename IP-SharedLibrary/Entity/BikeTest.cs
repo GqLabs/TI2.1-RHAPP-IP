@@ -8,7 +8,7 @@ namespace IP_SharedLibrary.Entity
 {
     public class BikeTest
     {
-        public List<String> MeasurementsInWatt { get; private set; }
+        public List<Measurement> Measurements { get; private set; }
         public int Age { get; private set; }
         public String Weight { get; private set; }
         public Double Heartbeat { get; private set; }
@@ -27,14 +27,14 @@ namespace IP_SharedLibrary.Entity
             Gender = gender;
         }
 
-        public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<string> measurementsInWatt, DateTime timeStampStart, DateTime timeStampStop)
+        public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements, DateTime timeStampStart, DateTime timeStampStop)
         {
             Age = age;
             Weight = weight;
             Username = username;
             Gender = gender;
             Heartbeat = heartbeat;
-            MeasurementsInWatt = measurementsInWatt;
+            Measurements = measurements;
             TimeStampStarted = timeStampStart;
             TimeStampStopped = timeStampStop;
         }

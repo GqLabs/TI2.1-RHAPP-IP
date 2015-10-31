@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IP_SharedLibrary.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace RHAPP_IP_Client.Misc
 {
      class DataHandler
     {
+        #region (static) properties, (static) fields, (static) events
         // vaste waarden
         public static readonly string COMMAND = "CU";
         public static readonly string CMD_TIME = "PT";
@@ -34,16 +36,17 @@ namespace RHAPP_IP_Client.Misc
         private SerialPort ComPort;
 
         // custom events
-        public delegate void DataDelegate(string[] data);
+        public delegate void DataDelegate(Measurement measurement);
         public static event DataDelegate IncomingDataEvent;
 
         public delegate void ErrorDelegate(string error);
         public static event ErrorDelegate IncomingErrorEvent;
+        #endregion
 
-        private static void OnIncomingDataEvent(string[] data)
+        private static void OnIncomingDataEvent(Measurement measurement)
         {
             DataDelegate handler = IncomingDataEvent;
-            if (handler != null) handler(data);
+            if (handler != null) handler(measurement);
         }
 
         public static void OnIncomingErrorEvent(string error)
@@ -126,8 +129,9 @@ namespace RHAPP_IP_Client.Misc
 
         private void handleBikeValues(string buffer)
         {
+            Measurement m = new Measurement(buffer);
             bufferIn = buffer.Split('\t');
-            OnIncomingDataEvent(bufferIn);
+            OnIncomingDataEvent(m);
         }
 
         public bool checkBikeState(bool commandMode)
