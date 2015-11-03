@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,25 +43,23 @@ namespace IP_SharedLibrary.Entity
             RealPower = int.Parse(parts[7]);
         }
 
+        public JObject ToJsonObject()
+        {
+            var json = new JObject();
+            json.Add("Pulse", Pulse);
+            json.Add("PedalRpm", PedalRpm);
+            json.Add("Speed", Speed);
+            json.Add("Distance", Distance);
+            json.Add("DestPower", DestPower);
+            json.Add("Energy", Energy);
+            json.Add("Time", Time);
+            json.Add("RealPower", RealPower);
+            return json;
+        }
+
         public override string ToString()
         {
-            return new StringBuilder()
-                .Append("pulse: ")
-                .Append(Pulse)
-                .Append(",\tpedal rpm: ")
-                .Append(PedalRpm)
-                .Append(",\tspeed: ")
-                .Append(Speed)
-                .Append(",\tdistance: ")
-                .Append(Distance).Append(",\tdest. power: ")
-                .Append(DestPower)
-                .Append(",\tenergy: ")
-                .Append(Energy)
-                .Append(",\ttime: ")
-                .Append(Time.ToShortTimeString())
-                .Append(",\treal power: ")
-                .Append(RealPower)
-                .ToString();
+            return ToJsonObject().ToString();
         }
     }
 }

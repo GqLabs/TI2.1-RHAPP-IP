@@ -257,7 +257,7 @@ namespace RHAPP_IP_Server
 
         private void HandleSerialDataPacket(JObject json)
         {
-            Console.WriteLine("Handle Chat Packet");
+            Console.WriteLine("Handle SerialData Packet");
             var packet = new SerialDataPacket(json);
 
             var PatientUsername = Authentication.GetAllUsers()
