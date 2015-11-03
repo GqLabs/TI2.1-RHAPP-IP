@@ -7,8 +7,7 @@ using IP_SharedLibrary.Packet.Push;
 using IP_SharedLibrary.Packet.Request;
 using IP_SharedLibrary.Packet.Response;
 using Newtonsoft.Json.Linq;
-//using PullResponsePacket = ChatShared.Packet.Response.PullResponsePacket<ChatShared.Entity.User>;
-//using PullResponseEnum = ChatShared.Packet.Response.PullResponsePacket<ChatShared.Entity.User>.DataType;
+using PullResponsePacket = IP_SharedLibrary.Packet.Response.PullResponsePacket<IP_SharedLibrary.Entity.User>;
 
 namespace IP_SharedLibrary.Packet
 {
@@ -68,7 +67,7 @@ namespace IP_SharedLibrary.Packet
 
 
             Packet p = null;
-            switch ((string) json.GetValue("CMD", StringComparison.CurrentCultureIgnoreCase))
+            switch ((string)json.GetValue("CMD", StringComparison.CurrentCultureIgnoreCase))
             {
 
                 //case ChatPacket.DefCmd:
@@ -83,32 +82,21 @@ namespace IP_SharedLibrary.Packet
                 case LoginResponsePacket.DefCmd:
                     p = new LoginResponsePacket(json);
                     break;
-                //case MessagePushPacket.DefCmd:
-                //    p = new MessagePushPacket(json);
-                //    break;
+                case SerialDataPushPacket.DefCmd:
+                    p = new SerialDataPushPacket(json);
+                    break;
                 //case RegisterPacket.DefCmd:
                 //    p = new RegisterPacket(json);
                 //    break;
                 //case RegisterResponsePacket.DefCmd:
                 //    p = new RegisterResponsePacket(json);
                 //    break;
-                //case UserChangedPacket.DefCmd:
-                //    p = new UserChangedPacket(json);
-                //    break;
-                //case PullResponsePacket.DefCmd:
-                //    switch ((PullResponseEnum)Enum.Parse(typeof(PullResponseEnum),
-                //        (string)
-                //            json.GetValue("DataType", StringComparison.CurrentCultureIgnoreCase))
-                //        )
-                //    { // Start inner switch
-                //        case PullResponseEnum.User:
-                //            p = new PullResponsePacket<User>(json);
-                //            break;
-                //        case PullResponseEnum.ChatMessage:
-                //            p = new PullResponsePacket<ChatMessage>(json);
-                //            break;
-                //    } //End inner switch
-                //    break;
+                case UserChangedPacket.DefCmd:
+                    p = new UserChangedPacket(json);
+                    break;
+                case PullResponsePacket.DefCmd:
+                    p = new PullResponsePacket<User>(json);
+                    break;
                 default:
                     try
                     {
