@@ -122,6 +122,7 @@ namespace RHAPP_IP_Server
                     else
                     {
                         Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
                     }
                 }
             }
