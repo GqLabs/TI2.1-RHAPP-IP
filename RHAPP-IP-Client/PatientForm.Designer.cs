@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -111,34 +111,34 @@
             // 
             // bpmChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.bpmChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.bpmChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.bpmChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.bpmChart.Legends.Add(legend3);
             this.bpmChart.Location = new System.Drawing.Point(322, 38);
             this.bpmChart.Name = "bpmChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Hartslag";
-            this.bpmChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Hartslag";
+            this.bpmChart.Series.Add(series3);
             this.bpmChart.Size = new System.Drawing.Size(300, 300);
             this.bpmChart.TabIndex = 12;
             this.bpmChart.Text = "chart2";
             // 
             // rpmChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.rpmChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.rpmChart.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.rpmChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.rpmChart.Legends.Add(legend4);
             this.rpmChart.Location = new System.Drawing.Point(16, 38);
             this.rpmChart.Name = "rpmChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "RPM";
-            this.rpmChart.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "RPM";
+            this.rpmChart.Series.Add(series4);
             this.rpmChart.Size = new System.Drawing.Size(300, 300);
             this.rpmChart.TabIndex = 8;
             this.rpmChart.Text = "chart1";

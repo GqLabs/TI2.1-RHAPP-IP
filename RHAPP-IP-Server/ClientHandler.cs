@@ -136,7 +136,7 @@ namespace RHAPP_IP_Server
             var packet = new PullRequestPacket(json);
 
             var u = Authentication.GetUser(packet.Username);
-            if (u == null) return;
+            if (u == null && !u.IsDoctor) return;
             
             var returnPacket = HandlePullRequestUsersByStatus();
 #if DEBUG
@@ -153,8 +153,10 @@ namespace RHAPP_IP_Server
             foreach (var user in allUsers)
             {
                 user.OnlineStatus = authenticatedUsers.Contains(user);
+                user.ClearPass();
             }
-            return new PullResponsePacket(allUsers);
+            var allPatients = allUsers.Where(user => user.IsDoctor == false).ToList();
+            return new PullResponsePacket(allPatients);
         }
 
         //private ResponsePacket HandlePullRequestMessagesByUser(PullRequestPacket packet)

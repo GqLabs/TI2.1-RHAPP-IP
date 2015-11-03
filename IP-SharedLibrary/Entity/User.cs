@@ -4,12 +4,20 @@ namespace IP_SharedLibrary.Entity
 {
     public class User
     {
-        public string Nickname { get; private set; }
-        public string Username { get; private set; }
+        public string Nickname { get; set; }
+        public string Username { get; set; }
         public string Password { get; private set; }
-        public bool IsDoctor { get; private set; }
+        public bool IsDoctor { get; set; }
 
         public bool OnlineStatus { get; set; }
+
+        public User(string nickname, string username, string password, bool isDoctor, bool onlineStatus)
+        {
+            Nickname = nickname;
+            Username = username;
+            Password = password;
+            IsDoctor = isDoctor;
+        }
 
         public User(string nickname, string username, string password, bool isDoctor)
         {
@@ -26,6 +34,11 @@ namespace IP_SharedLibrary.Entity
             Password = password;
         }
 
+        public User()
+        {
+
+        }
+
         public void ChangeNickname(string nickname)
         {
             Nickname = nickname;
@@ -34,6 +47,11 @@ namespace IP_SharedLibrary.Entity
         public void ChangePassword()
         {
             throw new NotImplementedException();
+        }
+
+        public void ClearPass()
+        {
+            this.Password = "";
         }
 
         public override string ToString()
