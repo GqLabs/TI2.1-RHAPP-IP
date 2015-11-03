@@ -12,10 +12,10 @@ namespace IP_SharedLibrary.Entity
         public int PedalRpm { get; private set; }
         public int Speed { get; private set; }
         public int Distance { get; private set; }
-        public int DestPower { get; private set; }
+        public int DestPower { get; private set; } // requested power
         public int Energy { get; private set; }
         public DateTime Time { get; private set; }
-        public int RealPower { get; private set; }
+        public int RealPower { get; private set; } // actual power
 
         public Measurement(int pulse, int pedalRpm, int speed, int distance, int destPower, int energy, DateTime time, int realPower)
         {

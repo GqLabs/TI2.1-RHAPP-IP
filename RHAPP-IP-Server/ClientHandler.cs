@@ -107,6 +107,7 @@ namespace RHAPP_IP_Server
                 {
                     Console.WriteLine("Client with IP-address: {0} has been disconnected",
                         _tcpclient.Client.RemoteEndPoint);
+                    Authentication.TryDeAuthenticate(this);
                     _thread.Abort();
                 }
                 catch (Exception e)
@@ -115,6 +116,7 @@ namespace RHAPP_IP_Server
                     {
                         Console.WriteLine("Client with IP-address: {0} has been disconnected",
                             _tcpclient.Client.RemoteEndPoint);
+                            Authentication.TryDeAuthenticate(this);
                         _thread.Abort();
                     }
                     else

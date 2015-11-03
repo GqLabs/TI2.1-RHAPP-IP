@@ -55,9 +55,26 @@ namespace RHAPP_IP_Server
             }
         }
 
+        public static void TryDeAuthenticate(ClientHandler clientHandler)
+        {
+            var user = GetUser(clientHandler);
+            if (user != null)
+            {
+                DeAuthenticate(user.Username);
+            }
+        }
+
         public static ClientHandler GetStream(String username)
         {
             return AuthUsers.First(x => x.Key.Username == username).Value;
+        }
+
+        private static User GetUser(ClientHandler clientHandler)
+        {
+            User u = AuthUsers
+                .Where(client => client.Value == clientHandler)
+                .Select(user => user.Key).FirstOrDefault();
+            return u;
         }
 
         public static User GetUser(String username)

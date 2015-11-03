@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.crtRPM = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblWatt = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.crtPower = new System.Windows.Forms.NumericUpDown();
+            this.btnSetPower = new System.Windows.Forms.Button();
+            this.crtPulse = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblTijd = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tbTime = new System.Windows.Forms.TextBox();
+            this.btnStartTest = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnTestButton = new System.Windows.Forms.Button();
             this.lblUser = new System.Windows.Forms.Label();
             this.cmbOnlinePatients = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -57,31 +57,30 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtRPM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtPower)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtPulse)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // chart1
+            // crtRPM
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(248, 6);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "RPM";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(300, 300);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
+            chartArea5.Name = "ChartArea1";
+            this.crtRPM.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.crtRPM.Legends.Add(legend5);
+            this.crtRPM.Location = new System.Drawing.Point(248, 6);
+            this.crtRPM.Name = "crtRPM";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "RPM";
+            this.crtRPM.Series.Add(series5);
+            this.crtRPM.Size = new System.Drawing.Size(300, 300);
+            this.crtRPM.TabIndex = 0;
+            this.crtRPM.Text = "chart1";
             // 
             // lblWatt
             // 
@@ -91,61 +90,60 @@
             this.lblWatt.Size = new System.Drawing.Size(30, 13);
             this.lblWatt.TabIndex = 1;
             this.lblWatt.Text = "Watt";
-            this.lblWatt.Click += new System.EventHandler(this.label1_Click);
             // 
-            // numericUpDown1
+            // crtPower
             // 
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.crtPower.Increment = new decimal(new int[] {
             25,
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(52, 34);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.crtPower.Location = new System.Drawing.Point(52, 34);
+            this.crtPower.Maximum = new decimal(new int[] {
             250,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.crtPower.Minimum = new decimal(new int[] {
             25,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(103, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.crtPower.Name = "crtPower";
+            this.crtPower.Size = new System.Drawing.Size(103, 20);
+            this.crtPower.TabIndex = 2;
+            this.crtPower.Value = new decimal(new int[] {
             25,
             0,
             0,
             0});
             // 
-            // button1
+            // btnSetPower
             // 
-            this.button1.Location = new System.Drawing.Point(160, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Set";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSetPower.Location = new System.Drawing.Point(160, 31);
+            this.btnSetPower.Name = "btnSetPower";
+            this.btnSetPower.Size = new System.Drawing.Size(57, 23);
+            this.btnSetPower.TabIndex = 3;
+            this.btnSetPower.Text = "Set";
+            this.btnSetPower.UseVisualStyleBackColor = true;
+            this.btnSetPower.Click += new System.EventHandler(this.btnSetPower_Click);
             // 
-            // chart2
+            // crtPulse
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(554, 7);
-            this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Hartslag";
-            this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(300, 300);
-            this.chart2.TabIndex = 4;
-            this.chart2.Text = "chart2";
+            chartArea6.Name = "ChartArea1";
+            this.crtPulse.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.crtPulse.Legends.Add(legend6);
+            this.crtPulse.Location = new System.Drawing.Point(554, 7);
+            this.crtPulse.Name = "crtPulse";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Legend = "Legend1";
+            series6.Name = "Hartslag";
+            this.crtPulse.Series.Add(series6);
+            this.crtPulse.Size = new System.Drawing.Size(300, 300);
+            this.crtPulse.TabIndex = 4;
+            this.crtPulse.Text = "chart2";
             // 
             // lblTijd
             // 
@@ -156,23 +154,23 @@
             this.lblTijd.TabIndex = 5;
             this.lblTijd.Text = "Tijd";
             // 
-            // textBox1
+            // tbTime
             // 
-            this.textBox1.Location = new System.Drawing.Point(52, 60);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(103, 20);
-            this.textBox1.TabIndex = 6;
+            this.tbTime.Location = new System.Drawing.Point(52, 60);
+            this.tbTime.Name = "tbTime";
+            this.tbTime.ReadOnly = true;
+            this.tbTime.Size = new System.Drawing.Size(103, 20);
+            this.tbTime.TabIndex = 6;
             // 
-            // button2
+            // btnStartTest
             // 
-            this.button2.Location = new System.Drawing.Point(52, 86);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(57, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Start test";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnStartTest.Location = new System.Drawing.Point(52, 86);
+            this.btnStartTest.Name = "btnStartTest";
+            this.btnStartTest.Size = new System.Drawing.Size(57, 23);
+            this.btnStartTest.TabIndex = 7;
+            this.btnStartTest.Text = "Start test";
+            this.btnStartTest.UseVisualStyleBackColor = true;
+            this.btnStartTest.Click += new System.EventHandler(this.btnStartTest_Click);
             // 
             // tabPage2
             // 
@@ -195,17 +193,17 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.btnTestButton);
             this.tabPage1.Controls.Add(this.lblUser);
             this.tabPage1.Controls.Add(this.cmbOnlinePatients);
-            this.tabPage1.Controls.Add(this.chart1);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.crtRPM);
+            this.tabPage1.Controls.Add(this.btnStartTest);
             this.tabPage1.Controls.Add(this.lblWatt);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.tbTime);
+            this.tabPage1.Controls.Add(this.crtPower);
             this.tabPage1.Controls.Add(this.lblTijd);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.chart2);
+            this.tabPage1.Controls.Add(this.btnSetPower);
+            this.tabPage1.Controls.Add(this.crtPulse);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -215,15 +213,15 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // button3
+            // btnTestButton
             // 
-            this.button3.Location = new System.Drawing.Point(52, 125);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnTestButton.Location = new System.Drawing.Point(52, 125);
+            this.btnTestButton.Name = "btnTestButton";
+            this.btnTestButton.Size = new System.Drawing.Size(75, 23);
+            this.btnTestButton.TabIndex = 10;
+            this.btnTestButton.Text = "Test button";
+            this.btnTestButton.UseVisualStyleBackColor = true;
+            this.btnTestButton.Click += new System.EventHandler(this.btnTestButton_Click);
             // 
             // lblUser
             // 
@@ -241,6 +239,7 @@
             this.cmbOnlinePatients.Name = "cmbOnlinePatients";
             this.cmbOnlinePatients.Size = new System.Drawing.Size(103, 21);
             this.cmbOnlinePatients.TabIndex = 8;
+            this.cmbOnlinePatients.SelectionChangeCommitted += new System.EventHandler(this.cmbOnlinePatients_SelectionChangeCommitted);
             // 
             // tabPage3
             // 
@@ -337,9 +336,9 @@
             this.Name = "DoctorForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DoctorForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtRPM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtPower)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.crtPulse)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -351,14 +350,14 @@
 
         #endregion
 
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart crtRPM;
         private System.Windows.Forms.Label lblWatt;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.NumericUpDown crtPower;
+        private System.Windows.Forms.Button btnSetPower;
+        private System.Windows.Forms.DataVisualization.Charting.Chart crtPulse;
         private System.Windows.Forms.Label lblTijd;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox tbTime;
+        private System.Windows.Forms.Button btnStartTest;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -373,7 +372,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.ComboBox cmbOnlinePatients;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnTestButton;
     }
 }
 

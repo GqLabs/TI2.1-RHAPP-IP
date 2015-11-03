@@ -31,15 +31,21 @@ namespace RHAPP_IP_Client
         private readonly TCPController Controller;
         public string Username { get; private set; }
         public bool Connected { get; private set; }
+
+        // <only_needed_for_doctor>
         public List<User> Users { get; private set; }
+        public Dictionary<string, Measurement> PatientMeasurements { get; private set; }
+        // </only_needed>
 
         private AppGlobal()
         {
             Users = new List<User>();
+            PatientMeasurements = new Dictionary<string, Measurement>();
             Controller = new TCPController();
             Controller.OnPacketReceived += PacketReceived;
             this.LoginResultEvent += CheckLoggedIn;
             DataHandler.IncomingDataEvent += SerialDataReceived;
+            IncomingMeasurementEvent += MeasurementDataReceived;
         }
 
         #endregion
@@ -185,6 +191,12 @@ namespace RHAPP_IP_Client
             Controller.ReceiveTransmissionAsync();
         }
 
+        private void MeasurementDataReceived(Packet p)
+        {
+            SerialDataPacket packet = p as SerialDataPacket;
+            PatientMeasurements.Add(packet.PatientUsername, packet.Measurement);
+        }
+        
         public void ExitApplication()
         {
             Controller.StopClient();
