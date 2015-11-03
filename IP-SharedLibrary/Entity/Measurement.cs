@@ -18,6 +18,20 @@ namespace IP_SharedLibrary.Entity
         public DateTime Time { get; private set; }
         public int RealPower { get; private set; } // actual power
 
+        public Measurement(JObject json)
+        {
+            if (json == null)
+                throw new ArgumentNullException("json", "Measurement ctor: json is null!");
+
+            JToken pulse;
+
+            if (!(json.TryGetValue("Pulse", StringComparison.CurrentCultureIgnoreCase, out pulse)))
+                throw new ArgumentException("Username is not found in json: \n" + json);
+
+            // Initialize
+            Pulse = (int)pulse;
+        }
+
         public Measurement(int pulse, int pedalRpm, int speed, int distance, int destPower, int energy, DateTime time, int realPower)
         {
             Pulse = pulse;
@@ -42,6 +56,8 @@ namespace IP_SharedLibrary.Entity
             Time = DateTime.Parse(parts[6]);
             RealPower = int.Parse(parts[7]);
         }
+
+
 
         public JObject ToJsonObject()
         {
