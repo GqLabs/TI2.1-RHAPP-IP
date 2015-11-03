@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 
-namespace ChatShared.Packet.Request
+namespace IP_SharedLibrary.Packet.Request
 {
-    public class PullRequestPacket : AuthenticatedPacket
+    public class PullRequestPacket : RequestPacket
     {
         //Inherited field: CMD, AuthToken
         //Introduced fields: Datatype (enum)
@@ -11,24 +11,23 @@ namespace ChatShared.Packet.Request
         public const string DefCmd = "PULL";
         public enum RequestType
         {
-            UsersByStatus,
-            MessagesByUser,
-            ReceivedMessages,
+            UsersByStatus
         }
 
         public RequestType Request { get; private set; }
         public String SearchKey { get; private set; }
+        public string Username { get; private set; }
 
 
-        public PullRequestPacket(RequestType requestType, string authtoken) : base(DefCmd, authtoken)
+        public PullRequestPacket(RequestType requestType, string username) : base(DefCmd)
         {
-            Initialize(requestType);
+            Initialize(requestType, username);
         }
 
-        public PullRequestPacket(RequestType requestType, string searchKey, string authtoken)
-            : base(DefCmd, authtoken)
+        public PullRequestPacket(RequestType requestType, string searchKey, string username)
+            : base(DefCmd)
         {
-            Initialize(requestType, searchKey);
+            Initialize(requestType, username, searchKey);
         }
 
         public PullRequestPacket(JObject json) : base(json)
@@ -38,9 +37,13 @@ namespace ChatShared.Packet.Request
 
             JToken requestTypeToken;
             JToken searchKeyToken;
+            JToken username;
 
             if (!(json.TryGetValue("REQUESTTYPE", StringComparison.CurrentCultureIgnoreCase, out requestTypeToken)))
                 throw new ArgumentException("RequestType is not found in json: \n" + json);
+
+            if (!(json.TryGetValue("USERNAME", StringComparison.CurrentCultureIgnoreCase, out username)))
+                throw new ArgumentException("Username is not found in json: \n" + json);
 
 
             var requestType = (RequestType) Enum.Parse(typeof (RequestType), (string) requestTypeToken);
@@ -51,19 +54,21 @@ namespace ChatShared.Packet.Request
             if (json.TryGetValue("SEARCHKEY", StringComparison.CurrentCultureIgnoreCase, out searchKeyToken))
                 Initialize(requestType, (string) searchKeyToken);
             else
-                Initialize(requestType);
+                Initialize(requestType, (string)username);
         }
 
-        private void Initialize(RequestType requestType, string searchKey = null)
+        private void Initialize(RequestType requestType, string username, string searchKey = null)
         {
             Request = requestType;
             SearchKey = searchKey;
+            Username = username;
         }
 
         public override JObject ToJsonObject()
         {
             var json = base.ToJsonObject();
             json.Add("REQUESTTYPE", Request.ToString());
+            json.Add("USERNAME", Username);
             if (SearchKey != null)
                 json.Add("SEARCHKEY", SearchKey);
             return json;

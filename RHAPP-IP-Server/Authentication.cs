@@ -62,7 +62,7 @@ namespace RHAPP_IP_Server
 
         public static User GetUser(String username)
         {
-            return AuthUsers.First(x => x.Key.Username == username).Key;
+            return AuthUsers.FirstOrDefault(x => x.Key.Username == username).Key;
         }
 
         public static List<User> GetAllUsers()

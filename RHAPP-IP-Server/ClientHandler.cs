@@ -127,37 +127,32 @@ namespace RHAPP_IP_Server
         }
 
         #region Packet_Handlers
-        //        private void HandlePullRequestPacket(JObject json)
-        //        {
-        //            Console.WriteLine("PullRequestPacket Received");
-        //            var packet = new PullRequestPacket(json);
+        private void HandlePullRequestPacket(JObject json)
+        {
+            Console.WriteLine("PullRequestPacket Received");
+            var packet = new PullRequestPacket(json);
 
-        //            var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
-        //            if (Authentication.Authenticate(packet.AuthToken))
-        //            {
-        //                switch (packet.Request)
-        //                {
-        //                    case PullRequestPacket.RequestType.UsersByStatus:
-        //                        returnPacket = HandlePullRequestUsersByStatus();
-        //                        break;
-        //                    case PullRequestPacket.RequestType.ReceivedMessages:
-        //                        returnPacket = HandlePullRequestReceivedMessages(packet);
-        //                        break;
-        //                    case PullRequestPacket.RequestType.MessagesByUser:
-        //                        returnPacket = HandlePullRequestMessagesByUser(packet);
-        //                        break;
-        //                    default:
-        //                        returnPacket = new ResponsePacket(Statuscode.Status.CommandNotImplemented,
-        //                            PullResponsePacket<object>.DefCmd);
-        //                        break;
-        //                }
-        //            }
-        //#if DEBUG
-        //            Console.WriteLine(packet);
-        //            Console.WriteLine(returnPacket);
-        //#endif
-        //            Send(returnPacket);
-        //        }
+            var u = Authentication.GetUser(packet.Username);
+            if (u == null) return;
+            
+            var returnPacket = HandlePullRequestUsersByStatus();
+#if DEBUG
+            Console.WriteLine(packet);
+            Console.WriteLine(returnPacket);
+#endif
+            Send(returnPacket);
+        }
+        private ResponsePacket HandlePullRequestUsersByStatus()
+        {
+            //Get all users and set their online-status to "false".
+            var allUsers = _datastorage.GetUsers().ToList();
+            var authenticatedUsers = Authentication.GetAllUsers();
+            foreach (var user in allUsers)
+            {
+                user.OnlineStatus = authenticatedUsers.Contains(user);
+            }
+            return new PullResponsePacket<User>(Statuscode.Status.Ok, allUsers);
+        }
 
         //private ResponsePacket HandlePullRequestMessagesByUser(PullRequestPacket packet)
         //{
@@ -174,21 +169,6 @@ namespace RHAPP_IP_Server
         //        PullResponsePacket<ChatMessage>.DataType.ChatMessage,
         //        allMessages);
 
-        //}
-
-        //private ResponsePacket HandlePullRequestUsersByStatus()
-        //{
-        //    //Get all users and set their online-status to "false".
-        //    var allUsers = _datastorage.GetUsers().ToList();
-        //    var authenticatedUsers = Authentication.GetAllUsers();
-        //    foreach (var user in allUsers)
-        //    {
-        //        user.OnlineStatus = authenticatedUsers.Contains(user);
-        //    }
-
-        //    return new PullResponsePacket<User>(Statuscode.Status.Ok,
-        //        PullResponsePacket<User>.DataType.User,
-        //        allUsers);
         //}
 
         //        private void HandleRegisterPacket(JObject json)
