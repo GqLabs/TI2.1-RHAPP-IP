@@ -59,6 +59,9 @@ namespace RHAPP_IP_Client
                         p.Show();
                     }
                     break;
+                case "201":
+                    MessageBox.Show("You can only log in once", "Error", MessageBoxButtons.OK);
+                    break;
                 case "430":
                     MessageBox.Show("Invalid Username or Password", "Error", MessageBoxButtons.OK);
                     break;
