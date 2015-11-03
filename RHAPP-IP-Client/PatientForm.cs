@@ -18,11 +18,30 @@ namespace RHAPP_IP_Client
     {
         private PatientModel patientModel;
 
+        private Dictionary<string, Dictionary<string, List<string>>> DictionaryByGender;
+
         public PatientForm()
         {
             InitializeComponent();
             patientModel = PatientModel.patientModel;
             patientModel.patientform = this;
+            
+            DictionaryByGender.Add("Female", null);
+
+            var dict1Male = new Dictionary<string, List<String>>();
+            var list1Male = new List<string>();
+
+            list1Male.Add("2.2");
+            list1Male.Add("2.2");
+            list1Male.Add("2.2");
+            list1Male.Add("2.3");
+            list1Male.Add("2.3");
+            list1Male.Add("2.3");
+
+            dict1Male.Add("50watt300kpm", list1Male);
+
+            DictionaryByGender.Add("Male", dict1Male);
+
         }
 
         private void PatientForm_Load(object sender, EventArgs e)

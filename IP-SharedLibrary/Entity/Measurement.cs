@@ -9,27 +9,32 @@ namespace IP_SharedLibrary.Entity
 {
     public class Measurement
     {
-        public int Pulse {get; private set;}
-        public int PedalRpm { get; private set; }
-        public int Speed { get; private set; }
-        public int Distance { get; private set; }
-        public int DestPower { get; private set; } // requested power
-        public int Energy { get; private set; }
-        public DateTime Time { get; private set; }
-        public int RealPower { get; private set; } // actual power
+        public int Pulse {get; set;}
+        public int PedalRpm { get; set; }
+        public int Speed { get; set; }
+        public int Distance { get; set; }
+        public int DestPower { get; set; } // requested power
+        public int Energy { get; set; }
+        public DateTime Time { get; set; }
+        public int RealPower { get; set; } // actual power
 
-        public Measurement(JObject json)
+        //public Measurement(JObject json)
+        //{
+        //    if (json == null)
+        //        throw new ArgumentNullException("json", "Measurement ctor: json is null!");
+
+        //    JToken pulse;
+
+        //    if (!(json.TryGetValue("Pulse", StringComparison.CurrentCultureIgnoreCase, out pulse)))
+        //        throw new ArgumentException("Username is not found in json: \n" + json);
+
+        //    // Initialize
+        //    Pulse = (int)pulse;
+        //}
+
+        public Measurement()
         {
-            if (json == null)
-                throw new ArgumentNullException("json", "Measurement ctor: json is null!");
 
-            JToken pulse;
-
-            if (!(json.TryGetValue("Pulse", StringComparison.CurrentCultureIgnoreCase, out pulse)))
-                throw new ArgumentException("Username is not found in json: \n" + json);
-
-            // Initialize
-            Pulse = (int)pulse;
         }
 
         public Measurement(int pulse, int pedalRpm, int speed, int distance, int destPower, int energy, DateTime time, int realPower)
