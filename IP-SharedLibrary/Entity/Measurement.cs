@@ -77,5 +77,15 @@ namespace IP_SharedLibrary.Entity
         {
             return ToJsonObject().ToString();
         }
+
+        public static implicit operator JObject(Measurement measurement)
+        {
+            return measurement.ToJsonObject();
+        }
+
+        public static implicit operator String(Measurement measurement)
+        {
+            return measurement.ToString();
+        }
     }
 }

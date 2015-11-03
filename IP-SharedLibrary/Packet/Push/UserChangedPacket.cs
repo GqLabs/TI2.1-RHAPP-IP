@@ -49,7 +49,7 @@ namespace IP_SharedLibrary.Packet.Push
             Nickname = nickname;
             Status = status;
         }
-
+        
         public override JObject ToJsonObject()
         {
             var json = base.ToJsonObject();
