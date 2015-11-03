@@ -10,6 +10,7 @@ namespace IP_SharedLibrary.Packet
         public enum Status
         {
             Ok = 200,
+            AlreadyOnline = 201,
             Unauthorized = 401,
             AccessDenied = 403,
             InvalidUsernameOrPassword = 430,
@@ -24,6 +25,10 @@ namespace IP_SharedLibrary.Packet
                 case Status.Ok:
                     Code = 200;
                     Description = "OK!";
+                    break;
+                case Status.AlreadyOnline:
+                    Code = 201;
+                    Description = "ALREADY ONLINE";
                     break;
                 case Status.Unauthorized:
                     Code = 401;

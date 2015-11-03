@@ -10,6 +10,7 @@ namespace RHAPP_IP_Client
     public class StandardForm : Form
     {
         protected AppGlobal _appGlobal { get; private set; } = AppGlobal.Instance;
+
         public void Logout(Form currentForm)
         {
             currentForm.Hide();
