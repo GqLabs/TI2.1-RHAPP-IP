@@ -48,6 +48,8 @@ namespace RHAPP_IP_Client
                     }
                     if (responsePacket.isDoctor)
                     {
+                        var v = new PullRequestPacket(_appGlobal.Username);
+                        _appGlobal.Send(v);
                         DoctorForm d = new DoctorForm();
                         this.Hide();
                         d.Show();

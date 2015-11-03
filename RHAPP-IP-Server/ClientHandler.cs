@@ -94,12 +94,12 @@ namespace RHAPP_IP_Server
                         case DisconnectPacket.DefCmd:
                             HandleDisconnectPacket(json);
                             break;
-                            //case RegisterPacket.DefCmd:
-                            //    HandleRegisterPacket(json);
-                            //    break;
-                            //case PullRequestPacket.DefCmd:
-                            //    HandlePullRequestPacket(json);
-                            //    break;
+                        //case RegisterPacket.DefCmd:
+                        //    HandleRegisterPacket(json);
+                        //    break;
+                        case PullRequestPacket.DefCmd:
+                            HandlePullRequestPacket(json);
+                            break;
                     }
 
                 }
@@ -195,7 +195,7 @@ namespace RHAPP_IP_Server
             Console.WriteLine("DisconnectPacket Received");
 
             var packet = new DisconnectPacket(json);
-
+            
             var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
             if (Authentication.CheckLoggedIn(packet.Username))
             {

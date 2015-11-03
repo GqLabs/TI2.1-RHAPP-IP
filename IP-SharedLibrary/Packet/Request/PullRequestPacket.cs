@@ -19,15 +19,16 @@ namespace IP_SharedLibrary.Packet.Request
         public string Username { get; private set; }
 
 
-        public PullRequestPacket(RequestType requestType, string username) : base(DefCmd)
+        public PullRequestPacket(string username) : base(DefCmd)
         {
-            Initialize(requestType, username);
+            
+            Initialize(RequestType.UsersByStatus, username);
         }
 
-        public PullRequestPacket(RequestType requestType, string searchKey, string username)
+        public PullRequestPacket(string searchKey, string username)
             : base(DefCmd)
         {
-            Initialize(requestType, username, searchKey);
+            Initialize(RequestType.UsersByStatus, username, searchKey);
         }
 
         public PullRequestPacket(JObject json) : base(json)

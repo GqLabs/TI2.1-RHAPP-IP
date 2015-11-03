@@ -13,7 +13,6 @@ namespace IP_SharedLibrary.Packet
 {
     public abstract class Packet
     {
-
         public static int GetLengthOfPacket(string buffer)
         {
             if (buffer.Length < 4) return -1;
