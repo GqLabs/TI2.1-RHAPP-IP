@@ -106,6 +106,7 @@ namespace RHAPP_IP_Client
             {
                 Username = ((LoginResponsePacket)packet).username;
                 Connected = true;
+                Receive();
             }
 
         }
