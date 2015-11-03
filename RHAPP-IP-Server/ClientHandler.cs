@@ -233,9 +233,12 @@ namespace RHAPP_IP_Server
                 }
 
             }
-            else if (Authentication.GetUser(packet.Username).OnlineStatus)
+            else if (Authentication.GetUser(packet.Username) != null)
             {
-                returnJson = new ResponsePacket(Statuscode.Status.AlreadyOnline, "RESP-LOGIN");
+                if (Authentication.GetUser(packet.Username).OnlineStatus)
+                    returnJson = new ResponsePacket(Statuscode.Status.AlreadyOnline, "RESP-LOGIN");
+                else
+                    returnJson = new ResponsePacket(Statuscode.Status.SyntaxError, "RESP-LOGIN");
             }
             else //If the code reaches this point, the authentification has failed.
             {

@@ -63,6 +63,8 @@ namespace IP_SharedLibrary.Packet
             {
                 case Status.Ok:
                     return 200;
+                case Status.AlreadyOnline:
+                    return 201;
                 case Status.Unauthorized:
                     return 401;
                 case Status.AccessDenied:
@@ -86,6 +88,8 @@ namespace IP_SharedLibrary.Packet
             {
                 case Status.Ok:
                     return "OK!";
+                case Status.AlreadyOnline:
+                    return "ALREADY ONLINE";
                 case Status.Unauthorized:
                     return "UNAUTHORIZED";
                 case Status.AccessDenied:
