@@ -70,9 +70,9 @@ namespace IP_SharedLibrary.Packet
             switch ((string)json.GetValue("CMD", StringComparison.CurrentCultureIgnoreCase))
             {
 
-                //case ChatPacket.DefCmd:
-                //    p = new ChatPacket(json);
-                //    break;
+                case SerialDataPacket.DefCmd:
+                    p = new SerialDataPacket(json);
+                    break;
                 case DisconnectPacket.DefCmd:
                     p = new DisconnectPacket(json);
                     break;

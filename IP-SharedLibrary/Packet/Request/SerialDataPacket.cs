@@ -14,7 +14,7 @@ namespace IP_SharedLibrary.Packet.Request
         // Inherited fields: CMD
         // Introduced fields: Data (type = serialdata)
 
-        public const string DefCmd = "PUSH-SERDAT";
+        public const string DefCmd = "SERIAL";
 
         public Measurement Measurement { get; private set; }
         public string PatientUsername { get; private set; }
