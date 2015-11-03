@@ -36,14 +36,14 @@ namespace RHAPP_IP_Server
         }
 
 
-        public static Boolean Authenticate(String username)
+        public static Boolean CheckLoggedIn(String username)
         {
-            bool isOk = true;
+            bool LoggedIn = false;
             foreach (User u in AuthUsers.Keys)
             {
-                if (u.Username == username) isOk = false;
+                if (u.Username == username) LoggedIn = true;
             }
-            return isOk;
+            return LoggedIn;
         }
         public static void DeAuthenticate(String username)
         {

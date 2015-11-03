@@ -8,6 +8,8 @@ namespace RHAPP_IP_Client
 {
     static class Program
     {
+        public static Form LoginForm { get; private set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +18,7 @@ namespace RHAPP_IP_Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(LoginForm = new LoginForm());
         }
     }
 }

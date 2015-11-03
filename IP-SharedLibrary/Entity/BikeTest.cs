@@ -11,10 +11,10 @@ namespace IP_SharedLibrary.Entity
         public List<Measurement> Measurements { get; private set; }
         public int Age { get; private set; }
         public String Weight { get; private set; }
-        public Double Heartbeat { get; private set; }
+        public Double Heartbeat { get; set; }
         public String Username { get; private set; }
         public DateTime TimeStampStarted { get; private set; }
-        public DateTime TimeStampStopped { get; private set; }
+        public DateTime TimeStampStopped { get; set; }
 
         // true == man; false == woman
         public Boolean Gender { get; private set; }
@@ -25,6 +25,8 @@ namespace IP_SharedLibrary.Entity
             Weight = weight;
             Username = username;
             Gender = gender;
+            Measurements = new List<Measurement>();
+            TimeStampStarted = DateTime.Now;
         }
 
         public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements, DateTime timeStampStart, DateTime timeStampStop)
@@ -37,6 +39,12 @@ namespace IP_SharedLibrary.Entity
             Measurements = measurements;
             TimeStampStarted = timeStampStart;
             TimeStampStopped = timeStampStop;
+        }
+
+        public void AddMeasurement(Measurement measurement)
+        {
+            Measurements.Add(measurement);
+            Heartbeat = measurement.Pulse;
         }
     }
 }

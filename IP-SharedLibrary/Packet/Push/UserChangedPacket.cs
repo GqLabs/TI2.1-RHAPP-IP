@@ -1,8 +1,8 @@
 ﻿using System;
-using ChatShared.Entity;
+using IP_SharedLibrary.Entity;
 using Newtonsoft.Json.Linq;
 
-namespace ChatShared.Packet.Push
+namespace IP_SharedLibrary.Packet.Push
 {
     public class UserChangedPacket : PushPacket
     {

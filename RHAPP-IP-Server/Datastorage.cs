@@ -57,7 +57,7 @@ namespace RHAPP_IP_Server
             return true;
         }
 
-        public void AddMessage(BikeTest bikeTest)
+        public void AddBikeTest(BikeTest bikeTest)
         {
             _bikeTests.Add(bikeTest);
         }

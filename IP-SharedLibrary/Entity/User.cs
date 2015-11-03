@@ -21,7 +21,9 @@ namespace IP_SharedLibrary.Entity
 
         public User(string nickname, string username, string password)
         {
-            throw new NotImplementedException();
+            Nickname = nickname;
+            Username = username;
+            Password = password;
         }
 
         public void ChangeNickname(string nickname)
@@ -31,6 +33,7 @@ namespace IP_SharedLibrary.Entity
 
         public void ChangePassword()
         {
+            throw new NotImplementedException();
         }
 
         public override string ToString()

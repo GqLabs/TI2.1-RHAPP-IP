@@ -18,9 +18,11 @@ namespace IP_SharedLibrary.Packet.Push
 
         public Measurement Measurement { get; private set; }
 
-        public SerialDataPushPacket(Measurement measurement) : base(DefCmd)
+        public string Username { get; private set; }
+
+        public SerialDataPushPacket(Measurement measurement, string username) : base(DefCmd)
         {
-            Initialize(measurement);
+            Initialize(measurement, username);
         }
 
         public SerialDataPushPacket(JObject json) : base(json)
@@ -29,24 +31,28 @@ namespace IP_SharedLibrary.Packet.Push
                 throw new ArgumentNullException("json", "SerialDataPushPacket ctor: json is null!");
 
             JToken measurementToken;
+            JToken username;
 
-            if (!(json.TryGetValue("Measurement", StringComparison.CurrentCultureIgnoreCase, out measurementToken)))
-                throw new ArgumentException("Measurement is not found in json: \n" + json);
+            if (!(json.TryGetValue("Measurement", StringComparison.CurrentCultureIgnoreCase, out measurementToken)
+                && (json.TryGetValue("Username", StringComparison.CurrentCultureIgnoreCase, out username))))
+                throw new ArgumentException("Measurement & Username is not found in json: \n" + json);
 
             var measurement = JsonConvert.DeserializeObject<Measurement>(measurementToken.ToString());
 
-            Initialize(measurement);
+            Initialize(measurement, (string)username);
         }
 
-        private void Initialize(Measurement measurement)
+        private void Initialize(Measurement measurement, string username)
         {
             Measurement = measurement;
+            Username = username;
         }
 
         public override JObject ToJsonObject()
         {
             var json = base.ToJsonObject();
             json.Add("Measurement", JsonConvert.SerializeObject(Measurement));
+            json.Add("Username", JsonConvert.SerializeObject(Username));
             return json;
         }
 

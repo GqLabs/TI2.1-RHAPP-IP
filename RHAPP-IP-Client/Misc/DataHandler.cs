@@ -31,7 +31,7 @@ namespace RHAPP_IP_Client.Misc
         public enum ReturnData { ERROR, ACK, RUN, STATUS }
 
         public State state = State.notConnected;
-        public ReturnData returnData;
+        public ReturnData returnData { get; set; }
 
         private SerialPort ComPort;
 

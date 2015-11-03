@@ -51,5 +51,10 @@ namespace RHAPP_IP_Client
                 patientModel.stopAskingData();
             }
         }
+
+        private void PatientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.FormClosingMethod(sender, e, this);
+        }
     }
 }

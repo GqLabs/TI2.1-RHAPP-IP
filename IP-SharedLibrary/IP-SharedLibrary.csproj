@@ -50,6 +50,7 @@
     <Compile Include="Packet\Packet.cs" />
     <Compile Include="Packet\Push\PushPacket.cs" />
     <Compile Include="Packet\Push\SerialDataPushPacket.cs" />
+    <Compile Include="Packet\Push\UserChangedPacket.cs" />
     <Compile Include="Packet\Request\DisconnectPacket.cs" />
     <Compile Include="Packet\Request\LoginPacket.cs" />
     <Compile Include="Packet\Request\RequestPacket.cs" />

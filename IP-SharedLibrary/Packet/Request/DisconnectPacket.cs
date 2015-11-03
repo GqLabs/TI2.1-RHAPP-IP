@@ -8,7 +8,7 @@ namespace IP_SharedLibrary.Packet.Request
         public const string DefCmd = "DC";
         public string Username { private set; get; }
 
-        public DisconnectPacket(string cmd, string username) :base(DefCmd)
+        public DisconnectPacket(string username) :base(DefCmd)
         {
             Initialize(username);
         }
@@ -18,12 +18,12 @@ namespace IP_SharedLibrary.Packet.Request
             if (json == null)
                 throw new ArgumentNullException("json", "Authenticatedpacket ctor: json is null!");
 
-            JToken authToken;
+            JToken username;
 
-            if (!(json.TryGetValue("AUTHTOKEN", StringComparison.CurrentCultureIgnoreCase, out authToken)))
-                throw new ArgumentException("Authtoken is not found in json: \n" + json);
+            if (!(json.TryGetValue("USERNAME", StringComparison.CurrentCultureIgnoreCase, out username)))
+                throw new ArgumentException("Username is not found in json: \n" + json);
 
-            Initialize((string)Username);
+            Initialize((string)username);
         }
 
         private void Initialize(string username)

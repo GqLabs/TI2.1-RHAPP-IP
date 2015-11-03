@@ -1,4 +1,6 @@
-﻿using IP_SharedLibrary.Packet;
+﻿using IP_SharedLibrary.Entity;
+using IP_SharedLibrary.Packet;
+using IP_SharedLibrary.Packet.Push;
 using IP_SharedLibrary.Packet.Request;
 using IP_SharedLibrary.Packet.Response;
 using Newtonsoft.Json;
@@ -22,6 +24,7 @@ namespace RHAPP_IP_Server
         private readonly NetworkStream _networkStream;
         private List<byte> _totalBuffer;
         private readonly Datastorage _datastorage;
+        private ClientDataHandler _clientDataHandler;
 
         public ClientHandler(TcpClient client)
         {
@@ -82,21 +85,21 @@ namespace RHAPP_IP_Server
 
                     switch ((string)cmd)
                     {
-                        //case ChatPacket.DefCmd:
-                        //    HandleChatPacket(json);
-                        //    break;
+                        case SerialDataPacket.DefCmd:
+                            HandleSerialDataPacket(json);
+                            break;
                         case LoginPacket.DefCmd:
                             HandleLoginPacket(json);
                             break;
                         case DisconnectPacket.DefCmd:
                             HandleDisconnectPacket(json);
                             break;
-                        //case RegisterPacket.DefCmd:
-                        //    HandleRegisterPacket(json);
-                        //    break;
-                        //case PullRequestPacket.DefCmd:
-                        //    HandlePullRequestPacket(json);
-                        //    break;
+                            //case RegisterPacket.DefCmd:
+                            //    HandleRegisterPacket(json);
+                            //    break;
+                            //case PullRequestPacket.DefCmd:
+                            //    HandlePullRequestPacket(json);
+                            //    break;
                     }
 
                 }
@@ -123,37 +126,38 @@ namespace RHAPP_IP_Server
             // ReSharper disable once FunctionNeverReturns
         }
 
-//        private void HandlePullRequestPacket(JObject json)
-//        {
-//            Console.WriteLine("PullRequestPacket Received");
-//            var packet = new PullRequestPacket(json);
+        #region Packet_Handlers
+        //        private void HandlePullRequestPacket(JObject json)
+        //        {
+        //            Console.WriteLine("PullRequestPacket Received");
+        //            var packet = new PullRequestPacket(json);
 
-//            var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
-//            if (Authentication.Authenticate(packet.AuthToken))
-//            {
-//                switch (packet.Request)
-//                {
-//                    case PullRequestPacket.RequestType.UsersByStatus:
-//                        returnPacket = HandlePullRequestUsersByStatus();
-//                        break;
-//                    case PullRequestPacket.RequestType.ReceivedMessages:
-//                        returnPacket = HandlePullRequestReceivedMessages(packet);
-//                        break;
-//                    case PullRequestPacket.RequestType.MessagesByUser:
-//                        returnPacket = HandlePullRequestMessagesByUser(packet);
-//                        break;
-//                    default:
-//                        returnPacket = new ResponsePacket(Statuscode.Status.CommandNotImplemented,
-//                            PullResponsePacket<object>.DefCmd);
-//                        break;
-//                }
-//            }
-//#if DEBUG
-//            Console.WriteLine(packet);
-//            Console.WriteLine(returnPacket);
-//#endif
-//            Send(returnPacket);
-//        }
+        //            var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
+        //            if (Authentication.Authenticate(packet.AuthToken))
+        //            {
+        //                switch (packet.Request)
+        //                {
+        //                    case PullRequestPacket.RequestType.UsersByStatus:
+        //                        returnPacket = HandlePullRequestUsersByStatus();
+        //                        break;
+        //                    case PullRequestPacket.RequestType.ReceivedMessages:
+        //                        returnPacket = HandlePullRequestReceivedMessages(packet);
+        //                        break;
+        //                    case PullRequestPacket.RequestType.MessagesByUser:
+        //                        returnPacket = HandlePullRequestMessagesByUser(packet);
+        //                        break;
+        //                    default:
+        //                        returnPacket = new ResponsePacket(Statuscode.Status.CommandNotImplemented,
+        //                            PullResponsePacket<object>.DefCmd);
+        //                        break;
+        //                }
+        //            }
+        //#if DEBUG
+        //            Console.WriteLine(packet);
+        //            Console.WriteLine(returnPacket);
+        //#endif
+        //            Send(returnPacket);
+        //        }
 
         //private ResponsePacket HandlePullRequestMessagesByUser(PullRequestPacket packet)
         //{
@@ -187,22 +191,22 @@ namespace RHAPP_IP_Server
         //        allUsers);
         //}
 
-//        private void HandleRegisterPacket(JObject json)
-//        {
-//            Console.WriteLine("RegisterPacket Received");
+        //        private void HandleRegisterPacket(JObject json)
+        //        {
+        //            Console.WriteLine("RegisterPacket Received");
 
-//            var packet = new RegisterPacket(json);
-//            var user = new User(packet.Nickname, packet.Username, packet.Passhash);
-//            Datastorage.Instance.AddUser(user);
+        //            var packet = new RegisterPacket(json);
+        //            var user = new User(packet.Nickname, packet.Username, packet.Passhash);
+        //            Datastorage.Instance.AddUser(user);
 
-//            var returnPacket = new RegisterResponsePacket(Statuscode.Status.Ok);
-//            Send(returnPacket);
+        //            var returnPacket = new RegisterResponsePacket(Statuscode.Status.Ok);
+        //            Send(returnPacket);
 
-//#if DEBUG
-//            Console.WriteLine(packet.ToString());
-//            Console.WriteLine(returnPacket.ToString());
-//#endif
-//        }
+        //#if DEBUG
+        //            Console.WriteLine(packet.ToString());
+        //            Console.WriteLine(returnPacket.ToString());
+        //#endif
+        //        }
 
         private void HandleDisconnectPacket(JObject json)
         {
@@ -211,7 +215,7 @@ namespace RHAPP_IP_Server
             var packet = new DisconnectPacket(json);
 
             var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
-            if (Authentication.Authenticate(packet.Username))
+            if (Authentication.CheckLoggedIn(packet.Username))
             {
                 Authentication.DeAuthenticate(packet.Username);
                 returnPacket = new ResponsePacket(Statuscode.Status.Ok);
@@ -260,46 +264,51 @@ namespace RHAPP_IP_Server
 #endif
         }
 
-//        private void HandleChatPacket(JObject json)
-//        {
-//            Console.WriteLine("Handle Chat Packet");
-//            var packet = new ChatPacket(json);
+        private void HandleSerialDataPacket(JObject json)
+        {
+            Console.WriteLine("Handle Chat Packet");
+            var packet = new SerialDataPacket(json);
 
-//            var returnPacket = new ChatResponsePacket(Statuscode.Status.Unauthorized);
+            var PatientUsername = Authentication.GetAllUsers()
+                .Where(user => user.Username == packet.PatientUsername)
+                .Select(user => user.Username).FirstOrDefault();
 
-//            if (Authentication.Authenticate(packet.AuthToken))
-//            {
-//                var usernameSender = Authentication.GetAllUsers()
-//                    .Where(user => user.AuthToken == packet.AuthToken)
-//                    .Select(user => user.Username).FirstOrDefault();
+            ClientDataHandler.ReturnValue returnVal = _clientDataHandler.AddMeasurementToLastBikeTest(packet.Measurement);
+            if (returnVal == ClientDataHandler.ReturnValue.NotStarted)
+            {
+#if DEBUG
+                Console.WriteLine("Error: Tried to add measurement while BikeTest was not started of patient {0}", Authentication.GetUser(packet.PatientUsername).Nickname);
+#endif
+            }
+            else
+            {
+#if DEBUG
+                Console.WriteLine("Error: General error occured while tried to add measurement of patient {0}", Authentication.GetUser(packet.PatientUsername).Nickname);
+#endif
+            }
 
-//                var chatMessage = new ChatMessage(usernameSender,
-//                    packet.UsernameDestination,
-//                    packet.Message,
-//                    packet.Sent);
+            //Generate PushPacket
+            Packet pushPacket = new SerialDataPushPacket(packet.Measurement, packet.PatientUsername);
 
-//                _datastorage.AddMessage(chatMessage);
+            // Determining the sockets to send the pushpacket (to send to all online doctors) 
+            List<string> onlineDoctors = Authentication.GetAllUsers()
+                .Where(user => user.IsDoctor == true)
+                .Select(user => user.Username).ToList();
+            foreach (string u in onlineDoctors)
+            {
+                var clientHandler = Authentication.GetStream(u);
+                if (clientHandler != null) clientHandler.Send(pushPacket);
+#if DEBUG
+                if (clientHandler != null) Console.WriteLine("Notifing:\n{0}", pushPacket);
+#endif
+            }
+#if DEBUG
+            Console.WriteLine(packet);
+#endif
+        }
+        #endregion
 
-//                //Generate ChatPushPacket
-//                Packet pushPacket = new MessagePushPacket(chatMessage);
-
-//                // Determining the socket to send the pushpacket
-//                var clientHandler = Authentication.GetStream(packet.UsernameDestination);
-//                if (clientHandler != null) clientHandler.Send(pushPacket);
-//#if DEBUG
-//                if (clientHandler != null) Console.WriteLine("Notifing:\n{0}", pushPacket);
-//#endif
-
-//                returnPacket = new ChatResponsePacket(Statuscode.Status.Ok);
-//            }
-//#if DEBUG
-//            Console.WriteLine(packet);
-//            Console.WriteLine(returnPacket);
-//#endif
-//            Send(returnPacket);
-//        }
-
-
+        #region Send_methods
         private void SendToAllOnlineUsers(Packet p)
         {
             foreach (var clientHandler in Authentication.GetAllUsers()
@@ -323,6 +332,76 @@ namespace RHAPP_IP_Server
         public void Send(Packet s)
         {
             Send(s.ToString());
+        }
+        #endregion Send
+    }
+
+    internal class ClientDataHandler
+    {
+        private BikeTest _lastBikeTestBuff;
+        public enum BikeTestStatus { NotInitialized, Stopped, Started, Error }
+        public enum ReturnValue { Success, AlreadyStarted, AlreadyStopped, NotStarted, NotStopped, Error }
+        public BikeTestStatus TestStatus { get; private set; }
+        public Measurement LastMeasurement { get { return _lastBikeTestBuff.Measurements.Last() ?? (null); } }
+
+        public ClientDataHandler()
+        {
+            TestStatus = BikeTestStatus.Stopped;
+        }
+
+        public ReturnValue StartNewBikeTest(BikeTest bikeTest)
+        {
+            if (TestStatus == BikeTestStatus.Stopped)
+            {
+                if (bikeTest != null)
+                {
+                    _lastBikeTestBuff = bikeTest;
+                }
+                return ReturnValue.Success;
+            }
+            else if (TestStatus == BikeTestStatus.Started)
+            {
+                return ReturnValue.AlreadyStarted;
+            }
+            else
+            {
+                return ReturnValue.Error;
+            }
+        }
+
+        public ReturnValue StopCurrentBikeTest(out BikeTest oldBikeTest)
+        {
+            if (TestStatus == BikeTestStatus.Started)
+            {
+                oldBikeTest = _lastBikeTestBuff;
+                return ReturnValue.Success;
+            }
+            else if (TestStatus == BikeTestStatus.Stopped)
+            {
+                oldBikeTest = null;
+                return ReturnValue.AlreadyStopped;
+            }
+            else
+            {
+                oldBikeTest = null;
+                return ReturnValue.Error;
+            }
+        }
+
+        public ReturnValue AddMeasurementToLastBikeTest(Measurement m)
+        {
+            if (TestStatus == BikeTestStatus.Started)
+            {
+                if (_lastBikeTestBuff != null)
+                {
+                    _lastBikeTestBuff.AddMeasurement(m);
+                    return ReturnValue.Success;
+                }
+                else return ReturnValue.Error;
+            }
+            else if (TestStatus == BikeTestStatus.Stopped) return ReturnValue.NotStarted;
+            else return ReturnValue.Error;
+
         }
     }
 }

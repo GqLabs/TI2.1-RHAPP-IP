@@ -48,15 +48,15 @@ namespace RHAPP_IP_Client
                     }
                     if (responsePacket.isDoctor)
                     {
-                        DoctorForm doctorForm = new DoctorForm();
+                        DoctorForm d = new DoctorForm();
                         this.Hide();
-                        doctorForm.Show();
+                        d.Show();
                     }
                     else
                     {
-                        PatientForm patientForm = new PatientForm();
+                        PatientForm p = new PatientForm();
                         this.Hide();
-                        patientForm.Show();
+                        p.Show();
                     }
                     break;
                 case "430":
