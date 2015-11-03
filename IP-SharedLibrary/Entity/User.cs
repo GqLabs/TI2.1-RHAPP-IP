@@ -4,7 +4,7 @@ namespace IP_SharedLibrary.Entity
 {
     public class User
     {
-        public string Nickname { get; set; }
+        public string Nickname { get; private set; }
         public string Username { get; private set; }
         public string Password { get; private set; }
         public bool IsDoctor { get; private set; }

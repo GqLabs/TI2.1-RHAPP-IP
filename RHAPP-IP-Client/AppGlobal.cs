@@ -168,9 +168,9 @@ namespace RHAPP_IP_Client
             //    FillChatMessageList(packet.Data.ToList());
             //    Console.WriteLine("PullResponsePacket<ChatMessage> received!");
             //}
-            else if (p is PullResponsePacket<User>)
+            else if (p is PullResponsePacket)
             {
-                var packet = p as PullResponsePacket<User>;
+                var packet = p as PullResponsePacket;
                 foreach (User u in packet.Data.ToList())
                 {
                     Users.Add(u);

@@ -7,7 +7,7 @@ using IP_SharedLibrary.Packet.Push;
 using IP_SharedLibrary.Packet.Request;
 using IP_SharedLibrary.Packet.Response;
 using Newtonsoft.Json.Linq;
-using PullResponsePacket = IP_SharedLibrary.Packet.Response.PullResponsePacket<IP_SharedLibrary.Entity.User>;
+using PullResponsePacket = IP_SharedLibrary.Packet.Response.PullResponsePacket;
 
 namespace IP_SharedLibrary.Packet
 {
@@ -94,7 +94,7 @@ namespace IP_SharedLibrary.Packet
                     p = new UserChangedPacket(json);
                     break;
                 case PullResponsePacket.DefCmd:
-                    p = new PullResponsePacket<User>(json);
+                    p = new PullResponsePacket(json);
                     break;
                 default:
                     try

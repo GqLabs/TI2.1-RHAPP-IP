@@ -6,23 +6,23 @@ using Newtonsoft.Json.Linq;
 
 namespace IP_SharedLibrary.Packet.Response
 {
-    public class PullResponsePacket<T> : ResponsePacket
+    public class PullResponsePacket : ResponsePacket
     {
         public const string DefCmd = "RESP-PULL";
 
-        public IEnumerable<T> Data { get; private set; }
+        public IEnumerable<User> Data { get; private set; }
 
-        public PullResponsePacket(Statuscode.Status status, IEnumerable<T> dataEnumerable)
-            : base(status, DefCmd)
+        public PullResponsePacket(List<User> users)
+            : base(DefCmd)
         {
-            Initialize(dataEnumerable);
+
+            Initialize(users);
         }
 
-        public PullResponsePacket(string status,
-            IEnumerable<T> dataEnumerable)
+        public PullResponsePacket(string status,List<User> users)
             : base(status, null, DefCmd)
         {
-            Initialize(dataEnumerable);
+            Initialize(users);
         }
 
         public PullResponsePacket(JObject json)
@@ -38,13 +38,13 @@ namespace IP_SharedLibrary.Packet.Response
                 throw new ArgumentException("Data is not found in json \n" + json);
             
             var array = (JArray)dataToken;
-            var data = array.Select(value => value.ToObject<T>()).ToList();
+            var data = array.Select(value => value.ToObject<User>()).ToList();
             Initialize(data);
         }
 
-        private void Initialize(IEnumerable<T> dataEnumerable)
+        private void Initialize(List<User> users)
         {
-            Data = dataEnumerable;
+            Data = users;
         }
 
         public override JObject ToJsonObject()

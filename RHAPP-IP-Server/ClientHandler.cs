@@ -154,7 +154,7 @@ namespace RHAPP_IP_Server
             {
                 user.OnlineStatus = authenticatedUsers.Contains(user);
             }
-            return new PullResponsePacket<User>(Statuscode.Status.Ok, allUsers);
+            return new PullResponsePacket(allUsers);
         }
 
         //private ResponsePacket HandlePullRequestMessagesByUser(PullRequestPacket packet)

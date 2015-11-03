@@ -16,7 +16,7 @@ namespace IP_SharedLibrary.Packet.Request
 
         public const string DefCmd = "SERIAL";
 
-        //public Measurement Measurement { get; private set; }
+        public Measurement Measurement { get; private set; }
         
         public string PatientUsername { get; private set; }
 
