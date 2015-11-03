@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,6 +44,14 @@
             this.bpmChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.rpmChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.leeftijdBox1 = new System.Windows.Forms.TextBox();
+            this.gewichtBox2 = new System.Windows.Forms.TextBox();
+            this.geslachtComboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.bpmChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpmChart)).BeginInit();
             this.SuspendLayout();
@@ -111,34 +119,34 @@
             // 
             // bpmChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.bpmChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.bpmChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.bpmChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.bpmChart.Legends.Add(legend3);
             this.bpmChart.Location = new System.Drawing.Point(322, 38);
             this.bpmChart.Name = "bpmChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Hartslag";
-            this.bpmChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Legend = "Legend1";
+            series3.Name = "Hartslag";
+            this.bpmChart.Series.Add(series3);
             this.bpmChart.Size = new System.Drawing.Size(300, 300);
             this.bpmChart.TabIndex = 12;
             this.bpmChart.Text = "chart2";
             // 
             // rpmChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.rpmChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.rpmChart.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.rpmChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.rpmChart.Legends.Add(legend4);
             this.rpmChart.Location = new System.Drawing.Point(16, 38);
             this.rpmChart.Name = "rpmChart";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "RPM";
-            this.rpmChart.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "RPM";
+            this.rpmChart.Series.Add(series4);
             this.rpmChart.Size = new System.Drawing.Size(300, 300);
             this.rpmChart.TabIndex = 8;
             this.rpmChart.Text = "chart1";
@@ -154,11 +162,90 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.requestData_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(654, 229);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(651, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Zelf Invullen";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(651, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Leeftijd";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(651, 81);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Gewicht";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(651, 115);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.TabIndex = 25;
+            this.label7.Text = "Geslacht";
+            // 
+            // leeftijdBox1
+            // 
+            this.leeftijdBox1.Location = new System.Drawing.Point(707, 45);
+            this.leeftijdBox1.Name = "leeftijdBox1";
+            this.leeftijdBox1.Size = new System.Drawing.Size(100, 20);
+            this.leeftijdBox1.TabIndex = 26;
+            // 
+            // gewichtBox2
+            // 
+            this.gewichtBox2.Location = new System.Drawing.Point(707, 78);
+            this.gewichtBox2.Name = "gewichtBox2";
+            this.gewichtBox2.Size = new System.Drawing.Size(100, 20);
+            this.gewichtBox2.TabIndex = 27;
+            // 
+            // geslachtComboBox2
+            // 
+            this.geslachtComboBox2.FormattingEnabled = true;
+            this.geslachtComboBox2.Items.AddRange(new object[] {
+            "Man",
+            "Vrouw"});
+            this.geslachtComboBox2.Location = new System.Drawing.Point(707, 111);
+            this.geslachtComboBox2.Name = "geslachtComboBox2";
+            this.geslachtComboBox2.Size = new System.Drawing.Size(100, 21);
+            this.geslachtComboBox2.TabIndex = 28;
+            // 
             // PatientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 344);
+            this.ClientSize = new System.Drawing.Size(821, 344);
+            this.Controls.Add(this.geslachtComboBox2);
+            this.Controls.Add(this.gewichtBox2);
+            this.Controls.Add(this.leeftijdBox1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
@@ -192,5 +279,13 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox leeftijdBox1;
+        public System.Windows.Forms.TextBox gewichtBox2;
+        public System.Windows.Forms.ComboBox geslachtComboBox2;
     }
 }

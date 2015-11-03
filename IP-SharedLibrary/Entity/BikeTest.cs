@@ -15,6 +15,7 @@ namespace IP_SharedLibrary.Entity
         public String Username { get; private set; }
         public DateTime TimeStampStarted { get; private set; }
         public DateTime TimeStampStopped { get; set; }
+        public double Vo2Max { get; set; }
 
         // true == man; false == woman
         public Boolean Gender { get; private set; }
@@ -27,9 +28,10 @@ namespace IP_SharedLibrary.Entity
             Gender = gender;
             Measurements = new List<Measurement>();
             TimeStampStarted = DateTime.Now;
+
         }
 
-        public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements, DateTime timeStampStart, DateTime timeStampStop)
+        public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements, DateTime timeStampStart, DateTime timeStampStop,double vo2Max)
         {
             Age = age;
             Weight = weight;
@@ -39,6 +41,7 @@ namespace IP_SharedLibrary.Entity
             Measurements = measurements;
             TimeStampStarted = timeStampStart;
             TimeStampStopped = timeStampStop;
+            Vo2Max = vo2Max;
         }
 
         public void AddMeasurement(Measurement measurement)
