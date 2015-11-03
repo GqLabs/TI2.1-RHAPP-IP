@@ -228,6 +228,8 @@ namespace RHAPP_IP_Server
                 if (user != null)
                 {
                     user.OnlineStatus = true;
+                    if (!user.IsDoctor)
+                        SendToAllOnlineDoctors(new UserChangedPacket(user));
                 }
 
             }
@@ -271,17 +273,7 @@ namespace RHAPP_IP_Server
             Packet pushPacket = new SerialDataPushPacket(packet.Measurement, packet.PatientUsername);
 
             // Determining the sockets to send the pushpacket (to send to all online doctors) 
-            List<string> onlineDoctors = Authentication.GetAllUsers()
-                .Where(user => user.IsDoctor == true)
-                .Select(user => user.Username).ToList();
-            foreach (string u in onlineDoctors)
-            {
-                var clientHandler = Authentication.GetStream(u);
-                if (clientHandler != null) clientHandler.Send(pushPacket);
-#if DEBUG
-                if (clientHandler != null) Console.WriteLine("Notifing:\n{0}", pushPacket);
-#endif
-            }
+            SendToAllOnlineDoctors(pushPacket);
 #if DEBUG
             Console.WriteLine(packet);
 #endif
@@ -299,6 +291,21 @@ namespace RHAPP_IP_Server
                 Console.WriteLine("SendToAllUsers: Sending a packet");
 #endif
                 clientHandler.Send(p);
+            }
+        }
+
+        private void SendToAllOnlineDoctors(Packet packet)
+        {
+            List<string> onlineDoctors = Authentication.GetAllUsers()
+                .Where(user => user.IsDoctor == true)
+                .Select(user => user.Username).ToList();
+            foreach (string u in onlineDoctors)
+            {
+                var clientHandler = Authentication.GetStream(u);
+                if (clientHandler != null) clientHandler.Send(packet);
+#if DEBUG
+                if (clientHandler != null) Console.WriteLine("Notifing:\n{0}", packet);
+#endif
             }
         }
 

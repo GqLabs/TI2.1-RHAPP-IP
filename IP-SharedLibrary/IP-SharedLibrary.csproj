@@ -53,9 +53,11 @@
     <Compile Include="Packet\Push\UserChangedPacket.cs" />
     <Compile Include="Packet\Request\DisconnectPacket.cs" />
     <Compile Include="Packet\Request\LoginPacket.cs" />
+    <Compile Include="Packet\Request\PullRequestPacket.cs" />
     <Compile Include="Packet\Request\RequestPacket.cs" />
     <Compile Include="Packet\Request\SerialDataPacket.cs" />
     <Compile Include="Packet\Response\LoginResponsePacket.cs" />
+    <Compile Include="Packet\Response\PullResponsePacket.cs" />
     <Compile Include="Packet\Response\ResponsePacket.cs" />
     <Compile Include="Packet\Statuscode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
