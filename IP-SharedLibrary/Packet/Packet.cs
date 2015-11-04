@@ -83,11 +83,20 @@ namespace IP_SharedLibrary.Packet
                 case BikeTestPacket.DefCmd:
                     p = new BikeTestPacket(json);
                     break;
+                case RequestBikeTestPacket.DefCmd:
+                    p = new RequestBikeTestPacket(json);
+                    break;
+                case SendCommandPacket.DefCmd:
+                    p = new SendCommandPacket(json);
+                    break;
                 case LoginResponsePacket.DefCmd:
                     p = new LoginResponsePacket(json);
                     break;
                 case SerialDataPushPacket.DefCmd:
                     p = new SerialDataPushPacket(json);
+                    break;
+                case CommandPushPacket.DefCmd:
+                    p = new CommandPushPacket(json);
                     break;
                 case StartTestPushPacket.DefCmd:
                     p = new StartTestPushPacket(json);

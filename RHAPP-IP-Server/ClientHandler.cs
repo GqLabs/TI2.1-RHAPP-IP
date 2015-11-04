@@ -99,6 +99,9 @@ namespace RHAPP_IP_Server
                         case StartTestPacket.DefCmd:
                             HandleStartTestPacket(json);
                             break;
+                        case SendCommandPacket.DefCmd:
+                            HandleSendCommandPacket(json);
+                            break;
                         //case RegisterPacket.DefCmd:
                         //    HandleRegisterPacket(json);
                         //    break;
@@ -121,7 +124,7 @@ namespace RHAPP_IP_Server
                     {
                         Console.WriteLine("Client with IP-address: {0} has been disconnected",
                             _tcpclient.Client.RemoteEndPoint);
-                            Authentication.TryDeAuthenticate(this);
+                        Authentication.TryDeAuthenticate(this);
                         _thread.Abort();
                     }
                     else
@@ -142,7 +145,7 @@ namespace RHAPP_IP_Server
 
             var u = Authentication.GetUser(packet.Username);
             if (u == null && !u.IsDoctor) return;
-            
+
             var returnPacket = HandlePullRequestUsersByStatus();
 #if DEBUG
             Console.WriteLine(packet);
@@ -202,7 +205,7 @@ namespace RHAPP_IP_Server
             Console.WriteLine("DisconnectPacket Received");
 
             var packet = new DisconnectPacket(json);
-            
+
             var returnPacket = new ResponsePacket(Statuscode.Status.Unauthorized);
             if (Authentication.CheckLoggedIn(packet.Username))
             {
@@ -270,7 +273,7 @@ namespace RHAPP_IP_Server
             var PatientUsername = Authentication.GetAllUsers()
                 .Where(user => user.Username == packet.PatientUsername)
                 .Select(user => user.Username).FirstOrDefault();
-            
+
             //Generate PushPacket
             Packet pushPacket = new SerialDataPushPacket(packet.Measurement, PatientUsername);
 
@@ -290,7 +293,7 @@ namespace RHAPP_IP_Server
                 var patientStream = Authentication.GetStream(packet.PatientUsername);
 
                 var pushPacket = new StartTestPushPacket();
-                
+
                 patientStream.Send(pushPacket);
             }
         }
@@ -298,8 +301,35 @@ namespace RHAPP_IP_Server
         private void HandleBikeTestPacket(JObject json)
         {
             Console.WriteLine("Handle BikeTest Packet");
-
             var packet = new BikeTestPacket(json);
+            BikeTest bikeTest = packet.Biketest;
+            Datastorage.Instance.AddBikeTest(bikeTest);
+        }
+
+        private void HandleSendCommandPacket(JObject json)
+        {
+            Console.WriteLine("Handle SendCommand Packet");
+            var packet = new SendCommandPacket(json);
+            if ( (packet.CMD != null || packet.CMD != "") && (packet.Username != null || packet.Username != "") )
+            {
+                CommandPushPacket pushpacket = new CommandPushPacket(packet.CMD);
+                ClientHandler destPatient = Authentication.GetStream(packet.Username);
+                if (destPatient != null)
+                    destPatient.Send(pushpacket);
+                else
+                {
+                    Console.WriteLine("can't find requested patient!");
+                }
+            }
+            else if (packet.Username == null || packet.Username == "")
+            {
+                Console.WriteLine("ERROR: username not found in packet.");
+            }
+            else
+            {
+                Console.WriteLine("ERROR: packet.CMD is not a value as expected.");
+                Console.WriteLine(packet.ToString());
+            }
         }
 
         #endregion

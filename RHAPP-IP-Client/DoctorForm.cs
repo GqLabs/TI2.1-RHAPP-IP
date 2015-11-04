@@ -122,7 +122,7 @@ namespace RHAPP_IP_Client
         private void btnStartTest_Click(object sender, EventArgs e)
         {
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
-            var v = new IP_SharedLibrary.Packet.Request.StartTestPacket(selectedUser.ToString());
+            var v = new IP_SharedLibrary.Packet.Request.StartTestPacket(selectedUser.Username);
             _appGlobal.Send(v);
         }
 
