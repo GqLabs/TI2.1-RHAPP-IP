@@ -13,7 +13,7 @@ namespace IP_SharedLibrary.Entity
         public int Age { get; set; }
         public Double Weight { get; set; }
         public Double Heartbeat { get; set; }
-        public String Username { get; private set; }
+        public String Username { get; set; }
         public double Vo2Max { get; set; }
 
         // true == man; false == woman
