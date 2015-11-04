@@ -120,7 +120,7 @@ namespace RHAPP_IP_Client
 
         private void btnSetPower_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnStartTest_Click(object sender, EventArgs e)
