@@ -7,6 +7,7 @@ using IP_SharedLibrary.Entity;
 using IP_SharedLibrary.Packet;
 using System.Windows.Forms.DataVisualization.Charting;
 using IP_SharedLibrary.Packet.Push;
+using IP_SharedLibrary.Packet.Request;
 
 namespace RHAPP_IP_Client
 {
@@ -116,13 +117,15 @@ namespace RHAPP_IP_Client
 
         private void btnSetPower_Click(object sender, EventArgs e)
         {
-            
+            var selectedUser = (User)cmbOnlinePatients.SelectedItem;
+            var v = new SendCommandPacket("PT " + crtPower.Value.ToString(),selectedUser.Username);
+            _appGlobal.Send(v);
         }
 
         private void btnStartTest_Click(object sender, EventArgs e)
         {
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
-            var v = new IP_SharedLibrary.Packet.Request.StartTestPacket(selectedUser.Username);
+            var v = new StartTestPacket(selectedUser.Username);
             _appGlobal.Send(v);
         }
 
