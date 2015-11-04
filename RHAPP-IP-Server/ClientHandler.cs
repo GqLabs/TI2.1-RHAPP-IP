@@ -94,6 +94,12 @@ namespace RHAPP_IP_Server
                         case DisconnectPacket.DefCmd:
                             HandleDisconnectPacket(json);
                             break;
+                        case BikeTestPacket.DefCmd:
+                            HandleBikeTestPacket(json);
+                            break;
+                        case StartTestPacket.DefCmd:
+                            HandleStartTestPacket(json);
+                            break;
                         //case RegisterPacket.DefCmd:
                         //    HandleRegisterPacket(json);
                         //    break;
@@ -266,7 +272,10 @@ namespace RHAPP_IP_Server
             var PatientUsername = Authentication.GetAllUsers()
                 .Where(user => user.Username == packet.PatientUsername)
                 .Select(user => user.Username).FirstOrDefault();
-
+            if (_clientDataHandler == null)
+            {
+                _clientDataHandler = new ClientDataHandler();
+            }
             ClientDataHandler.ReturnValue returnVal = _clientDataHandler.AddMeasurementToLastBikeTest(packet.Measurement);
             if (returnVal == ClientDataHandler.ReturnValue.NotStarted)
             {
@@ -290,6 +299,17 @@ namespace RHAPP_IP_Server
             Console.WriteLine(packet);
 #endif
         }
+
+        private void HandleStartTestPacket(JObject json)
+        {
+
+        }
+
+        private void HandleBikeTestPacket(JObject json)
+        {
+
+        }
+
         #endregion
 
         #region Send_methods
