@@ -22,6 +22,7 @@ namespace RHAPP_IP_Client
 
         public delegate void ResultDelegate(Packet packet);
         public event ResultDelegate LoginResultEvent;
+
         public event ResultDelegate ResultEvent;
         public delegate void PushDelegate(Packet packet);
         public event PushDelegate IncomingMeasurementEvent;

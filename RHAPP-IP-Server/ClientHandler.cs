@@ -302,6 +302,16 @@ namespace RHAPP_IP_Server
         private void HandleRequestBikeTestPacket(JObject json)
         {
             Console.WriteLine("Handle RequestBikeTest Packet");
+            var packet = new RequestBikeTestPacket(json);
+            if (packet.PatientUsername != null || packet.PatientUsername != "")
+            {
+                var biketest = _datastorage.GetBikeTestsOfUser(packet.PatientUsername).LastOrDefault();
+                if (biketest == null)
+                    return;
+                var response = new RequestBikeTestResponsePacket(biketest, packet.PatientUsername);
+                Send(response);
+            }
+            
         }
 
         #endregion
