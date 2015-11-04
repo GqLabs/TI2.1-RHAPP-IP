@@ -23,10 +23,10 @@ namespace RHAPP_IP_Server
         private Datastorage()
         {
             //Debug code below:
-            _users.Add(new User("Henk", "patient", Crypto.CreateSHA256("1234"), false));
-            _users.Add(new User("Piet", "testuser", Crypto.CreateSHA256("5678"), false));
-            _users.Add(new User("Bart", "bart", Crypto.CreateSHA256("hoi"), true));
-            _users.Add(new User("Karel", "karel", Crypto.CreateSHA256("hoi"), true));
+            //_users.Add(new User("Henk", "patient", Crypto.CreateSHA256("1234"), false));
+            //_users.Add(new User("Piet", "testuser", Crypto.CreateSHA256("5678"), false));
+            //_users.Add(new User("Bart", "bart", Crypto.CreateSHA256("hoi"), true));
+            //_users.Add(new User("Karel", "karel", Crypto.CreateSHA256("hoi"), true));
             
             OpenFromFile();
         } 

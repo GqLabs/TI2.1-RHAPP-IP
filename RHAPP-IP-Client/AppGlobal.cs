@@ -21,6 +21,7 @@ namespace RHAPP_IP_Client
         public static AppGlobal Instance { get { return _instance ?? (_instance = new AppGlobal()); } }
 
         public delegate void ResultDelegate(Packet packet);
+        public event ResultDelegate BikeTestChangedEvent;
         public event ResultDelegate LoginResultEvent;
 
         public event ResultDelegate ResultEvent;
@@ -62,6 +63,12 @@ namespace RHAPP_IP_Client
         private void OnLoginResultEvent(LoginResponsePacket packet)
         {
             ResultDelegate handler = LoginResultEvent;
+            if (handler != null) handler(packet);
+        }
+
+        private void OnBikeTestChangedEvent(RequestBikeTestResponsePacket packet)
+        {
+            ResultDelegate handler = BikeTestChangedEvent;
             if (handler != null) handler(packet);
         }
 
@@ -185,7 +192,8 @@ namespace RHAPP_IP_Client
             }
             else if (p is RequestBikeTestResponsePacket)
             {
-                //TODO code
+                var packet = p as RequestBikeTestResponsePacket;
+                OnBikeTestChangedEvent(packet);
             }
 
             else if (p is ResponsePacket) //this one should be last!
