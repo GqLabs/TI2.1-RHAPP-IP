@@ -153,6 +153,10 @@ namespace RHAPP_IP_Client
                 x.OnlineStatus = packet.Status;
                 OnUserChangedEvent(x);
             }
+            else if (p is StartTestPushPacket)
+            {
+                PatientModel.patientModel.startTest();
+            }
             else if (p is LoginResponsePacket)
             {
                 OnLoginResultEvent(p as LoginResponsePacket);

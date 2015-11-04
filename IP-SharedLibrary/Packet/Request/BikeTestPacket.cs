@@ -13,7 +13,7 @@ namespace IP_SharedLibrary.Packet.Request
     {
         public const string DefCmd = "BIKETEST";
 
-        public string DestinationUsername { get; private set; }
+        public string PatientUsername { get; private set; }
         public BikeTest Biketest { get; private set; }
 
         public BikeTestPacket(JObject json)
@@ -22,34 +22,34 @@ namespace IP_SharedLibrary.Packet.Request
             if (json == null)
                 throw new ArgumentNullException("json", "StartTestpacket ctor: json is null!");
 
-            JToken destUsernameToken;
+            JToken patientUsername;
             JToken biketest;
 
-            if (!(json.TryGetValue("DestinationUsername", StringComparison.CurrentCultureIgnoreCase, out destUsernameToken)
+            if (!(json.TryGetValue("PatientUsername", StringComparison.CurrentCultureIgnoreCase, out patientUsername)
                 && json.TryGetValue("Biketest", StringComparison.CurrentCultureIgnoreCase, out biketest)))
                 throw new ArgumentException("Biketest is not found in json: \n" + json);
 
-            var measurementObj = JsonConvert.DeserializeObject<BikeTest>(biketest.ToString());
+            var biketestObj = JsonConvert.DeserializeObject<BikeTest>(biketest.ToString());
 
-            Initialize((string)destUsernameToken, measurementObj);
+            Initialize((string)patientUsername, biketestObj);
         }
 
-        public BikeTestPacket(string destUsername, BikeTest biketest)
+        public BikeTestPacket(string patientUsername, BikeTest biketest)
             : base(DefCmd)
         {
-            Initialize(destUsername, biketest);
+            Initialize(patientUsername, biketest);
         }
 
-        private void Initialize(string destUsername, BikeTest biketest)
+        private void Initialize(string patientUsername, BikeTest biketest)
         {
-            DestinationUsername = destUsername;
+            PatientUsername = patientUsername;
             Biketest = biketest;
         }
 
         public override JObject ToJsonObject()
         {
             var json = base.ToJsonObject();
-            json.Add("DestinationUsername", DestinationUsername);
+            json.Add("PatientUsername", PatientUsername);
             json.Add("Biketest", JsonConvert.SerializeObject(Biketest));
             return json;
         }

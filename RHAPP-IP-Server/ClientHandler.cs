@@ -24,7 +24,6 @@ namespace RHAPP_IP_Server
         private readonly NetworkStream _networkStream;
         private List<byte> _totalBuffer;
         private readonly Datastorage _datastorage;
-        private ClientDataHandler _clientDataHandler;
 
         public ClientHandler(TcpClient client)
         {
@@ -271,24 +270,7 @@ namespace RHAPP_IP_Server
             var PatientUsername = Authentication.GetAllUsers()
                 .Where(user => user.Username == packet.PatientUsername)
                 .Select(user => user.Username).FirstOrDefault();
-            if (_clientDataHandler == null)
-            {
-                _clientDataHandler = new ClientDataHandler();
-            }
-            ClientDataHandler.ReturnValue returnVal = _clientDataHandler.AddMeasurementToLastBikeTest(packet.Measurement);
-            if (returnVal == ClientDataHandler.ReturnValue.NotStarted)
-            {
-#if DEBUG
-                Console.WriteLine("Error: Tried to add measurement while BikeTest was not started of patient {0}", Authentication.GetUser(packet.PatientUsername).Nickname);
-#endif
-            }
-            else
-            {
-#if DEBUG
-                Console.WriteLine("Error: General error occured while tried to add measurement of patient {0}", Authentication.GetUser(packet.PatientUsername).Nickname);
-#endif
-            }
-
+            
             //Generate PushPacket
             Packet pushPacket = new SerialDataPushPacket(packet.Measurement, PatientUsername);
 
@@ -303,12 +285,14 @@ namespace RHAPP_IP_Server
         {
             Console.WriteLine("Handle StartTest Packet");
             var packet = new StartTestPacket(json);
-            var patientStream = Authentication.GetStream(packet.PatientUsername);
-            if (patientStream != null)
+            if (packet.PatientUsername != null || packet.PatientUsername != "")
             {
+                var patientStream = Authentication.GetStream(packet.PatientUsername);
 
+                var pushPacket = new StartTestPushPacket();
+                
+                patientStream.Send(pushPacket);
             }
-            patientStream.Send(new ResponsePacket(Statuscode.Status.Ok.ToString(), "STARTTEST", null));
         }
 
         private void HandleBikeTestPacket(JObject json)
@@ -362,72 +346,4 @@ namespace RHAPP_IP_Server
         #endregion Send
     }
 
-    internal class ClientDataHandler
-    {
-        private BikeTest _lastBikeTestBuff;
-        public enum BikeTestStatus { NotInitialized, Stopped, Started, Error }
-        public enum ReturnValue { Success, AlreadyStarted, AlreadyStopped, NotStarted, NotStopped, Error }
-        public BikeTestStatus TestStatus { get; private set; }
-        public Measurement LastMeasurement { get { return _lastBikeTestBuff.Measurements.Last() ?? (null); } }
-
-        public ClientDataHandler()
-        {
-            TestStatus = BikeTestStatus.Stopped;
-        }
-
-        public ReturnValue StartNewBikeTest(BikeTest bikeTest)
-        {
-            if (TestStatus == BikeTestStatus.Stopped)
-            {
-                if (bikeTest != null)
-                {
-                    _lastBikeTestBuff = bikeTest;
-                }
-                return ReturnValue.Success;
-            }
-            else if (TestStatus == BikeTestStatus.Started)
-            {
-                return ReturnValue.AlreadyStarted;
-            }
-            else
-            {
-                return ReturnValue.Error;
-            }
-        }
-
-        public ReturnValue StopCurrentBikeTest(out BikeTest oldBikeTest)
-        {
-            if (TestStatus == BikeTestStatus.Started)
-            {
-                oldBikeTest = _lastBikeTestBuff;
-                return ReturnValue.Success;
-            }
-            else if (TestStatus == BikeTestStatus.Stopped)
-            {
-                oldBikeTest = null;
-                return ReturnValue.AlreadyStopped;
-            }
-            else
-            {
-                oldBikeTest = null;
-                return ReturnValue.Error;
-            }
-        }
-
-        public ReturnValue AddMeasurementToLastBikeTest(Measurement m)
-        {
-            if (TestStatus == BikeTestStatus.Started)
-            {
-                if (_lastBikeTestBuff != null)
-                {
-                    _lastBikeTestBuff.AddMeasurement(m);
-                    return ReturnValue.Success;
-                }
-                else return ReturnValue.Error;
-            }
-            else if (TestStatus == BikeTestStatus.Stopped) return ReturnValue.NotStarted;
-            else return ReturnValue.Error;
-
-        }
-    }
 }

@@ -62,6 +62,20 @@ namespace RHAPP_IP_Server
             _bikeTests.Add(bikeTest);
         }
 
+        private bool AddMeasurementToLastBikeTestByUser(Measurement measurement, string username)
+        {
+            BikeTest bikeTest = _bikeTests
+                .Where(biketest => biketest.Username == username)
+                .Select(biketest => biketest).LastOrDefault();
+            if (bikeTest == null)
+                return false;
+            bikeTest.Measurements.Add(measurement);
+            if (bikeTest.Measurements.LastOrDefault() == measurement)
+                return true;
+            else
+                return false;
+        }
+
         private void OpenFromFile()
         {
             var location = Settings.Default.UsersFileLocation;
