@@ -2,10 +2,7 @@
 using RHAPP_IP_Client.Misc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -158,8 +155,16 @@ namespace RHAPP_IP_Client
 
         public void startTest()
         {
+            if(patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
+            {
             setTimeMode("0010");
             testStarted = true;
+            }
+            else
+            {
+                MessageBox.Show("vul uw gegevens in");
+            }
+
         }
 
         public void stopTest(Measurement m)
@@ -169,7 +174,7 @@ namespace RHAPP_IP_Client
             int power = m.DestPower;
             double gewicht = Double.Parse(patientform.gewichtBox2.Text);
             int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
-            MessageBox.Show("" + vo2MaxBerekenen(power, pulse, gewicht, leeftijd));
+            MessageBox.Show("Uw vo2Max is:" + vo2MaxBerekenen(power, pulse, gewicht, leeftijd));
         }
 
         public double vo2MaxBerekenen(int power, int pulse, double gewicht, int leeftijd)
@@ -201,7 +206,7 @@ namespace RHAPP_IP_Client
                 if (l > 66) h = 0.65 * e;
                 double d = h * 1000;
                 double c = d / gewicht;
-                return c;
+                return Math.Floor(c);
             } else if (patientform.geslachtComboBox2.Text == "Vrouw")
             {
                 double f = 163.8 * power;
@@ -229,7 +234,7 @@ namespace RHAPP_IP_Client
                 if (l > 66) h = 0.65 * e;
                 double d = h * 1000;
                 double c = d / gewicht;
-                return c;
+                return Math.Floor(c);
             }
             else
             {

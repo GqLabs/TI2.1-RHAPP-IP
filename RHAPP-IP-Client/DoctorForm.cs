@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using IP_SharedLibrary.Entity;
 using IP_SharedLibrary.Packet;
@@ -125,7 +121,9 @@ namespace RHAPP_IP_Client
 
         private void btnStartTest_Click(object sender, EventArgs e)
         {
-
+            var selectedUser = (User)cmbOnlinePatients.SelectedItem;
+            var v = new IP_SharedLibrary.Packet.Request.StartTestPacket(selectedUser.ToString());
+            _appGlobal.Send(v);
         }
 
         private void cmbOnlinePatients_SelectionChangeCommitted(object sender, EventArgs e)
