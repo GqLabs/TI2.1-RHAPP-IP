@@ -179,7 +179,7 @@ namespace RHAPP_IP_Client
             double gewicht = Double.Parse(patientform.gewichtBox2.Text);
             int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
             double vo2 = vo2MaxBerekenen(power, pulse, gewicht, leeftijd);
-            var bt = new BikeTest(0, "", isMan, gewicht, leeftijd, pulse, new List<Measurement>(), vo2);
+            var bt = new BikeTest(AppGlobal.Instance.Username, isMan, gewicht, leeftijd, pulse, new List<Measurement>(), vo2);
 
             MessageBox.Show("Uw vo2Max is:" + vo2);
         }

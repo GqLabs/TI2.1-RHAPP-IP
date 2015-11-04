@@ -24,7 +24,7 @@ namespace IP_SharedLibrary.Entity
 
         }
 
-        public BikeTest(string username, bool gender, string weight, int age)
+        public BikeTest(string username, bool gender, double weight, int age)
         {
             Age = age;
             Weight = weight;
