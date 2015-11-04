@@ -111,6 +111,12 @@ namespace RHAPP_IP_Client
                 {
                     if (m.Time.Minute >= 0 && m.Time.Hour == 1)
                         stopTest(m);
+
+                    if (m.PedalRpm <= 50)
+                        MessageBox.Show("U fiets te langzaam, hou het rond de 60 RPM");
+
+                    if (m.PedalRpm >= 70)
+                        MessageBox.Show("U fiets te snel, hou het rond de 60 RPM");
                 }
 
                 Console.WriteLine(m.DestPower);
@@ -187,7 +193,7 @@ namespace RHAPP_IP_Client
             int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
             double vo2 = vo2MaxBerekenen(power, pulse, gewicht, leeftijd);
             var bt = new BikeTest(AppGlobal.Instance.Username, isMan, gewicht, leeftijd, pulse, AppGlobal.Instance.Measurements, vo2);
-            var v = new IP_SharedLibrary.Packet.Request.BikeTestPacket(AppGlobal.Instance.Username,bt);
+            var v = new IP_SharedLibrary.Packet.Request.BikeTestPacket(AppGlobal.Instance.Username, bt);
             AppGlobal.Instance.Send(v);
 
             MessageBox.Show("Uw vo2Max is:" + vo2);
