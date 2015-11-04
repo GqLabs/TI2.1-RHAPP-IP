@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using IP_SharedLibrary.Utilities;
+using System;
 
 namespace RHAPP_IP_Server
 {
@@ -42,12 +43,19 @@ namespace RHAPP_IP_Server
 
         public IEnumerable<BikeTest> GetBikeTestsOfUser(string username)
         {
-            var x =
+            IEnumerable<BikeTest> x = null;
+            try
+            {
+                x =
                 from bikeTest in _bikeTests
                 where bikeTest.Username == username
-                orderby bikeTest.TimeStampStarted ascending
+                orderby bikeTest.Measurements.FirstOrDefault().Time ascending
                 select bikeTest;
-
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             return x;
         }
 

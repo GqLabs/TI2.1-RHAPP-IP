@@ -298,6 +298,7 @@ namespace RHAPP_IP_Server
         private void HandleBikeTestPacket(JObject json)
         {
             Console.WriteLine("Handle BikeTest Packet");
+
             var packet = new BikeTestPacket(json);
         }
 
