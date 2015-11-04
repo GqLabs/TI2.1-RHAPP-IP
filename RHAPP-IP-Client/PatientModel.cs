@@ -168,6 +168,7 @@ namespace RHAPP_IP_Client
         {
             if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
             {
+                var instance = AppGlobal.Instance;
                 reset();
                 setDistanceMode("100");
                 testStarted = true;

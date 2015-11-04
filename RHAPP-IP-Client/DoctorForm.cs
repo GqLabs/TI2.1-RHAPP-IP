@@ -142,8 +142,15 @@ namespace RHAPP_IP_Client
         private void btnStartTest_Click(object sender, EventArgs e)
         {
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
-            var v = new StartTestPacket(selectedUser.Username);
-            _appGlobal.Send(v);
+            var v3 = new StartTestPacket(selectedUser.Username);
+            _appGlobal.Send(v3);
+            var v1 = new SendCommandPacket("CM", selectedUser.Username);
+            //Thread.Sleep(200);
+            var v2 = new SendCommandPacket("PW " + crtPower.Value.ToString(), selectedUser.Username);
+            Thread.Sleep(200);
+            _appGlobal.Send(v1);
+            Thread.Sleep(700);
+            _appGlobal.Send(v2);
         }
 
         private void cmbOnlinePatients_SelectionChangeCommitted(object sender, EventArgs e)
