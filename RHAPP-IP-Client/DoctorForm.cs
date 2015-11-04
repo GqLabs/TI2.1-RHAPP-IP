@@ -31,7 +31,7 @@ namespace RHAPP_IP_Client
 
         private void HandleUserChanged(User u)
         {
-            if (u.Username == _appGlobal.Username)
+            if (u.Username == _appGlobal.Username || !u.OnlineStatus)
                 return;
             if (InvokeRequired)
             {
