@@ -11,7 +11,7 @@ namespace IP_SharedLibrary.Entity
     {
         public List<Measurement> Measurements { get; set; }
         public int Age { get; set; }
-        public String Weight { get; set; }
+        public Double Weight { get; set; }
         public Double Heartbeat { get; set; }
         public String Username { get; private set; }
         public double Vo2Max { get; set; }
@@ -33,7 +33,7 @@ namespace IP_SharedLibrary.Entity
             Measurements = new List<Measurement>();
         }
 
-        public BikeTest(string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements,double vo2Max)
+        public BikeTest(string username, bool gender, double weight, int age, double heartbeat, List<Measurement> measurements,double vo2Max)
         {
             Age = age;
             Weight = weight;
