@@ -109,7 +109,7 @@ namespace RHAPP_IP_Client
 
                 if (testStarted)
                 {
-                    if (m.Time.Minute <= 0 && m.Time.Hour <= 0)
+                    if (m.Time.Minute >= 0 && m.Time.Hour == 1)
                         stopTest(m);
                 }
 
@@ -157,7 +157,8 @@ namespace RHAPP_IP_Client
         {
             if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
             {
-                setTimeMode("0010");
+                reset();
+                setDistanceMode("100");
                 testStarted = true;
             }
             else
@@ -169,6 +170,7 @@ namespace RHAPP_IP_Client
 
         public void stopTest(Measurement m)
         {
+            testStarted = false;
             bool isMan = true;
             if (patientform.geslachtComboBox2.Text == "Man")
                 isMan = true;
@@ -179,7 +181,9 @@ namespace RHAPP_IP_Client
             double gewicht = Double.Parse(patientform.gewichtBox2.Text);
             int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
             double vo2 = vo2MaxBerekenen(power, pulse, gewicht, leeftijd);
-            var bt = new BikeTest(AppGlobal.Instance.Username, isMan, gewicht, leeftijd, pulse, new List<Measurement>(), vo2);
+            var bt = new BikeTest(AppGlobal.Instance.Username, isMan, gewicht, leeftijd, pulse, AppGlobal.Instance.Measurements, vo2);
+            var v = new IP_SharedLibrary.Packet.Request.BikeTestPacket(AppGlobal.Instance.Username,bt);
+            AppGlobal.Instance.Send(v);
 
             MessageBox.Show("Uw vo2Max is:" + vo2);
         }
