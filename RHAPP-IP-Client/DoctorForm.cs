@@ -9,6 +9,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using IP_SharedLibrary.Packet.Push;
 using IP_SharedLibrary.Packet.Request;
 using System.Threading;
+using IP_SharedLibrary.Packet.Response;
 
 namespace RHAPP_IP_Client
 {
@@ -23,13 +24,29 @@ namespace RHAPP_IP_Client
             InitializeComponent();
             _appGlobal.UserChangedEvent += HandleUserChanged;
             _appGlobal.IncomingMeasurementEvent += HandleIncomingMeasurement;
+            _appGlobal.BikeTestChangedEvent += HandleBikeTest;
             cmbOnlinePatients.ValueMember = null;
             cmbOnlinePatients.DisplayMember = "Nickname";
-            comboBox1.DataSource = _appGlobal.Users;
+            comboBox1.ValueMember = null;
+            comboBox1.DisplayMember = "Nickname";
+        }
+
+        private void HandleBikeTest(Packet packet)
+        {
+            var p = packet as RequestBikeTestResponsePacket;
+            leeftijdBox.Text = "" + p.Biketest.Age;
+            gewichtBox.Text = "" + p.Biketest.Weight;
+            vo2Box.Text = "" + p.Biketest.Vo2Max;
+
+                if (p.Biketest.Gender)
+                geslachtBox.Text = "Man";
+            else if (p.Biketest.Gender)
+                geslachtBox.Text = "Vrouw";
         }
 
         private void HandleUserChanged(User u)
         {
+            comboBox1.Items.Add(u);
             if (u.Username == _appGlobal.Username || !u.OnlineStatus)
                 return;
             if (InvokeRequired)
@@ -94,11 +111,6 @@ namespace RHAPP_IP_Client
             cmbOnlinePatients.Items.Clear();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         int j = 0;
         private void btnTestButton_Click(object sender, EventArgs e)
         {
@@ -122,7 +134,7 @@ namespace RHAPP_IP_Client
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
             var v1 = new SendCommandPacket("CM", selectedUser.Username);
             //Thread.Sleep(200);
-            var v2 = new SendCommandPacket("PT " + crtPower.Value.ToString(),selectedUser.Username);
+            var v2 = new SendCommandPacket("PT " + crtPower.Value.ToString(), selectedUser.Username);
             _appGlobal.Send(v1);
             _appGlobal.Send(v2);
         }
@@ -154,7 +166,7 @@ namespace RHAPP_IP_Client
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var v = new RequestBikeTestPacket(comboBox1.SelectedText);
+            var v = new RequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
             _appGlobal.Send(v);
         }
     }

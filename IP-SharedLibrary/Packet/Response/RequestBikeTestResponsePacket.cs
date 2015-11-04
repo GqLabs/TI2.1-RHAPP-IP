@@ -13,61 +13,50 @@ namespace IP_SharedLibrary.Packet.Response
     {
         public const string DefCmd = "RESP-BIKETEST";
 
-        public BikeTest Biketest { get; private set; }
         public string PatientUsername { get; private set; }
+        public BikeTest Biketest { get; private set; }
 
-        #region Constructors
-        public RequestBikeTestResponsePacket(BikeTest bikeTest, string patientUsername)
-            : base(DefCmd)
-        {
-            Initialize(bikeTest, patientUsername);
-        }
-
-
-        public RequestBikeTestResponsePacket(JObject json) : base(json)
+        public RequestBikeTestResponsePacket(JObject json)
+            : base(json)
         {
             if (json == null)
-                throw new ArgumentNullException("json", "LoginResponsepacket ctor: json is null!");
+                throw new ArgumentNullException("json", "StartTestpacket ctor: json is null!");
 
+            JToken patientUsername;
             JToken biketest;
-            JToken patientusername;
 
-            if (!(json.TryGetValue("PatientUsername", StringComparison.CurrentCultureIgnoreCase, out patientusername)))
-                throw new ArgumentException("PatientUsername is not found in json \n" + json);
-
-            if (!(json.TryGetValue("Biketest", StringComparison.CurrentCultureIgnoreCase, out biketest)))
-                throw new ArgumentException("Biketest is not found in json \n" + json);
+            if (!(json.TryGetValue("PatientUsername", StringComparison.CurrentCultureIgnoreCase, out patientUsername)
+                && json.TryGetValue("Biketest", StringComparison.CurrentCultureIgnoreCase, out biketest)))
+                throw new ArgumentException("Biketest is not found in json: \n" + json);
 
             var biketestObj = JsonConvert.DeserializeObject<BikeTest>(biketest.ToString());
 
-            Initialize(biketestObj, (string)patientusername);
+            Initialize((string)patientUsername, biketestObj);
         }
-        #endregion
 
-        #region Initializers
-        private void Initialize(BikeTest bikeTest, string patientUsername)
+        public RequestBikeTestResponsePacket(string patientUsername, BikeTest biketest)
+            : base(Statuscode.Status.Ok)
         {
-            this.Biketest = bikeTest;
-            this.PatientUsername = patientUsername;
+            Initialize(patientUsername, biketest);
         }
-        #endregion
 
-        #region Override Methods
+        private void Initialize(string patientUsername, BikeTest biketest)
+        {
+            PatientUsername = patientUsername;
+            Biketest = biketest;
+        }
+
         public override JObject ToJsonObject()
         {
-            var returnJson = base.ToJsonObject();
-            returnJson.Add("PatientUsername", PatientUsername);
-            returnJson.Add("Biketest", JsonConvert.SerializeObject(Biketest));
-
-            return returnJson;
-
+            var json = base.ToJsonObject();
+            json.Add("PatientUsername", PatientUsername);
+            json.Add("Biketest", JsonConvert.SerializeObject(Biketest));
+            return json;
         }
 
         public override string ToString()
         {
             return ToJsonObject().ToString();
         }
-
-        #endregion
     }
 }
