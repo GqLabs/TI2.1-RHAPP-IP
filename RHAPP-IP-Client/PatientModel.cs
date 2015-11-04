@@ -155,10 +155,10 @@ namespace RHAPP_IP_Client
 
         public void startTest()
         {
-            if(patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
+            if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
             {
-            setTimeMode("0010");
-            testStarted = true;
+                setTimeMode("0010");
+                testStarted = true;
             }
             else
             {
@@ -169,17 +169,24 @@ namespace RHAPP_IP_Client
 
         public void stopTest(Measurement m)
         {
-            stopAskingData();
+            bool isMan = true;
+            if (patientform.geslachtComboBox2.Text == "Man")
+                isMan = true;
+            else if (patientform.geslachtComboBox2.Text == "Vrouw")
+                isMan = false;
             int pulse = m.Pulse;
             int power = m.DestPower;
             double gewicht = Double.Parse(patientform.gewichtBox2.Text);
             int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
-            MessageBox.Show("Uw vo2Max is:" + vo2MaxBerekenen(power, pulse, gewicht, leeftijd));
+            double vo2 = vo2MaxBerekenen(power, pulse, gewicht, leeftijd);
+            var bt = new BikeTest(0, "", isMan, gewicht, leeftijd, pulse, new List<Measurement>(), vo2);
+
+            MessageBox.Show("Uw vo2Max is:" + vo2);
         }
 
         public double vo2MaxBerekenen(int power, int pulse, double gewicht, int leeftijd)
         {
-            if(patientform.geslachtComboBox2.Text == "Man")
+            if (patientform.geslachtComboBox2.Text == "Man")
             {
                 double f = 174.2 * power;
                 double g = f + 4020;
@@ -207,7 +214,8 @@ namespace RHAPP_IP_Client
                 double d = h * 1000;
                 double c = d / gewicht;
                 return Math.Floor(c);
-            } else if (patientform.geslachtComboBox2.Text == "Vrouw")
+            }
+            else if (patientform.geslachtComboBox2.Text == "Vrouw")
             {
                 double f = 163.8 * power;
                 double g = f + 3780;

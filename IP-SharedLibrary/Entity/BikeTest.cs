@@ -12,7 +12,7 @@ namespace IP_SharedLibrary.Entity
         public int ID { get; set; }
         public List<Measurement> Measurements { get; set; }
         public int Age { get; set; }
-        public String Weight { get; set; }
+        public Double Weight { get; set; }
         public Double Heartbeat { get; set; }
         public String Username { get; private set; }
         public DateTime TimeStampStarted { get; set; }
@@ -38,7 +38,7 @@ namespace IP_SharedLibrary.Entity
 
         }
 
-        public BikeTest(int ID, string username, bool gender, string weight, int age, double heartbeat, List<Measurement> measurements, DateTime timeStampStart, DateTime timeStampStop,double vo2Max)
+        public BikeTest(int ID, string username, bool gender, double weight, int age, double heartbeat, List<Measurement> measurements,double vo2Max)
         {
             this.ID = ID;
             Age = age;
@@ -47,8 +47,6 @@ namespace IP_SharedLibrary.Entity
             Gender = gender;
             Heartbeat = heartbeat;
             Measurements = measurements;
-            TimeStampStarted = timeStampStart;
-            TimeStampStopped = timeStampStop;
             Vo2Max = vo2Max;
         }
 
