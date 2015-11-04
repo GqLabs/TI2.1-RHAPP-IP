@@ -308,7 +308,7 @@ namespace RHAPP_IP_Server
                 var biketest = _datastorage.GetBikeTestsOfUser(packet.PatientUsername).LastOrDefault();
                 if (biketest == null)
                     return;
-                var response = new RequestBikeTestResponsePacket(biketest, packet.PatientUsername);
+                var response = new RequestBikeTestResponsePacket(packet.PatientUsername, biketest);
                 Send(response);
             }
             
