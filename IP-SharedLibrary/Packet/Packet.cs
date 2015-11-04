@@ -63,8 +63,7 @@ namespace IP_SharedLibrary.Packet
         public static Packet GetPacketFromJson(JObject json)
         {
             if (json == null) return null;
-
-
+            
             Packet p = null;
             switch ((string)json.GetValue("CMD", StringComparison.CurrentCultureIgnoreCase))
             {

@@ -44,18 +44,19 @@ namespace RHAPP_IP_Client
 
         private void HandleIncomingMeasurement(Packet packet)
         {
-            var selectedUser = (User)cmbOnlinePatients.SelectedItem;
-            var resultPacket = ((SerialDataPushPacket)packet);
-            if (selectedUser.Username == resultPacket.Username)
+            if (this.InvokeRequired)
             {
-                if (this.InvokeRequired)
-                {
-                    this.Invoke(new Action(() => HandleIncomingMeasurement(packet)));
-                }
-                else
-                {
-                    HandleBikeData(resultPacket.Measurement);
-                }
+                this.Invoke(new Action(() => HandleIncomingMeasurement(packet)));
+            }
+            else
+            {
+                var selectedUser = (User)cmbOnlinePatients.SelectedItem;
+                var resultPacket = ((SerialDataPushPacket)packet);
+                if (selectedUser != null)
+                    if (selectedUser.Username == resultPacket.Username)
+                    {
+                        HandleBikeData(resultPacket.Measurement);
+                    }
             }
         }
 
@@ -133,9 +134,9 @@ namespace RHAPP_IP_Client
             bpmPoints.Clear();
             rpmPoints.Clear();
             List<Measurement> measurementsOfPatient = _appGlobal.PatientMeasurements
-                .Where(patient => patient.Key == ((User)cmbOnlinePatients.SelectedItem).Username)
-                .Select(allMeasurements => allMeasurements.Value).ToList();
-            foreach(Measurement measurement in measurementsOfPatient)
+                .Where(patient => patient.Item1 == ((User)cmbOnlinePatients.SelectedItem).Username)
+                .Select(allMeasurements => allMeasurements.Item2).ToList();
+            foreach (Measurement measurement in measurementsOfPatient)
             {
                 HandleBikeData(measurement);
             }
