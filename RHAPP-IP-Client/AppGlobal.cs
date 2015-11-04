@@ -42,6 +42,7 @@ namespace RHAPP_IP_Client
         {
             Users = new List<User>();
             PatientMeasurements = new List<Tuple<string, Measurement>>();
+            Measurements = new List<Measurement>();
             Controller = new TCPController();
             Controller.OnPacketReceived += PacketReceived;
             this.LoginResultEvent += CheckLoggedIn;
