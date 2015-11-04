@@ -304,6 +304,7 @@ namespace RHAPP_IP_Server
             var packet = new BikeTestPacket(json);
             BikeTest bikeTest = packet.Biketest;
             Datastorage.Instance.AddBikeTest(bikeTest);
+	    Datastorage.Instance.SaveToFile();
         }
 
         private void HandleSendCommandPacket(JObject json)
