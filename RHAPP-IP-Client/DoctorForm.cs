@@ -24,6 +24,7 @@ namespace RHAPP_IP_Client
             _appGlobal.IncomingMeasurementEvent += HandleIncomingMeasurement;
             cmbOnlinePatients.ValueMember = null;
             cmbOnlinePatients.DisplayMember = "Nickname";
+            comboBox1.DataSource = _appGlobal.Users;
         }
 
         private void HandleUserChanged(User u)
@@ -145,6 +146,12 @@ namespace RHAPP_IP_Client
             if (lastMeasurement != null)
                 crtPower.Value = lastMeasurement.DestPower;
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var v = new RequestBikeTestPacket(comboBox1.SelectedText);
+            _appGlobal.Send(v);
         }
     }
 }
