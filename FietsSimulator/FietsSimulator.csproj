@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF525C72-9053-4433-B94E-B431965D8895}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{4FF5A179-C048-4833-AD7C-568FF05C66C5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IP_SharedLibrary</RootNamespace>
-    <AssemblyName>IP-SharedLibrary</AssemblyName>
+    <RootNamespace>FietsSimulator</RootNamespace>
+    <AssemblyName>FietsSimulator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,38 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\BikeTest.cs" />
-    <Compile Include="Entity\Measurement.cs" />
-    <Compile Include="Entity\User.cs" />
-    <Compile Include="Packet\Packet.cs" />
-    <Compile Include="Packet\Push\PushPacket.cs" />
-    <Compile Include="Packet\Push\SerialDataPushPacket.cs" />
-    <Compile Include="Packet\Push\UserChangedPacket.cs" />
-    <Compile Include="Packet\Request\DisconnectPacket.cs" />
-    <Compile Include="Packet\Request\LoginPacket.cs" />
-    <Compile Include="Packet\Request\PullRequestPacket.cs" />
-    <Compile Include="Packet\Request\RequestPacket.cs" />
-    <Compile Include="Packet\Request\SerialDataPacket.cs" />
-    <Compile Include="Packet\Request\StartStopTestPacket.cs" />
-    <Compile Include="Packet\Response\LoginResponsePacket.cs" />
-    <Compile Include="Packet\Response\PullResponsePacket.cs" />
-    <Compile Include="Packet\Response\ResponsePacket.cs" />
-    <Compile Include="Packet\Statuscode.cs" />
+    <Compile Include="FietsSimulator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Utilities\Crypto.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

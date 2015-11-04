@@ -44,6 +44,7 @@ namespace RHAPP_IP_Client
         {
             if (checkBox1.CheckState == CheckState.Checked)
             {
+                if(!PatientModel.patientModel.testStarted)
                 patientModel.setDistanceMode("10");
             patientModel.startAskingData();
             }
@@ -57,6 +58,11 @@ namespace RHAPP_IP_Client
         private void PatientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.FormClosingMethod(sender, e, this);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            patientModel.startTest();
         }
     }
 }

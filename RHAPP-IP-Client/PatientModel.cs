@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace RHAPP_IP_Client
@@ -22,6 +23,9 @@ namespace RHAPP_IP_Client
 
         private string powerLog;
         public Boolean askdata;
+
+        public Boolean testStarted;
+        private Dictionary<string, Dictionary<string, List<string>>> DictionaryByGender;
 
         public string CurrentDoctorID { get; set; }
 
@@ -71,6 +75,7 @@ namespace RHAPP_IP_Client
                     dataHandler.closeComm();
                 }
 
+
             }
         }
         //event handler
@@ -85,8 +90,11 @@ namespace RHAPP_IP_Client
             }
             else
             {
+                patientform.timeBox.Text = m.Time.Hour + ":" + m.Time.Minute;
+
+
                 //fill graph pulse
-                bpmPoints.Add(new DataPoint(m.Time.ToOADate(), Convert.ToDouble(m.Pulse)));
+                bpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.Pulse)));
                 patientform.bpmChart.Series[0].Points.Clear();
                 for (int i = 0; i < bpmPoints.Count; i++)
                     patientform.bpmChart.Series[0].Points.Add(bpmPoints[i]);
@@ -95,13 +103,21 @@ namespace RHAPP_IP_Client
                 patientform.bpmChart.Update();
 
                 //fill graph rpm
-                rpmPoints.Add(new DataPoint(m.Time.ToOADate(), Convert.ToDouble(m.PedalRpm)));
+                rpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.PedalRpm)));
                 patientform.rpmChart.Series[0].Points.Clear();
                 for (int i = 0; i < rpmPoints.Count; i++)
                     patientform.rpmChart.Series[0].Points.Add(rpmPoints[i]);
                 if (rpmPoints.Count > 25)
                     rpmPoints.RemoveAt(0);
                 patientform.rpmChart.Update();
+
+                if (testStarted)
+                {
+                    if (m.Time.Minute <= 0 && m.Time.Hour <= 0)
+                        stopTest(m);
+                }
+
+                Console.WriteLine(m.DestPower);
             }
         }
 
@@ -139,6 +155,87 @@ namespace RHAPP_IP_Client
         {
             if (!dataHandler.checkBikeState(false)) return;
             dataHandler.sendData("RS");
+        }
+
+        public void startTest()
+        {
+            setTimeMode("0010");
+            testStarted = true;
+        }
+
+        public void stopTest(Measurement m)
+        {
+            stopAskingData();
+            int pulse = m.Pulse;
+            int power = m.DestPower;
+            double gewicht = Double.Parse(patientform.gewichtBox2.Text);
+            int leeftijd = int.Parse(patientform.leeftijdBox1.Text);
+            MessageBox.Show("" + vo2MaxBerekenen(power, pulse, gewicht, leeftijd));
+        }
+
+        public double vo2MaxBerekenen(int power, int pulse, double gewicht, int leeftijd)
+        {
+            if(patientform.geslachtComboBox2.Text == "Man")
+            {
+                double f = 174.2 * power;
+                double g = f + 4020;
+                double a = 103.2 * pulse;
+                double b = a - 6298;
+                double e = g / b;
+                double l = leeftijd;
+                double k = leeftijd;
+                double h = e;
+                if (l == 9) h = 1.22 * e;
+                if (l == 10) h = 1.19 * e;
+                if (l == 11) h = 1.16 * e;
+                if (l == 12) h = 1.14 * e;
+                if (l == 13) h = 1.11 * e;
+                if (l == 14) h = 1.08 * e;
+                if (l == 15) h = 1.06 * e;
+                if (l == 16) h = 1.03 * e;
+                if (l > 35 && k <= 40) h = 0.87 * e;
+                if (l > 40 && k <= 45) h = 0.83 * e;
+                if (l > 45 && k <= 50) h = 0.78 * e;
+                if (l > 50 && k <= 55) h = 0.75 * e;
+                if (l > 55 && k <= 60) h = 0.71 * e;
+                if (l > 60 && k <= 65) h = 0.68 * e;
+                if (l > 66) h = 0.65 * e;
+                double d = h * 1000;
+                double c = d / gewicht;
+                return c;
+            } else if (patientform.geslachtComboBox2.Text == "Vrouw")
+            {
+                double f = 163.8 * power;
+                double g = f + 3780;
+                double a = 104.4 * pulse;
+                double b = a - 7514;
+                double e = g / b;
+                double l = leeftijd;
+                double k = leeftijd;
+                double h = e;
+                if (l == 9) h = 1.22 * e;
+                if (l == 10) h = 1.19 * e;
+                if (l == 11) h = 1.16 * e;
+                if (l == 12) h = 1.14 * e;
+                if (l == 13) h = 1.11 * e;
+                if (l == 14) h = 1.08 * e;
+                if (l == 15) h = 1.06 * e;
+                if (l == 16) h = 1.03 * e;
+                if (l > 35 && k <= 40) h = 0.87 * e;
+                if (l > 40 && k <= 45) h = 0.83 * e;
+                if (l > 45 && k <= 50) h = 0.78 * e;
+                if (l > 50 && k <= 55) h = 0.75 * e;
+                if (l > 55 && k <= 60) h = 0.71 * e;
+                if (l > 60 && k <= 65) h = 0.68 * e;
+                if (l > 66) h = 0.65 * e;
+                double d = h * 1000;
+                double c = d / gewicht;
+                return c;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
