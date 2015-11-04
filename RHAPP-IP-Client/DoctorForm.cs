@@ -122,7 +122,7 @@ namespace RHAPP_IP_Client
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
             var v1 = new SendCommandPacket("CM", selectedUser.Username);
             //Thread.Sleep(200);
-            var v2 = new SendCommandPacket("PT " + crtPower.Value.ToString(),selectedUser.Username);
+            var v2 = new SendCommandPacket("PW " + crtPower.Value.ToString(),selectedUser.Username);
             _appGlobal.Send(v1);
             _appGlobal.Send(v2);
         }
