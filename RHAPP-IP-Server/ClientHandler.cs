@@ -102,9 +102,9 @@ namespace RHAPP_IP_Server
                         case SendCommandPacket.DefCmd:
                             HandleSendCommandPacket(json);
                             break;
-                        //case RegisterPacket.DefCmd:
-                        //    HandleRegisterPacket(json);
-                        //    break;
+                        case RequestBikeTestPacket.DefCmd:
+                            HandleRequestBikeTestPacket(json);
+                            break;
                         case PullRequestPacket.DefCmd:
                             HandlePullRequestPacket(json);
                             break;
@@ -165,40 +165,6 @@ namespace RHAPP_IP_Server
             var allPatients = allUsers.Where(user => user.IsDoctor == false).ToList();
             return new PullResponsePacket(allPatients);
         }
-
-        //private ResponsePacket HandlePullRequestMessagesByUser(PullRequestPacket packet)
-        //{
-        //    var allMessages = _datastorage.GetMessages(packet.SearchKey);
-        //    return new PullResponsePacket<ChatMessage>(Statuscode.Status.Ok,
-        //        PullResponsePacket<ChatMessage>.DataType.ChatMessage,
-        //        allMessages);
-        //}
-
-        //private ResponsePacket HandlePullRequestReceivedMessages(PullRequestPacket packet)
-        //{
-        //    var allMessages = _datastorage.GetMessagesSentTo(packet.SearchKey);
-        //    return new PullResponsePacket<ChatMessage>(Statuscode.Status.Ok,
-        //        PullResponsePacket<ChatMessage>.DataType.ChatMessage,
-        //        allMessages);
-
-        //}
-
-        //        private void HandleRegisterPacket(JObject json)
-        //        {
-        //            Console.WriteLine("RegisterPacket Received");
-
-        //            var packet = new RegisterPacket(json);
-        //            var user = new User(packet.Nickname, packet.Username, packet.Passhash);
-        //            Datastorage.Instance.AddUser(user);
-
-        //            var returnPacket = new RegisterResponsePacket(Statuscode.Status.Ok);
-        //            Send(returnPacket);
-
-        //#if DEBUG
-        //            Console.WriteLine(packet.ToString());
-        //            Console.WriteLine(returnPacket.ToString());
-        //#endif
-        //        }
 
         private void HandleDisconnectPacket(JObject json)
         {
@@ -331,6 +297,11 @@ namespace RHAPP_IP_Server
                 Console.WriteLine("ERROR: packet.CMD is not a value as expected.");
                 Console.WriteLine(packet.ToString());
             }
+        }
+
+        private void HandleRequestBikeTestPacket(JObject json)
+        {
+            Console.WriteLine("Handle RequestBikeTest Packet");
         }
 
         #endregion

@@ -28,7 +28,7 @@ namespace RHAPP_IP_Server
             _users.Add(new User("Bart", "bart", Crypto.CreateSHA256("hoi"), true));
             _users.Add(new User("Karel", "karel", Crypto.CreateSHA256("hoi"), true));
             
-            //OpenFromFile();
+            OpenFromFile();
         } 
 
         public User GetUser(string username)

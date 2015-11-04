@@ -8,6 +8,7 @@ using IP_SharedLibrary.Packet;
 using System.Windows.Forms.DataVisualization.Charting;
 using IP_SharedLibrary.Packet.Push;
 using IP_SharedLibrary.Packet.Request;
+using System.Threading;
 
 namespace RHAPP_IP_Client
 {
@@ -118,8 +119,11 @@ namespace RHAPP_IP_Client
         private void btnSetPower_Click(object sender, EventArgs e)
         {
             var selectedUser = (User)cmbOnlinePatients.SelectedItem;
-            var v = new SendCommandPacket("PT " + crtPower.Value.ToString(),selectedUser.Username);
-            _appGlobal.Send(v);
+            var v1 = new SendCommandPacket("CM", selectedUser.Username);
+            //Thread.Sleep(200);
+            var v2 = new SendCommandPacket("PT " + crtPower.Value.ToString(),selectedUser.Username);
+            _appGlobal.Send(v1);
+            _appGlobal.Send(v2);
         }
 
         private void btnStartTest_Click(object sender, EventArgs e)

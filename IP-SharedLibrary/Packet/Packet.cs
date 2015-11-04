@@ -101,17 +101,14 @@ namespace IP_SharedLibrary.Packet
                 case StartTestPushPacket.DefCmd:
                     p = new StartTestPushPacket(json);
                     break;
-                //case RegisterPacket.DefCmd:
-                //    p = new RegisterPacket(json);
-                //    break;
-                //case RegisterResponsePacket.DefCmd:
-                //    p = new RegisterResponsePacket(json);
-                //    break;
                 case UserChangedPacket.DefCmd:
                     p = new UserChangedPacket(json);
                     break;
                 case PullResponsePacket.DefCmd:
                     p = new PullResponsePacket(json);
+                    break;
+                case RequestBikeTestResponsePacket.DefCmd:
+                    p = new RequestBikeTestResponsePacket(json);
                     break;
                 default:
                     try

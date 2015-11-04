@@ -64,6 +64,7 @@
     <Compile Include="Packet\Request\StartTestPacket.cs" />
     <Compile Include="Packet\Response\LoginResponsePacket.cs" />
     <Compile Include="Packet\Response\PullResponsePacket.cs" />
+    <Compile Include="Packet\Response\RequestBikeTestResponsePacket.cs" />
     <Compile Include="Packet\Response\ResponsePacket.cs" />
     <Compile Include="Packet\Statuscode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

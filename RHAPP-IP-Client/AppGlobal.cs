@@ -35,8 +35,8 @@ namespace RHAPP_IP_Client
         // <only_needed_for_doctor>
         public List<User> Users { get; private set; }
         public List<Tuple<string, Measurement>> PatientMeasurements { get; private set; } // on doctor side
-        public List<Measurement> Measurements { get; private set; } // on patient side
         // </only_needed>
+        public List<Measurement> Measurements { get; private set; } // on patient side
 
         private AppGlobal()
         {
@@ -181,6 +181,10 @@ namespace RHAPP_IP_Client
                     Users.Add(u);
                     OnUserChangedEvent(u);
                 }
+            }
+            else if (p is RequestBikeTestResponsePacket)
+            {
+                //TODO code
             }
 
             else if (p is ResponsePacket) //this one should be last!
