@@ -34,13 +34,13 @@ namespace RHAPP_IP_Client
 
         // <only_needed_for_doctor>
         public List<User> Users { get; private set; }
-        public Dictionary<string, Measurement> PatientMeasurements { get; private set; }
+        public List<Tuple<string, Measurement>> PatientMeasurements { get; private set; }
         // </only_needed>
 
         private AppGlobal()
         {
             Users = new List<User>();
-            PatientMeasurements = new Dictionary<string, Measurement>();
+            PatientMeasurements = new List<Tuple<string, Measurement>>();
             Controller = new TCPController();
             Controller.OnPacketReceived += PacketReceived;
             this.LoginResultEvent += CheckLoggedIn;
@@ -194,8 +194,8 @@ namespace RHAPP_IP_Client
 
         private void MeasurementDataReceived(Packet p)
         {
-            SerialDataPacket packet = p as SerialDataPacket;
-            PatientMeasurements.Add(packet.PatientUsername, packet.Measurement);
+            SerialDataPushPacket packet = p as SerialDataPushPacket;
+            PatientMeasurements.Add(new Tuple<string, Measurement>(packet.Username, packet.Measurement));
         }
         
         public void ExitApplication()

@@ -291,7 +291,7 @@ namespace RHAPP_IP_Server
             }
 
             //Generate PushPacket
-            Packet pushPacket = new SerialDataPushPacket(packet.Measurement, packet.PatientUsername);
+            Packet pushPacket = new SerialDataPushPacket(packet.Measurement, PatientUsername);
 
             // Determining the sockets to send the pushpacket (to send to all online doctors) 
             SendToAllOnlineDoctors(pushPacket);

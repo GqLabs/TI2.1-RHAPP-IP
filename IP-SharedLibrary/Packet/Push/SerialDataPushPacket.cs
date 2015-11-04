@@ -52,7 +52,7 @@ namespace IP_SharedLibrary.Packet.Push
         {
             var json = base.ToJsonObject();
             json.Add("Measurement", JsonConvert.SerializeObject(Measurement));
-            json.Add("Username", JsonConvert.SerializeObject(Username));
+            json.Add("Username", Username);
             return json;
         }
 

@@ -3,10 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="ServerIP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">93.154.13.189</Value>
     </Setting>
     <Setting Name="ServerIPTemp" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="ServerIPTemp2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">93.154.13.189</Value>
     </Setting>
   </Settings>
 </SettingsFile>
