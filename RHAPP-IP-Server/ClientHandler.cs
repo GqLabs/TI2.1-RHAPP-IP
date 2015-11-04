@@ -159,7 +159,6 @@ namespace RHAPP_IP_Server
             foreach (var user in allUsers)
             {
                 user.OnlineStatus = authenticatedUsers.Contains(user);
-                user.ClearPass();
             }
             var allPatients = allUsers.Where(user => user.IsDoctor == false).ToList();
             return new PullResponsePacket(allPatients);
