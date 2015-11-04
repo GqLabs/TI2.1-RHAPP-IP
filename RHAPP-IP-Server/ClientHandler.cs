@@ -300,6 +300,9 @@ namespace RHAPP_IP_Server
             Console.WriteLine("Handle BikeTest Packet");
 
             var packet = new BikeTestPacket(json);
+            BikeTest bikeTest = packet.Biketest;
+            Datastorage.Instance.AddBikeTest(bikeTest);
+            Datastorage.Instance.SaveToFile();
         }
 
         #endregion

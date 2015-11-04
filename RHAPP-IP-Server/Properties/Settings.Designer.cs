@@ -25,7 +25,7 @@ namespace RHAPP_IP_Server.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Users.txt")]
         public string UsersFileLocation {
             get {
                 return ((string)(this["UsersFileLocation"]));
@@ -34,7 +34,7 @@ namespace RHAPP_IP_Server.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("BikeTest.txt")]
         public string BikeTestsFileLocation {
             get {
                 return ((string)(this["BikeTestsFileLocation"]));
