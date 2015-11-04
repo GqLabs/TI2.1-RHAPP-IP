@@ -153,6 +153,11 @@ namespace RHAPP_IP_Client
             dataHandler.sendData("RS");
         }
 
+        public void SendData(string data)
+        {
+            dataHandler.sendData(data);
+        }
+
         public void startTest()
         {
             if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")

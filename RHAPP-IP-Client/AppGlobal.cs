@@ -159,15 +159,14 @@ namespace RHAPP_IP_Client
             {
                 PatientModel.patientModel.startTest();
             }
+            else if (p is CommandPushPacket)
+            {
+                PatientModel.patientModel.SendData(((CommandPushPacket)p).Command);
+            }
             else if (p is LoginResponsePacket)
             {
                 OnLoginResultEvent(p as LoginResponsePacket);
             }
-            //else if (p is RegisterResponsePacket)
-            //{
-            //    var packet = p as RegisterResponsePacket;
-            //    OnRegisterResultEvent(packet.Status);
-            //}
             //else if (p is PullResponsePacket<ChatMessage>)
             //{
             //    var packet = p as PullResponsePacket<ChatMessage>;
@@ -204,7 +203,7 @@ namespace RHAPP_IP_Client
             SerialDataPushPacket packet = p as SerialDataPushPacket;
             PatientMeasurements.Add(new Tuple<string, Measurement>(packet.Username, packet.Measurement));
         }
-        
+
         public void ExitApplication()
         {
             Controller.StopClient();
