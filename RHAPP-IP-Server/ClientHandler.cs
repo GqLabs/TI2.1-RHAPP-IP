@@ -302,12 +302,20 @@ namespace RHAPP_IP_Server
 
         private void HandleStartTestPacket(JObject json)
         {
+            Console.WriteLine("Handle StartTest Packet");
+            var packet = new StartTestPacket(json);
+            var patientStream = Authentication.GetStream(packet.PatientUsername);
+            if (patientStream != null)
+            {
 
+            }
+            patientStream.Send(new ResponsePacket(Statuscode.Status.Ok.ToString(), "STARTTEST", null));
         }
 
         private void HandleBikeTestPacket(JObject json)
         {
-
+            Console.WriteLine("Handle BikeTest Packet");
+            var packet = new BikeTestPacket(json);
         }
 
         #endregion

@@ -50,13 +50,15 @@
     <Compile Include="Packet\Packet.cs" />
     <Compile Include="Packet\Push\PushPacket.cs" />
     <Compile Include="Packet\Push\SerialDataPushPacket.cs" />
+    <Compile Include="Packet\Push\StartTestPushPacket.cs" />
     <Compile Include="Packet\Push\UserChangedPacket.cs" />
+    <Compile Include="Packet\Request\BikeTestPacket.cs" />
     <Compile Include="Packet\Request\DisconnectPacket.cs" />
     <Compile Include="Packet\Request\LoginPacket.cs" />
     <Compile Include="Packet\Request\PullRequestPacket.cs" />
     <Compile Include="Packet\Request\RequestPacket.cs" />
     <Compile Include="Packet\Request\SerialDataPacket.cs" />
-    <Compile Include="Packet\Request\StartStopTestPacket.cs" />
+    <Compile Include="Packet\Request\StartTestPacket.cs" />
     <Compile Include="Packet\Response\LoginResponsePacket.cs" />
     <Compile Include="Packet\Response\PullResponsePacket.cs" />
     <Compile Include="Packet\Response\ResponsePacket.cs" />
