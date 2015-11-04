@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,6 +52,7 @@
             this.leeftijdBox1 = new System.Windows.Forms.TextBox();
             this.gewichtBox2 = new System.Windows.Forms.TextBox();
             this.geslachtComboBox2 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bpmChart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpmChart)).BeginInit();
             this.SuspendLayout();
@@ -119,34 +120,34 @@
             // 
             // bpmChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.bpmChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.bpmChart.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.bpmChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.bpmChart.Legends.Add(legend1);
             this.bpmChart.Location = new System.Drawing.Point(322, 38);
             this.bpmChart.Name = "bpmChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "Hartslag";
-            this.bpmChart.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Hartslag";
+            this.bpmChart.Series.Add(series1);
             this.bpmChart.Size = new System.Drawing.Size(300, 300);
             this.bpmChart.TabIndex = 12;
             this.bpmChart.Text = "chart2";
             // 
             // rpmChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.rpmChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.rpmChart.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.rpmChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.rpmChart.Legends.Add(legend2);
             this.rpmChart.Location = new System.Drawing.Point(16, 38);
             this.rpmChart.Name = "rpmChart";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "RPM";
-            this.rpmChart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "RPM";
+            this.rpmChart.Series.Add(series2);
             this.rpmChart.Size = new System.Drawing.Size(300, 300);
             this.rpmChart.TabIndex = 8;
             this.rpmChart.Text = "chart1";
@@ -168,7 +169,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 21;
-            this.button2.Text = "button2";
+            this.button2.Text = "start test";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -233,11 +234,21 @@
             this.geslachtComboBox2.Size = new System.Drawing.Size(100, 21);
             this.geslachtComboBox2.TabIndex = 28;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(657, 152);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(90, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Hou 60 RPM aan";
+            // 
             // PatientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 344);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.geslachtComboBox2);
             this.Controls.Add(this.gewichtBox2);
             this.Controls.Add(this.leeftijdBox1);
@@ -287,5 +298,6 @@
         public System.Windows.Forms.TextBox leeftijdBox1;
         public System.Windows.Forms.TextBox gewichtBox2;
         public System.Windows.Forms.ComboBox geslachtComboBox2;
+        private System.Windows.Forms.Label label8;
     }
 }

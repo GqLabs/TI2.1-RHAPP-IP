@@ -25,7 +25,6 @@ namespace RHAPP_IP_Client
         public Boolean askdata;
 
         public Boolean testStarted;
-        private Dictionary<string, Dictionary<string, List<string>>> DictionaryByGender;
 
         public string CurrentDoctorID { get; set; }
 

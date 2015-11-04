@@ -64,7 +64,7 @@ namespace RHAPP_IP_Client
         private void HandleBikeData(Measurement m)
         {
             //fill graph pulse
-            bpmPoints.Add(new DataPoint(m.Time.ToOADate(), Convert.ToDouble(m.Pulse)));
+            bpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.Pulse)));
             crtPulse.Series[0].Points.Clear();
             for (int i = 0; i < bpmPoints.Count; i++)
                 crtPulse.Series[0].Points.Add(bpmPoints[i]);
@@ -73,7 +73,7 @@ namespace RHAPP_IP_Client
             crtPulse.Update();
 
             //fill graph rpm
-            rpmPoints.Add(new DataPoint(m.Time.ToOADate(), Convert.ToDouble(m.PedalRpm)));
+            rpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.PedalRpm)));
             crtRPM.Series[0].Points.Clear();
             for (int i = 0; i < rpmPoints.Count; i++)
                 crtRPM.Series[0].Points.Add(rpmPoints[i]);
