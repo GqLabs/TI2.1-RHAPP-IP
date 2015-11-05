@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RHAPP_IP_Client.Misc
@@ -13,6 +14,7 @@ namespace RHAPP_IP_Client.Misc
     public class TCPController
     {
         private TcpClient _client;
+        private Thread _receiveThread;
         public Boolean IsConnected { get; private set; }
         public delegate void ReceivedPacket(Packet p);
         public event ReceivedPacket OnPacketReceived;
@@ -31,6 +33,7 @@ namespace RHAPP_IP_Client.Misc
                 throw new ArgumentNullException("ServerIP", "ServerIP is not set or invalid");
 
             RunClient(IPAddress.Parse(Properties.Settings.Default.ServerIP));
+            StartReceive();
         }
 
         public void RunClient(IPAddress IP)
@@ -46,6 +49,7 @@ namespace RHAPP_IP_Client.Misc
 
             // Signal that connected
             Console.WriteLine("TCPController: Connection active");
+            StartReceive();
         }
 
         public void StopClient()
@@ -69,7 +73,7 @@ namespace RHAPP_IP_Client.Misc
             await _client.GetStream().WriteAsync(bytes, 0, bytes.Length);
         }
 
-        public async void ReceiveTransmissionAsync()
+        public void ReceiveTransmission()
         {
             while (IsConnected)
             {
@@ -77,7 +81,7 @@ namespace RHAPP_IP_Client.Misc
                 var bytesRead = 0;
                 try
                 {
-                    bytesRead = await _client.GetStream().ReadAsync(buffer, 0, buffer.Length);
+                    bytesRead = _client.GetStream().Read(buffer, 0, buffer.Length);
                 }
                 catch (IOException e)
                 {
@@ -121,6 +125,23 @@ namespace RHAPP_IP_Client.Misc
                     return;
                 }
             }
+        }
+
+        internal void StartReceive()
+        {
+            if (_receiveThread == null)
+            {
+                _receiveThread = new Thread(ReceiveTransmission);
+                _receiveThread.Start();
+            }
+            else if (_receiveThread.ThreadState == ThreadState.Stopped)
+                _receiveThread.Start();
+        }
+        internal void StopReceive()
+        {
+            _receiveThread.Interrupt();
+            Thread.Sleep(50);
+            _receiveThread.Abort();
         }
     }
 }

@@ -33,15 +33,22 @@ namespace RHAPP_IP_Client
 
         private void HandleBikeTest(Packet packet)
         {
-            var p = packet as RequestBikeTestResponsePacket;
-            leeftijdBox.Text = "" + p.Biketest.Age;
-            gewichtBox.Text = "" + p.Biketest.Weight;
-            vo2Box.Text = "" + p.Biketest.Vo2Max;
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => HandleBikeTest(packet)));
+            }
+            else
+            {
+                var p = packet as RequestBikeTestResponsePacket;
+                leeftijdBox.Text = "" + p.Biketest.Age;
+                gewichtBox.Text = "" + p.Biketest.Weight;
+                vo2Box.Text = "" + p.Biketest.Vo2Max;
 
                 if (p.Biketest.Gender)
-                geslachtBox.Text = "Man";
-            else if (p.Biketest.Gender)
-                geslachtBox.Text = "Vrouw";
+                    geslachtBox.Text = "Man";
+                else if (p.Biketest.Gender)
+                    geslachtBox.Text = "Vrouw";
+            }
         }
 
         private void HandleUserChanged(User u)
@@ -171,10 +178,12 @@ namespace RHAPP_IP_Client
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            var v = new RequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
-            _appGlobal.Send(v);
+            if (comboBox1.SelectedItem != null)
+            {
+                _appGlobal.SendRequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
+            }
         }
     }
 }

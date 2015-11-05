@@ -112,11 +112,11 @@ namespace RHAPP_IP_Client
                     if (m.Time.Minute >= 0 && m.Time.Hour == 1)
                         stopTest(m);
 
-                    if (m.PedalRpm <= 50)
-                        MessageBox.Show("U fiets te langzaam, hou het rond de 60 RPM");
+                    //if (m.PedalRpm <= 50)
+                        //MessageBox.Show("U fiets te langzaam, hou het rond de 60 RPM");
 
-                    if (m.PedalRpm >= 70)
-                        MessageBox.Show("U fiets te snel, hou het rond de 60 RPM");
+                   // if (m.PedalRpm >= 70)
+                        //MessageBox.Show("U fiets te snel, hou het rond de 60 RPM");
                 }
 
                 Console.WriteLine(m.DestPower);

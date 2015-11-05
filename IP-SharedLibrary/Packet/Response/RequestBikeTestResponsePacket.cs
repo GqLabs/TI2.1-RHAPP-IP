@@ -17,7 +17,7 @@ namespace IP_SharedLibrary.Packet.Response
         public BikeTest Biketest { get; private set; }
 
         public RequestBikeTestResponsePacket(JObject json)
-            : base(json)
+            :base(json)
         {
             if (json == null)
                 throw new ArgumentNullException("json", "StartTestpacket ctor: json is null!");
@@ -35,7 +35,7 @@ namespace IP_SharedLibrary.Packet.Response
         }
 
         public RequestBikeTestResponsePacket(string patientUsername, BikeTest biketest)
-            : base(Statuscode.Status.Ok)
+            : base(Statuscode.Status.Ok, DefCmd)
         {
             Initialize(patientUsername, biketest);
         }

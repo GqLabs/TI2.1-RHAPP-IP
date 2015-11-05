@@ -19,6 +19,7 @@ namespace RHAPP_IP_Client
         {
             InitializeComponent();
             _appGlobal.LoginResultEvent += HandleLoginEvent;
+            _appGlobal.Controller.OnPacketReceived += PacketReceived;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace RHAPP_IP_Client
                 case "200":
                     if (this.InvokeRequired)
                     {
-                        this.Invoke((new Action(() => HandleLoginEvent(packet))));
+                        this.Invoke(new Action(() => HandleLoginEvent(packet)));
                         return;
                     }
                     if (responsePacket.isDoctor)

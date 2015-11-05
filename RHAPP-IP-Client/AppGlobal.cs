@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RHAPP_IP_Client
@@ -30,7 +31,7 @@ namespace RHAPP_IP_Client
         public delegate void UserDelegate(User u);
         public event UserDelegate UserChangedEvent;
 
-        private readonly TCPController Controller;
+        public TCPController Controller { get; private set; }
         public string Username { get; private set; }
         public bool Connected { get; private set; }
 
@@ -54,31 +55,31 @@ namespace RHAPP_IP_Client
 
         #endregion
 
-        private void OnResultEvent(Packet packet)
+        public void OnResultEvent(Packet packet)
         {
             ResultDelegate handler = ResultEvent;
             if (handler != null) handler(packet);
         }
 
-        private void OnLoginResultEvent(LoginResponsePacket packet)
+        public void OnLoginResultEvent(LoginResponsePacket packet)
         {
             ResultDelegate handler = LoginResultEvent;
             if (handler != null) handler(packet);
         }
 
-        private void OnBikeTestChangedEvent(RequestBikeTestResponsePacket packet)
+        public void OnBikeTestChangedEvent(RequestBikeTestResponsePacket packet)
         {
             ResultDelegate handler = BikeTestChangedEvent;
             if (handler != null) handler(packet);
         }
 
-        private void OnIncomingMeasurementEvent(SerialDataPushPacket packet)
+        public void OnIncomingMeasurementEvent(SerialDataPushPacket packet)
         {
             PushDelegate handler = IncomingMeasurementEvent;
             if (handler != null) handler(packet);
         }
 
-        private void OnUserChangedEvent(User u)
+        public void OnUserChangedEvent(User u)
         {
             UserDelegate handler = UserChangedEvent;
             if (handler != null) handler(u);
@@ -90,7 +91,6 @@ namespace RHAPP_IP_Client
             var passhash = Crypto.CreateSHA256(password);
             var packet = new LoginPacket(username, passhash);
             Send(packet);
-            Controller.ReceiveTransmissionAsync();
         }
 
         public async void Logout()
@@ -115,6 +115,12 @@ namespace RHAPP_IP_Client
             Connected = false;
         }
 
+        public void SendRequestBikeTestPacket(string usernamePatient)
+        {
+            var v = new RequestBikeTestPacket(usernamePatient);
+            Send(v);
+        }
+
         private void CheckLoggedIn(Packet packet)
         {
             //Post logged-in method calls
@@ -122,11 +128,9 @@ namespace RHAPP_IP_Client
             {
                 Username = ((LoginResponsePacket)packet).username;
                 Connected = true;
-                Receive();
             }
 
         }
-
 
         public void Send(Packet packet)
         {
@@ -138,68 +142,13 @@ namespace RHAPP_IP_Client
         // Get TCPController to receive a packet.
         public void Receive()
         {
-            Controller.ReceiveTransmissionAsync();
+            Controller.StartReceive();
         }
 
         private void PacketReceived(Packet p)
         {
-            Console.WriteLine(p.ToJsonObject().ToString());
-            if (p is SerialDataPushPacket)
-            {
-                Console.WriteLine("push packet received!");
-                OnIncomingMeasurementEvent(p as SerialDataPushPacket);
-            }
-            else if (p is UserChangedPacket)
-            {
-                var packet = p as UserChangedPacket;
-                if (packet.Username == this.Username)
-                    return;
-                User x = Users.FirstOrDefault(u => u.Username == packet.Username);
-                if (x == null)
-                {
-                    x = new User(packet.Nickname, packet.Username, null);
-                    Users.Add(x);
-                }
-                x.OnlineStatus = packet.Status;
-                OnUserChangedEvent(x);
-            }
-            else if (p is StartTestPushPacket)
-            {
-                PatientModel.patientModel.startTest();
-            }
-            else if (p is CommandPushPacket)
-            {
-                PatientModel.patientModel.SendData(((CommandPushPacket)p).Command);
-            }
-            else if (p is LoginResponsePacket)
-            {
-                OnLoginResultEvent(p as LoginResponsePacket);
-            }
-            //else if (p is PullResponsePacket<ChatMessage>)
-            //{
-            //    var packet = p as PullResponsePacket<ChatMessage>;
-            //    FillChatMessageList(packet.Data.ToList());
-            //    Console.WriteLine("PullResponsePacket<ChatMessage> received!");
-            //}
-            else if (p is PullResponsePacket)
-            {
-                var packet = p as PullResponsePacket;
-                foreach (User u in packet.Data.ToList())
-                {
-                    Users.Add(u);
-                    OnUserChangedEvent(u);
-                }
-            }
-            else if (p is RequestBikeTestResponsePacket)
-            {
-                var packet = p as RequestBikeTestResponsePacket;
-                OnBikeTestChangedEvent(packet);
-            }
+            
 
-            else if (p is ResponsePacket) //this one should be last!
-            {
-                OnResultEvent(p as ResponsePacket);
-            }
         }
 
         private void SerialDataReceived(Measurement m)
@@ -208,7 +157,6 @@ namespace RHAPP_IP_Client
             var packet = new SerialDataPacket(m, Username);
             Measurements.Add(m);
             Send(packet);
-            Controller.ReceiveTransmissionAsync();
         }
 
         private void MeasurementDataReceived(Packet p)
@@ -219,6 +167,7 @@ namespace RHAPP_IP_Client
 
         public void ExitApplication()
         {
+            Controller.StopReceive();
             Controller.StopClient();
             Properties.Settings.Default.Save();
         }

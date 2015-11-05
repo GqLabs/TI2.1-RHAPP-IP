@@ -59,6 +59,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.crtRPM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtPulse)).BeginInit();
@@ -244,6 +245,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.geslachtBox);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.comboBox1);
@@ -286,7 +288,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 8;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // vo2Box
             // 
@@ -348,6 +349,16 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Leeftijd";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(188, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Vraag op";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,6 +407,7 @@
         private System.Windows.Forms.Button btnTestButton;
         private System.Windows.Forms.TextBox geslachtBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
