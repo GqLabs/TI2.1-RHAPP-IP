@@ -35,7 +35,7 @@ namespace IP_SharedLibrary.Packet.Response
         }
 
         public RequestBikeTestResponsePacket(string patientUsername, BikeTest biketest)
-            : base(Statuscode.Status.Ok)
+            : base(Statuscode.Status.Ok, DefCmd)
         {
             Initialize(patientUsername, biketest);
         }

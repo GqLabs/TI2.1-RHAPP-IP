@@ -309,7 +309,7 @@ namespace RHAPP_IP_Server
                 if (biketest == null)
                     return;
                 var response = new RequestBikeTestResponsePacket(packet.PatientUsername, biketest);
-                Send(response);
+                Send(response.ToString());
             }
             
         }
