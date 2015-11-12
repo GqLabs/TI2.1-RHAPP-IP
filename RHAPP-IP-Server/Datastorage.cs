@@ -18,18 +18,18 @@ namespace RHAPP_IP_Server
         }
 
         private readonly List<User> _users = new List<User>();
-        private readonly List<BikeTest> _bikeTests = new List<BikeTest>(); 
+        private readonly List<BikeTest> _bikeTests = new List<BikeTest>();
 
         private Datastorage()
         {
-            //Debug code below:
+            //Debug code below: (already saved in JSON File)
             //_users.Add(new User("Henk", "patient", Crypto.CreateSHA256("1234"), false));
             //_users.Add(new User("Piet", "testuser", Crypto.CreateSHA256("5678"), false));
             //_users.Add(new User("Bart", "bart", Crypto.CreateSHA256("hoi"), true));
             //_users.Add(new User("Karel", "karel", Crypto.CreateSHA256("hoi"), true));
-            
+
             OpenFromFile();
-        } 
+        }
 
         public User GetUser(string username)
         {
@@ -39,7 +39,7 @@ namespace RHAPP_IP_Server
         public IEnumerable<User> GetUsers()
         {
             return _users;
-        } 
+        }
 
         public IEnumerable<BikeTest> GetBikeTestsOfUser(string username)
         {

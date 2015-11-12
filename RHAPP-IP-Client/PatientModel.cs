@@ -17,11 +17,15 @@ namespace RHAPP_IP_Client
 
         private DataHandler dataHandler;
         private Thread workerThread;
+        private Thread worker2Thread;
+
+        private DateTime testWorkerTimeStamp;
+        private int rpmBuffer;
 
         private string powerLog;
-        public Boolean askdata;
+        public Boolean askdata { get; set; }
 
-        public Boolean testStarted;
+        public Boolean TestStarted { get; set; }
 
         public string CurrentDoctorID { get; set; }
 
@@ -29,6 +33,7 @@ namespace RHAPP_IP_Client
         {
             dataHandler = new DataHandler();
             DataHandler.IncomingDataEvent += HandleBikeData; //initialize event
+            worker2Thread = new Thread(() => testWorker());
         }
         public void startComPort(string portname)
         {
@@ -107,18 +112,14 @@ namespace RHAPP_IP_Client
                     rpmPoints.RemoveAt(0);
                 patientform.rpmChart.Update();
 
-                if (testStarted)
+                if (TestStarted)
                 {
+                    rpmBuffer = m.PedalRpm;
                     if (m.Time.Minute >= 0 && m.Time.Hour == 1)
-                        stopTest(m);
-
-                    //if (m.PedalRpm <= 50)
-                        //MessageBox.Show("U fiets te langzaam, hou het rond de 60 RPM");
-
-                   // if (m.PedalRpm >= 70)
-                        //MessageBox.Show("U fiets te snel, hou het rond de 60 RPM");
+                    {
+                        StopTest(m);
+                    }
                 }
-
                 Console.WriteLine(m.DestPower);
             }
         }
@@ -164,14 +165,14 @@ namespace RHAPP_IP_Client
             dataHandler.sendData(data);
         }
 
-        public void startTest()
+        public void StartTest()
         {
             if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
             {
                 var instance = AppGlobal.Instance;
-                reset();
                 setDistanceMode("100");
-                testStarted = true;
+                TestStarted = true;
+                worker2Thread.Start();
             }
             else
             {
@@ -180,9 +181,31 @@ namespace RHAPP_IP_Client
 
         }
 
-        public void stopTest(Measurement m)
+        private void testWorker()
         {
-            testStarted = false;
+            if ((testWorkerTimeStamp.Ticks + testWorkerTimeStamp.AddSeconds(10.0).Ticks) < DateTime.Now.Ticks)
+            {
+                testWorkerTimeStamp = DateTime.Now;
+                if (rpmBuffer <= 50)
+                {
+                    MessageBox.Show("U fietst te langzaam, hou het rond de 60 RPM");
+                }
+
+
+                if (rpmBuffer >= 70)
+                {
+                    MessageBox.Show("U fietst te snel, hou het rond de 60 RPM");
+                }
+
+            }
+
+        }
+
+        public void StopTest(Measurement m)
+        {
+            worker2Thread.Abort();
+            worker2Thread.Join();
+            TestStarted = false;
             bool isMan = true;
             if (patientform.geslachtComboBox2.Text == "Man")
                 isMan = true;

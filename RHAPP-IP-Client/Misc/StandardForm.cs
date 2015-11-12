@@ -57,7 +57,7 @@ namespace RHAPP_IP_Client
                 }
                 else if (p is StartTestPushPacket)
                 {
-                    PatientModel.patientModel.startTest();
+                    PatientModel.patientModel.StartTest();
                 }
                 else if (p is CommandPushPacket)
                 {

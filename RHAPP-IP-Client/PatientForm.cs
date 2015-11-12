@@ -24,7 +24,6 @@ namespace RHAPP_IP_Client
             InitializeComponent();
             patientModel = PatientModel.patientModel;
             patientModel.patientform = this;
-
         }
 
         private void PatientForm_Load(object sender, EventArgs e)
@@ -35,18 +34,18 @@ namespace RHAPP_IP_Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             patientModel.startComPort(comboBox1.SelectedItem.ToString());
             Console.WriteLine(comboBox1.SelectedItem.ToString());
+            patientModel.startAskingData();
         }
 
         private void requestData_Click(object sender, EventArgs e)
         {
             if (checkBox1.CheckState == CheckState.Checked)
             {
-                if(!PatientModel.patientModel.testStarted)
-                patientModel.setDistanceMode("10");
-            patientModel.startAskingData();
+                //if(!PatientModel.patientModel.TestStarted)
+                //patientModel.setDistanceMode("10");
+                patientModel.startAskingData();
             }
 
             if (checkBox1.CheckState == CheckState.Unchecked)
@@ -62,7 +61,7 @@ namespace RHAPP_IP_Client
 
         private void button2_Click(object sender, EventArgs e)
         {
-            patientModel.startTest();
+            patientModel.StartTest();
         }
     }
 }
