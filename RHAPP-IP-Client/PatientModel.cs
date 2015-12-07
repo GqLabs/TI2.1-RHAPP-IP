@@ -172,7 +172,14 @@ namespace RHAPP_IP_Client
                 var instance = AppGlobal.Instance;
                 setDistanceMode("100");
                 TestStarted = true;
-                worker2Thread.Start();
+                try
+                {
+                    worker2Thread.Start();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
             }
             else
             {
