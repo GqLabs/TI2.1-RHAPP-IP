@@ -19,6 +19,8 @@ namespace RHAPP_IP_Client
         public List<DataPoint> bpmPoints { get; set; } = new List<DataPoint>();
         public List<DataPoint> rpmPoints { set; get; } = new List<DataPoint>();
 
+        public Dictionary<int,BikeTest> bikeTests { get; set; } = new Dictionary<int,BikeTest>();
+
         public DoctorForm()
         {
             InitializeComponent();
@@ -40,14 +42,14 @@ namespace RHAPP_IP_Client
             else
             {
                 var p = packet as RequestBikeTestResponsePacket;
-                leeftijdBox.Text = "" + p.Biketest.Age;
-                gewichtBox.Text = "" + p.Biketest.Weight;
-                vo2Box.Text = "" + p.Biketest.Vo2Max;
+                bikeTests.Add(bikeTests.Count + 1, p.Biketest);
 
-                if (p.Biketest.Gender)
-                    geslachtBox.Text = "Man";
-                else if (p.Biketest.Gender)
-                    geslachtBox.Text = "Vrouw";
+                cmbTestNummer.Items.Clear();
+                var biketests = bikeTests.Where(test => test.Value.Username == ((User)comboBox1.SelectedItem).Username);
+                foreach (KeyValuePair<int, BikeTest> biketest in biketests)
+                {
+                    cmbTestNummer.Items.Add(biketest.Key);
+                }
             }
         }
 
@@ -184,6 +186,36 @@ namespace RHAPP_IP_Client
             {
                 _appGlobal.SendRequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTestNummer_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            BikeTest p;
+            bikeTests.TryGetValue((int)cmbTestNummer.SelectedItem, out p);
+            leeftijdBox.Text = "" + p.Age;
+            gewichtBox.Text = "" + p.Weight;
+            vo2Box.Text = "" + p.Vo2Max;
+
+            if (p.Gender)
+                geslachtBox.Text = "Man";
+            else if (!p.Gender)
+                geslachtBox.Text = "Vrouw";
+        }
+
+        private void cmbTestNummer_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            button1_Click(sender, e);
         }
     }
 }
