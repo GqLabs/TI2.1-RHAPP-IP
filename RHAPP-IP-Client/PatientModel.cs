@@ -19,7 +19,7 @@ namespace RHAPP_IP_Client
         private Thread workerThread;
         private Thread worker2Thread;
 
-        private DateTime testWorkerTimeStamp;
+        private DateTime testWorkerTimeStamp { get; set; }
         private int rpmBuffer;
 
         private string powerLog;

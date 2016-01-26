@@ -25,7 +25,7 @@ namespace RHAPP_IP_Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("93.154.13.189")]
         public string ServerIP {
             get {
                 return ((string)(this["ServerIP"]));

@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.crtRPM = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblWatt = new System.Windows.Forms.Label();
             this.crtPower = new System.Windows.Forms.NumericUpDown();
@@ -45,10 +45,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnTestButton = new System.Windows.Forms.Button();
             this.lblUser = new System.Windows.Forms.Label();
             this.cmbOnlinePatients = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.geslachtBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -59,7 +59,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.crtRPM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtPower)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crtPulse)).BeginInit();
@@ -70,17 +69,17 @@
             // 
             // crtRPM
             // 
-            chartArea3.Name = "ChartArea1";
-            this.crtRPM.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.crtRPM.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.crtRPM.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.crtRPM.Legends.Add(legend1);
             this.crtRPM.Location = new System.Drawing.Point(248, 6);
             this.crtRPM.Name = "crtRPM";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Legend = "Legend1";
-            series3.Name = "RPM";
-            this.crtRPM.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "RPM";
+            this.crtRPM.Series.Add(series1);
             this.crtRPM.Size = new System.Drawing.Size(300, 300);
             this.crtRPM.TabIndex = 0;
             this.crtRPM.Text = "chart1";
@@ -133,17 +132,17 @@
             // 
             // crtPulse
             // 
-            chartArea4.Name = "ChartArea1";
-            this.crtPulse.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.crtPulse.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.crtPulse.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.crtPulse.Legends.Add(legend2);
             this.crtPulse.Location = new System.Drawing.Point(554, 7);
             this.crtPulse.Name = "crtPulse";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Hartslag";
-            this.crtPulse.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Hartslag";
+            this.crtPulse.Series.Add(series2);
             this.crtPulse.Size = new System.Drawing.Size(300, 300);
             this.crtPulse.TabIndex = 4;
             this.crtPulse.Text = "chart2";
@@ -196,7 +195,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btnTestButton);
             this.tabPage1.Controls.Add(this.lblUser);
             this.tabPage1.Controls.Add(this.cmbOnlinePatients);
             this.tabPage1.Controls.Add(this.crtRPM);
@@ -214,16 +212,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Test";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // btnTestButton
-            // 
-            this.btnTestButton.Location = new System.Drawing.Point(52, 125);
-            this.btnTestButton.Name = "btnTestButton";
-            this.btnTestButton.Size = new System.Drawing.Size(75, 23);
-            this.btnTestButton.TabIndex = 10;
-            this.btnTestButton.Text = "Test button";
-            this.btnTestButton.UseVisualStyleBackColor = true;
-            this.btnTestButton.Click += new System.EventHandler(this.btnTestButton_Click);
             // 
             // lblUser
             // 
@@ -263,6 +251,16 @@
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "Historie";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(188, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Vraag op";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // geslachtBox
             // 
@@ -349,16 +347,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Leeftijd";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(188, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Vraag op";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // DoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -404,7 +392,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.ComboBox cmbOnlinePatients;
-        private System.Windows.Forms.Button btnTestButton;
         private System.Windows.Forms.TextBox geslachtBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RHAPP_IP_Client.Misc
@@ -23,7 +24,7 @@ namespace RHAPP_IP_Client.Misc
         // private fields
         private string portname;
         private int baudrate = 9600;
-        private string bufferOut;
+         private string bufferOut;
         private string[] bufferIn;
 
         // public fields
@@ -92,6 +93,7 @@ namespace RHAPP_IP_Client.Misc
         {
             bufferOut = data;
             ComPort.WriteLine(data);
+            Thread.Sleep(2);
         }
 
         private void ComPort_DataReceived(object sender, SerialDataReceivedEventArgs e)

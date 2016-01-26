@@ -13,7 +13,7 @@ namespace FietsSimulator
     class FietsSimulator
     {
         private SerialPort comport;
-        private Mode curmode; 
+        private Mode curmode = Mode.DISTANCE;
         private int _power, _heartbeat, rpm, speed, distance, energy;
         private long maxtime;
         private Stopwatch stopwatch;
@@ -66,11 +66,16 @@ namespace FietsSimulator
             Console.WriteLine(message);
             if (message == "RS")
             {
-                curmode = Mode.NONE;
+                curmode = Mode.DISTANCE;
                 rpm = speed = distance = energy = 0;
                 Power = 25;
                 stopwatch.Stop();
                 SendData("ACK");
+                curmode = Mode.DISTANCE;
+                stopwatch.Reset();
+                stopwatch.Start();
+                rpm = 100;
+                speed = 10;
             }
             else if (message == "CM" || message == "CU")
             {
@@ -112,7 +117,7 @@ namespace FietsSimulator
             }
             else if (message.Contains("PW"))
             {
-                if (curmode != Mode.NONE && message.Split().Length == 2)
+                if (message.Split().Length == 2)
                 {
                     this.Power = Int32.Parse(message.Split(' ')[1]);
                 }
@@ -121,7 +126,7 @@ namespace FietsSimulator
                     SendData("ERROR");
                 }
             }
-            else if (message == "ST" && curmode != Mode.NONE)
+            else if (message == "ST")
             {
                 SendStatus();
             }
@@ -138,7 +143,7 @@ namespace FietsSimulator
         }
         private void SendStatus()
         {
-            SendData(Heartbeat.ToString() + "\t"+rpm +"\t"+speed*10+"\t"+distance+"\t" + Power.ToString() + "\t600\t"+getTimeElapsed()+"\t200\r");
+            SendData(Heartbeat.ToString() + "\t"+ "60" +"\t"+speed*10+"\t"+distance+"\t" + Power.ToString() + "\t600\t"+getTimeElapsed()+"\t200\r");
         }
 
         private string getTimeElapsed()

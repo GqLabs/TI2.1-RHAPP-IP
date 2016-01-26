@@ -75,11 +75,11 @@ namespace RHAPP_IP_Client
             {
                 var selectedUser = (User)cmbOnlinePatients.SelectedItem;
                 var resultPacket = ((SerialDataPushPacket)packet);
-                if (selectedUser != null)
-                    if (selectedUser.Username == resultPacket.Username)
-                    {
-                        HandleBikeData(resultPacket.Measurement);
-                    }
+                if (selectedUser == null) return;
+                if (selectedUser.Username == resultPacket.Username)
+                {
+                    HandleBikeData(resultPacket.Measurement);
+                }
             }
         }
 
@@ -89,8 +89,8 @@ namespace RHAPP_IP_Client
             //fill graph pulse
             bpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.Pulse)));
             crtPulse.Series[0].Points.Clear();
-            for (int i = 0; i < bpmPoints.Count; i++)
-                crtPulse.Series[0].Points.Add(bpmPoints[i]);
+            foreach (DataPoint t in bpmPoints)
+                crtPulse.Series[0].Points.Add(t);
             if (bpmPoints.Count > 25)
                 bpmPoints.RemoveAt(0);
             crtPulse.Update();
@@ -98,8 +98,8 @@ namespace RHAPP_IP_Client
             //fill graph rpm
             rpmPoints.Add(new DataPoint(m.Time.Second, Convert.ToDouble(m.PedalRpm)));
             crtRPM.Series[0].Points.Clear();
-            for (int i = 0; i < rpmPoints.Count; i++)
-                crtRPM.Series[0].Points.Add(rpmPoints[i]);
+            foreach (DataPoint t in rpmPoints)
+                crtRPM.Series[0].Points.Add(t);
             if (rpmPoints.Count > 25)
                 rpmPoints.RemoveAt(0);
             crtRPM.Update();
@@ -154,10 +154,10 @@ namespace RHAPP_IP_Client
             var v1 = new SendCommandPacket("CM", selectedUser.Username);
             //Thread.Sleep(200);
             var v2 = new SendCommandPacket("PW " + crtPower.Value.ToString(), selectedUser.Username);
-            Thread.Sleep(200);
-            _appGlobal.Send(v1);
-            Thread.Sleep(700);
-            _appGlobal.Send(v2);
+            //Thread.Sleep(200);
+            //_appGlobal.Send(v1);
+            //Thread.Sleep(700);
+            //_appGlobal.Send(v2);
         }
 
         private void cmbOnlinePatients_SelectionChangeCommitted(object sender, EventArgs e)
@@ -172,7 +172,7 @@ namespace RHAPP_IP_Client
             {
                 HandleBikeData(measurement);
             }
-            var lastMeasurement = measurementsOfPatient.LastOrDefault();
+            Measurement lastMeasurement = measurementsOfPatient.LastOrDefault();
             if (lastMeasurement != null)
                 crtPower.Value = lastMeasurement.DestPower;
 

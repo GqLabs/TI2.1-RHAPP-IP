@@ -59,9 +59,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(398, 10);
+            this.button1.Location = new System.Drawing.Point(597, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(112, 35);
             this.button1.TabIndex = 19;
             this.button1.Text = "Connect";
             this.button1.UseVisualStyleBackColor = true;
@@ -70,51 +71,57 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(313, 11);
+            this.comboBox1.Location = new System.Drawing.Point(470, 17);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(75, 21);
+            this.comboBox1.Size = new System.Drawing.Size(110, 28);
             this.comboBox1.TabIndex = 18;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(257, 15);
+            this.label3.Location = new System.Drawing.Point(386, 23);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(70, 20);
             this.label3.TabIndex = 17;
             this.label3.Text = "Comport";
             // 
             // actualBox
             // 
-            this.actualBox.Location = new System.Drawing.Point(172, 11);
+            this.actualBox.Location = new System.Drawing.Point(258, 17);
+            this.actualBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.actualBox.Name = "actualBox";
             this.actualBox.ReadOnly = true;
-            this.actualBox.Size = new System.Drawing.Size(75, 20);
+            this.actualBox.Size = new System.Drawing.Size(110, 26);
             this.actualBox.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(132, 15);
+            this.label1.Location = new System.Drawing.Point(198, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.Size = new System.Drawing.Size(43, 20);
             this.label1.TabIndex = 15;
             this.label1.Text = "Watt";
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(47, 11);
+            this.timeBox.Location = new System.Drawing.Point(70, 17);
+            this.timeBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.timeBox.Name = "timeBox";
             this.timeBox.ReadOnly = true;
-            this.timeBox.Size = new System.Drawing.Size(75, 20);
+            this.timeBox.Size = new System.Drawing.Size(110, 26);
             this.timeBox.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 15);
+            this.label2.Location = new System.Drawing.Point(20, 23);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 13);
+            this.label2.Size = new System.Drawing.Size(33, 20);
             this.label2.TabIndex = 13;
             this.label2.Text = "Tijd";
             // 
@@ -124,14 +131,15 @@
             this.bpmChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.bpmChart.Legends.Add(legend1);
-            this.bpmChart.Location = new System.Drawing.Point(322, 38);
+            this.bpmChart.Location = new System.Drawing.Point(483, 58);
+            this.bpmChart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bpmChart.Name = "bpmChart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Hartslag";
             this.bpmChart.Series.Add(series1);
-            this.bpmChart.Size = new System.Drawing.Size(300, 300);
+            this.bpmChart.Size = new System.Drawing.Size(450, 462);
             this.bpmChart.TabIndex = 12;
             this.bpmChart.Text = "chart2";
             // 
@@ -141,23 +149,25 @@
             this.rpmChart.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.rpmChart.Legends.Add(legend2);
-            this.rpmChart.Location = new System.Drawing.Point(16, 38);
+            this.rpmChart.Location = new System.Drawing.Point(24, 58);
+            this.rpmChart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rpmChart.Name = "rpmChart";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
             series2.Name = "RPM";
             this.rpmChart.Series.Add(series2);
-            this.rpmChart.Size = new System.Drawing.Size(300, 300);
+            this.rpmChart.Size = new System.Drawing.Size(450, 462);
             this.rpmChart.TabIndex = 8;
             this.rpmChart.Text = "chart1";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(499, 13);
+            this.checkBox1.Location = new System.Drawing.Point(748, 20);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(70, 17);
+            this.checkBox1.Size = new System.Drawing.Size(101, 24);
             this.checkBox1.TabIndex = 20;
             this.checkBox1.Text = "Ask Data";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -165,62 +175,70 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(654, 229);
+            this.button2.Location = new System.Drawing.Point(981, 352);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(112, 35);
             this.button2.TabIndex = 21;
             this.button2.Text = "start test";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(651, 15);
+            this.label4.Location = new System.Drawing.Point(976, 23);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.Size = new System.Drawing.Size(94, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Zelf Invullen";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(651, 48);
+            this.label5.Location = new System.Drawing.Point(976, 74);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(61, 20);
             this.label5.TabIndex = 23;
             this.label5.Text = "Leeftijd";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(651, 81);
+            this.label6.Location = new System.Drawing.Point(976, 125);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 13);
+            this.label6.Size = new System.Drawing.Size(67, 20);
             this.label6.TabIndex = 24;
             this.label6.Text = "Gewicht";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(651, 115);
+            this.label7.Location = new System.Drawing.Point(976, 177);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 13);
+            this.label7.Size = new System.Drawing.Size(73, 20);
             this.label7.TabIndex = 25;
             this.label7.Text = "Geslacht";
             // 
             // leeftijdBox1
             // 
-            this.leeftijdBox1.Location = new System.Drawing.Point(707, 45);
+            this.leeftijdBox1.Location = new System.Drawing.Point(1060, 69);
+            this.leeftijdBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leeftijdBox1.Name = "leeftijdBox1";
-            this.leeftijdBox1.Size = new System.Drawing.Size(100, 20);
+            this.leeftijdBox1.Size = new System.Drawing.Size(148, 26);
             this.leeftijdBox1.TabIndex = 26;
             // 
             // gewichtBox2
             // 
-            this.gewichtBox2.Location = new System.Drawing.Point(707, 78);
+            this.gewichtBox2.Location = new System.Drawing.Point(1060, 120);
+            this.gewichtBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gewichtBox2.Name = "gewichtBox2";
-            this.gewichtBox2.Size = new System.Drawing.Size(100, 20);
+            this.gewichtBox2.Size = new System.Drawing.Size(148, 26);
             this.gewichtBox2.TabIndex = 27;
             // 
             // geslachtComboBox2
@@ -229,25 +247,27 @@
             this.geslachtComboBox2.Items.AddRange(new object[] {
             "Man",
             "Vrouw"});
-            this.geslachtComboBox2.Location = new System.Drawing.Point(707, 111);
+            this.geslachtComboBox2.Location = new System.Drawing.Point(1060, 171);
+            this.geslachtComboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.geslachtComboBox2.Name = "geslachtComboBox2";
-            this.geslachtComboBox2.Size = new System.Drawing.Size(100, 21);
+            this.geslachtComboBox2.Size = new System.Drawing.Size(148, 28);
             this.geslachtComboBox2.TabIndex = 28;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(657, 152);
+            this.label8.Location = new System.Drawing.Point(986, 234);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 13);
+            this.label8.Size = new System.Drawing.Size(131, 20);
             this.label8.TabIndex = 29;
             this.label8.Text = "Hou 60 RPM aan";
             // 
             // PatientForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 344);
+            this.ClientSize = new System.Drawing.Size(1232, 529);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.geslachtComboBox2);
             this.Controls.Add(this.gewichtBox2);
@@ -267,6 +287,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.bpmChart);
             this.Controls.Add(this.rpmChart);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PatientForm";
             this.Text = "PatientForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PatientForm_FormClosing);

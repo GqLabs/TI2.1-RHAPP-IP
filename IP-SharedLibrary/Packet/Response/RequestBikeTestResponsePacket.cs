@@ -44,6 +44,7 @@ namespace IP_SharedLibrary.Packet.Response
         {
             PatientUsername = patientUsername;
             Biketest = biketest;
+            Biketest.Measurements = null;
         }
 
         public override JObject ToJsonObject()
