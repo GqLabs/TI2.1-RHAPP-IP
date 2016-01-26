@@ -270,14 +270,14 @@ namespace RHAPP_IP_Server
             var packet = new BikeTestPacket(json);
             BikeTest bikeTest = packet.Biketest;
             Datastorage.Instance.AddBikeTest(bikeTest);
-	    Datastorage.Instance.SaveToFile();
+            Datastorage.Instance.SaveToFile();
         }
 
         private void HandleSendCommandPacket(JObject json)
         {
             Console.WriteLine("Handle SendCommand Packet");
             var packet = new SendCommandPacket(json);
-            if ( (packet.CMD != null || packet.CMD != "") && (packet.Username != null || packet.Username != "") )
+            if ((packet.CMD != null || packet.CMD != "") && (packet.Username != null || packet.Username != ""))
             {
                 CommandPushPacket pushpacket = new CommandPushPacket(packet.Commmand);
                 ClientHandler destPatient = Authentication.GetStream(packet.Username);
@@ -305,13 +305,16 @@ namespace RHAPP_IP_Server
             var packet = new RequestBikeTestPacket(json);
             if (packet.PatientUsername != null || packet.PatientUsername != "")
             {
-                var biketest = _datastorage.GetBikeTestsOfUser(packet.PatientUsername).LastOrDefault();
+                var biketest = _datastorage.GetBikeTestsOfUser(packet.PatientUsername);
                 if (biketest == null)
                     return;
-                var response = new RequestBikeTestResponsePacket(packet.PatientUsername, biketest);
+                if (biketest.Count() < 1)
+                    return;
+                var response = new RequestBikeTestResponsePacket(packet.PatientUsername, biketest.ToList());
                 Send(response.ToString());
+
             }
-            
+
         }
 
         #endregion

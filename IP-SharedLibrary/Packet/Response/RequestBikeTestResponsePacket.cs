@@ -14,7 +14,7 @@ namespace IP_SharedLibrary.Packet.Response
         public const string DefCmd = "RESP-BIKETEST";
 
         public string PatientUsername { get; private set; }
-        public BikeTest Biketest { get; private set; }
+        public List<BikeTest> Biketest { get; private set; }
 
         public RequestBikeTestResponsePacket(JObject json)
             :base(json)
@@ -29,22 +29,25 @@ namespace IP_SharedLibrary.Packet.Response
                 && json.TryGetValue("Biketest", StringComparison.CurrentCultureIgnoreCase, out biketest)))
                 throw new ArgumentException("Biketest is not found in json: \n" + json);
 
-            var biketestObj = JsonConvert.DeserializeObject<BikeTest>(biketest.ToString());
+            var biketestObj = JsonConvert.DeserializeObject<List<BikeTest>>(biketest.ToString());
 
             Initialize((string)patientUsername, biketestObj);
         }
 
-        public RequestBikeTestResponsePacket(string patientUsername, BikeTest biketest)
+        public RequestBikeTestResponsePacket(string patientUsername, List<BikeTest> biketest)
             : base(Statuscode.Status.Ok, DefCmd)
         {
             Initialize(patientUsername, biketest);
         }
 
-        private void Initialize(string patientUsername, BikeTest biketest)
+        private void Initialize(string patientUsername, List<BikeTest> biketest)
         {
             PatientUsername = patientUsername;
             Biketest = biketest;
-            Biketest.Measurements = null;
+            foreach(BikeTest test in biketest)
+            {
+                test.Measurements = null;
+            }
         }
 
         public override JObject ToJsonObject()

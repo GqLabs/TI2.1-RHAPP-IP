@@ -42,8 +42,10 @@ namespace RHAPP_IP_Client
             else
             {
                 var p = packet as RequestBikeTestResponsePacket;
-                bikeTests.Add(bikeTests.Count + 1, p.Biketest);
-
+                foreach(BikeTest test in p.Biketest)
+                {
+                    bikeTests.Add(bikeTests.Count + 1, test);
+                }
                 cmbTestNummer.Items.Clear();
                 var biketests = bikeTests.Where(test => test.Value.Username == ((User)comboBox1.SelectedItem).Username);
                 foreach (KeyValuePair<int, BikeTest> biketest in biketests)
