@@ -49,7 +49,7 @@ namespace RHAPP_IP_Server
                 x =
                 from bikeTest in _bikeTests
                 where bikeTest.Username == username
-                orderby bikeTest.Measurements.FirstOrDefault().Time ascending
+                //orderby bikeTest.Measurements.FirstOrDefault().Time ascending
                 select bikeTest;
             }
             catch (Exception e)
