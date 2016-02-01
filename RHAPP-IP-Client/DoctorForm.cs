@@ -20,6 +20,7 @@ namespace RHAPP_IP_Client
         public List<DataPoint> rpmPoints { set; get; } = new List<DataPoint>();
 
         public Dictionary<int,BikeTest> bikeTests { get; set; } = new Dictionary<int,BikeTest>();
+        private int _bikeTestCount = 1;
 
         public DoctorForm()
         {
@@ -44,7 +45,8 @@ namespace RHAPP_IP_Client
                 var p = packet as RequestBikeTestResponsePacket;
                 foreach(BikeTest test in p.Biketest)
                 {
-                    bikeTests.Add(bikeTests.Count + 1, test);
+                    bikeTests.Add(_bikeTestCount, test);
+                    _bikeTestCount++;
                 }
                 cmbTestNummer.Items.Clear();
                 var biketests = bikeTests.Where(test => test.Value.Username == ((User)comboBox1.SelectedItem).Username);
@@ -217,6 +219,8 @@ namespace RHAPP_IP_Client
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            _bikeTestCount = 1;
+            bikeTests.Clear();
             button1_Click(sender, e);
         }
     }
