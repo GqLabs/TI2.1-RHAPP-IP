@@ -23,9 +23,9 @@ namespace RHAPP_IP_Client
         private int rpmBuffer;
 
         private string powerLog;
-        public Boolean askdata { get; set; }
+        public bool askdata { get; set; }
 
-        public Boolean TestStarted { get; set; }
+        public bool TestStarted { get; set; }
 
         public string CurrentDoctorID { get; set; }
 
@@ -33,7 +33,6 @@ namespace RHAPP_IP_Client
         {
             dataHandler = new DataHandler();
             DataHandler.IncomingDataEvent += HandleBikeData; //initialize event
-            worker2Thread = new Thread(() => testWorker());
         }
         public void startComPort(string portname)
         {
@@ -167,6 +166,8 @@ namespace RHAPP_IP_Client
 
         public void StartTest()
         {
+            testWorkerTimeStamp = DateTime.Now;
+            worker2Thread = new Thread(() => testWorker());
             if (patientform.gewichtBox2.Text != "" && patientform.leeftijdBox1.Text != "")
             {
                 var instance = AppGlobal.Instance;
@@ -190,21 +191,26 @@ namespace RHAPP_IP_Client
 
         private void testWorker()
         {
-            if ((testWorkerTimeStamp.Ticks + testWorkerTimeStamp.AddSeconds(10.0).Ticks) < DateTime.Now.Ticks)
+            while(TestStarted)
             {
-                testWorkerTimeStamp = DateTime.Now;
-                if (rpmBuffer <= 50)
+                if ((testWorkerTimeStamp.AddSeconds(5.0).Ticks) < DateTime.Now.Ticks)
                 {
-                    MessageBox.Show("U fietst te langzaam, hou het rond de 60 RPM");
+                    testWorkerTimeStamp = DateTime.Now;
+                    if (rpmBuffer <= 50)
+                    {
+                        MessageBox.Show("U fietst te langzaam, hou het rond de 60 RPM");
+                    }
+
+
+                    if (rpmBuffer >= 70)
+                    {
+                        MessageBox.Show("U fietst te snel, hou het rond de 60 RPM");
+                    }
+
                 }
-
-
-                if (rpmBuffer >= 70)
-                {
-                    MessageBox.Show("U fietst te snel, hou het rond de 60 RPM");
-                }
-
+                Thread.Sleep(100);
             }
+            
 
         }
 
@@ -228,6 +234,7 @@ namespace RHAPP_IP_Client
             AppGlobal.Instance.Send(v);
 
             MessageBox.Show("Uw vo2Max is:" + vo2);
+            reset();
         }
 
         public double vo2MaxBerekenen(int power, int pulse, double gewicht, int leeftijd)

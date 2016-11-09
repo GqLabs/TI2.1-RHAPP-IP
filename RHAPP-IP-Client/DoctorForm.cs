@@ -59,7 +59,7 @@ namespace RHAPP_IP_Client
 
         private void HandleUserChanged(User u)
         {
-            comboBox1.Items.Add(u);
+            if (!comboBox1.Items.Contains(u)) comboBox1.Items.Add(u);
             if (u.Username == _appGlobal.Username || !u.OnlineStatus)
                 return;
             if (InvokeRequired)
@@ -184,14 +184,6 @@ namespace RHAPP_IP_Client
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedItem != null)
-            {
-                _appGlobal.SendRequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
-            }
-        }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -220,8 +212,24 @@ namespace RHAPP_IP_Client
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             _bikeTestCount = 1;
+
+            EmptyTextBoxes();
+
             bikeTests.Clear();
-            button1_Click(sender, e);
+            if (comboBox1.SelectedItem != null)
+            {
+                _appGlobal.SendRequestBikeTestPacket(((User)comboBox1.SelectedItem).Username);
+            }
+        }
+
+        private void EmptyTextBoxes()
+        {
+            cmbTestNummer.Items.Clear();
+            cmbTestNummer.Text = "";
+            gewichtBox.Text = "";
+            leeftijdBox.Text = "";
+            geslachtBox.Text = "";
+            vo2Box.Text = "";
         }
     }
 }

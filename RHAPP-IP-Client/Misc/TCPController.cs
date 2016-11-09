@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RHAPP_IP_Client.Misc
 {
@@ -33,7 +34,6 @@ namespace RHAPP_IP_Client.Misc
                 throw new ArgumentNullException("ServerIP", "ServerIP is not set or invalid");
 
             RunClient(IPAddress.Parse(Properties.Settings.Default.ServerIP));
-            StartReceive();
         }
 
         public void RunClient(IPAddress IP)
@@ -42,14 +42,24 @@ namespace RHAPP_IP_Client.Misc
 
             IsReading = false;
             _client = new TcpClient();
-            _client.Connect(IP, IP_SharedLibrary.Properties.Settings.Default.PortNumber);
-            IsConnected = true;
+            try
+            {
+                _client.Connect(IP, IP_SharedLibrary.Properties.Settings.Default.PortNumber);
+                IsConnected = true;
 
-            _totalBuffer = new List<byte>();
+                _totalBuffer = new List<byte>();
 
-            // Signal that connected
-            Console.WriteLine("TCPController: Connection active");
-            StartReceive();
+                // Signal that connected
+                Console.WriteLine("TCPController: Connection active");
+                StartReceive();
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("De server reageert niet");
+                return;
+            }
+            
+           
         }
 
         public void StopClient()

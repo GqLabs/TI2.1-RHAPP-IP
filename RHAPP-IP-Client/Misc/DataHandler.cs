@@ -92,7 +92,8 @@ namespace RHAPP_IP_Client.Misc
         public void sendData(string data)
         {
             bufferOut = data;
-            ComPort.WriteLine(data);
+            if (ComPort != null) ComPort.WriteLine(data);
+            else return;
             Thread.Sleep(2);
         }
 
